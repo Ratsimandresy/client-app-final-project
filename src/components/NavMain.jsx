@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
 
@@ -21,9 +21,25 @@ const NavMain = (props) => {
 
   return (
     <nav className="NavMain">
-      <NavLink exact to="/">
-        <h3 className="logo">App name</h3>
-      </NavLink>
+      <Link to="/">
+        <h3 className="logo">What's Up Paris</h3>
+      </Link>
+
+      <ul className="nav-list">
+      <React.Fragment>
+        <li>
+          <NavLink to="/all-users">
+            All Users
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/all-events">
+            All Events
+          </NavLink>
+        </li>
+      </React.Fragment>
+      </ul>
+
       <ul className="nav-list">
         {context.isLoggedIn && (
           <React.Fragment>
