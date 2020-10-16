@@ -15,9 +15,9 @@ export default class EditEvent extends Component {
     event: {},
   };
 
-  componentDidMount() {
-    apiHandler.getOne("/api/event" + this.props._id);
-  }
+  //   componentDidMount() {
+  //     apiHandler.getOne("/api/event" + this.props._id);
+  //   }
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -37,12 +37,12 @@ export default class EditEvent extends Component {
 
   handleCancel = (e) => {
     this.props.history.push("/profil");
-    this.setState({ event: this.state });
+    // this.setState({ event: this.state });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submittinggggg");
+    // console.log("submittinggggsg");
 
     const fd = new FormData();
 
@@ -51,21 +51,22 @@ export default class EditEvent extends Component {
     }
 
     apiHandler
-      .updateOne("/api/event/" + this.props._id, fd)
+      .updateOne("/api/event/" + this.props.match.params.id, fd)
       .then((apiRes) => {
-        this.props.history.push("/profile");
+        console.log(apiRes);
+        this.setState({ event: apiRes });
+        // this.props.history.push("/profile");
       })
       .catch((err) => console.log(err));
   };
 
   render() {
-    console.log("=========>",this.props);
     return (
       <div className="EventForm">
         <Form onSubmit={this.handleSubmit} className="formContainer">
           <Form.Group>
-            <Form.Input
-              value={this.state.name}
+            <input
+              value={this.state.event.name}
               name="name"
               onChange={this.handleChange}
               label=" name"

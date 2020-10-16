@@ -22,11 +22,11 @@ function App() {
         <Route exact path="/all-events" component={AllEvents} />
         <Route exact path="/all-users" component={AllUsers} />
         <Route exact path="/add-event" component={FormEvent} />
-        <Route exact path="/edit-event" component={EditEvent} />
+        <Route exact path="/edit-event/:id" component={EditEvent} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/profile" component={Profile} />
-        <ProtectedRoute exact path="/profile/edit" component={EditProfile} />
+        <ProtectedRoute exact path="/profile/edit/" component={EditProfile} />
         <Route component={NotFound} />
       </Switch>
     </div>
