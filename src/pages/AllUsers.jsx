@@ -1,7 +1,8 @@
 import React from 'react';
 import apiHandler from "../api/apiHandler";
 import { Link } from "react-router-dom";
-import UserCard from "../components/UserCard";
+import UserCard from "../components/Card/UserCard";
+import "../styles/allUsers.css";
 
 class AllUsers extends React.Component {
     
