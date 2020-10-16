@@ -14,8 +14,10 @@ class Profile extends React.Component {
     apiHandler
       .getAll("/api/event")
       .then((apiRes) => {
-        const userEvents = apiRes.filter(event => event.userId === this.props.context.user._id);
-        this.setState({ userEvents : userEvents })
+        const userEvents = apiRes.filter(
+          (event) => event.userId === this.props.context.user._id
+        );
+        this.setState({ userEvents: userEvents });
       })
       .catch();
   }
@@ -32,15 +34,17 @@ class Profile extends React.Component {
           apiHandler
             .getAll("/api/event")
             .then((apiRes) => {
-                // this.props.history.push("/profile"); //redirect vers la page /profile juste après avoir edité l'événement
-                // console.log(apiRes);
-                apiHandler
+              // this.props.history.push("/profile"); //redirect vers la page /profile juste après avoir edité l'événement
+              // console.log(apiRes);
+              apiHandler
                 .getAll("/api/event")
                 .then((apiRes) => {
-                  const userEvents = apiRes.filter(event => event.userId === this.props.context.user._id);
-                  this.setState({ userEvents : userEvents })
+                  const userEvents = apiRes.filter(
+                    (event) => event.userId === this.props.context.user._id
+                  );
+                  this.setState({ userEvents: userEvents });
                 })
-                .catch()
+                .catch();
             })
             .catch();
         })
@@ -112,11 +116,11 @@ class Profile extends React.Component {
                     <Table.Cell>{userEvent.description}</Table.Cell>
                     <Table.Cell>{userEvent.noteAverage}</Table.Cell>
                     <Table.Cell>
-                      <Button className="icon">
-                        <Link to="/edit-event">
+                      <Link to="/edit-event">
+                        <Button className="icon">
                           <Icon name="edit" />
-                        </Link>
-                      </Button>
+                        </Button>
+                      </Link>
                     </Table.Cell>
                     <Table.Cell>
                       {/* <Button onClick={this.handleDelete} id={userEvent._id} className="icon">

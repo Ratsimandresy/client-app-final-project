@@ -12,13 +12,12 @@ const defaultOptions = [
 ];
 export default class EditEvent extends Component {
   state = {
-    name: "",
-    description: "",
-    mainImageUrl: "",
-    location: "",
-    infos: "",
-    city: "",
+    event: {},
   };
+
+  componentDidMount() {
+    apiHandler.getOne("/api/event" + this.props._id);
+  }
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -37,10 +36,8 @@ export default class EditEvent extends Component {
   };
 
   handleCancel = (e) => {
-    console.log("canceled!!!!!!!");
-    console.log(this.props);
-    console.log(e.target);
     this.props.history.push("/profil");
+    this.setState({ event: this.state });
   };
 
   handleSubmit = (event) => {
@@ -54,7 +51,7 @@ export default class EditEvent extends Component {
     }
 
     apiHandler
-      .createOne("/api/event/", fd)
+      .updateOne("/api/event/" + this.props._id, fd)
       .then((apiRes) => {
         this.props.history.push("/profile");
       })
@@ -62,7 +59,7 @@ export default class EditEvent extends Component {
   };
 
   render() {
-      console.log(this.props)
+    console.log("=========>",this.props);
     return (
       <div className="EventForm">
         <Form onSubmit={this.handleSubmit} className="formContainer">
