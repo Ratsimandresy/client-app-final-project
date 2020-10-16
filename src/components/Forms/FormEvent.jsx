@@ -9,6 +9,7 @@ const defaultOptions = [
   { key: "np", value: "np", text: "nice place" },
   { key: "pl", value: "pl", text: "plan" },
 ];
+
 export default class FormEvent extends Component {
   state = {
     name: "",
@@ -17,12 +18,18 @@ export default class FormEvent extends Component {
     location: "",
     infos: "",
     city: "",
+    categories: [],
   };
 
-  //   componentDidMount() {
-  // console.log(this.props);
-
-  //   }
+    componentDidMount() {
+      apiHandler
+      .getAll("/api/categories/")
+      .then((apiRes) => {
+        this.setState({ categories : apiRes })
+        console.log(this.state.categories)
+        })
+      .catch((err) => console.log(err));
+      }
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -86,15 +93,24 @@ export default class FormEvent extends Component {
               width={5}
             />
           </Form.Group>
-          <Form.Group>
+          {/* <Form.Group>
             <Select
               name="category"
               label="category"
               placeholder="category"
               width={6}
-              options={defaultOptions}
+              options={this.state.categories}
             />
-          </Form.Group>
+          </Form.Group> */}
+          <select name="category" id="category" onChange={this.handleChange}>
+            <option value="-1" disabled>
+              select a category
+            </option>
+            {this.state.categories.map(category => (
+              <option value={category._id}>{category.label}</option>
+            )
+          )}
+          </select>
           <Form.Group>
             <Form.Input
               name="location"
