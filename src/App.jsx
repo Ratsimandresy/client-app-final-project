@@ -1,13 +1,16 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import NavMain from "./components/NavMain";
+
 import Home from "./pages/Home";
 import AllEvents from "./pages/AllEvents";
 import AllUsers from "./pages/AllUsers";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
+
+import ProtectedRoute from "./components/ProtectedRoute";
+import NavMain from "./components/NavMain";
 
 function App() {
   return (
@@ -16,10 +19,11 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/AllEvents" component={AllEvents} />
-        <Route exact path="/AllUsers" component={AllUsers} />
+        <Route exact path="/all-users" component={AllUsers} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/profile" component={Profile} />
+        <Route component={NotFound} />
       </Switch>
     </div>
   );

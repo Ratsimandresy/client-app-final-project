@@ -7,6 +7,8 @@ class AllUsers extends React.Component {
     
     state = {
          users: [],
+         isLoading: true,
+         error: null
     };
     
 
@@ -26,8 +28,8 @@ class AllUsers extends React.Component {
     render() {
 
         return (
-            <div>
-                <h1>All the users</h1>
+            <div className="page page-all-users">
+                <h1 className="page-title">All the users</h1>
                 {this.state.users.map(user => (
                     <div key={user._id}>
                         <UserCard user={user} />
@@ -40,3 +42,47 @@ class AllUsers extends React.Component {
 }
 
 export default AllUsers
+
+
+
+
+// import React, { Component } from 'react';
+
+// import whatupAPI from '../api/apiHandler';
+
+// class AllUsers extends Component {
+
+//     state = {
+//         users:[],
+//         isLoading: true,
+//         error: null
+//     }
+
+//     async componentDidMount() {
+//         try {
+//             const allUsers = await whatupAPI.getAll("/api/user");
+//             console.log(allUsers);
+
+//             this.setState({
+//                 users:allUsers,
+//             });
+//         }catch(errApi){
+//             console.log(errApi);
+//             this.setState({
+//                 errApi,
+//             });
+//         }
+//     }
+
+//     render() {
+//         return (
+//             <div className="page page-all-users">
+//                 <div className="contaienr">
+//                     <h1 className="page-title">Page AllUsers</h1>
+//                 </div>                
+//             </div>
+//         )
+//     }
+// }
+
+// export default AllUsers;
