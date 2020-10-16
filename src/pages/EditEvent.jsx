@@ -62,11 +62,13 @@ export default class EditEvent extends Component {
   };
 
   render() {
+      console.log(this.props)
     return (
       <div className="EventForm">
         <Form onSubmit={this.handleSubmit} className="formContainer">
           <Form.Group>
             <Form.Input
+              value={this.state.name}
               name="name"
               onChange={this.handleChange}
               label=" name"
@@ -75,6 +77,7 @@ export default class EditEvent extends Component {
             />
 
             <Form.Input
+              value={this.state.infos}
               onChange={this.handleChange}
               name="infos"
               label="informations"
@@ -84,6 +87,7 @@ export default class EditEvent extends Component {
           </Form.Group>
           <Form.Group>
             <Select
+              value={this.state.category}
               name="category"
               label="category"
               placeholder="category"
@@ -93,6 +97,7 @@ export default class EditEvent extends Component {
           </Form.Group>
           <Form.Group>
             <Form.Input
+              value={this.state.location}
               name="location"
               onChange={this.handleChange}
               label="location"
@@ -100,6 +105,7 @@ export default class EditEvent extends Component {
               width={7}
             />
             <Form.Input
+              value={this.state.city}
               name="city"
               onChange={this.handleChange}
               label="city"
@@ -109,6 +115,7 @@ export default class EditEvent extends Component {
           </Form.Group>
           <Form.Group>
             <Select
+              value={this.state.tag}
               name="tag"
               placeholder="tag"
               width={6}
@@ -117,6 +124,7 @@ export default class EditEvent extends Component {
           </Form.Group>
           <Form.Group>
             <Form.Input
+              value={this.state.mainImageUrl}
               name="mainImageUrl"
               onChange={this.handleChange}
               label="Picture"
@@ -126,6 +134,7 @@ export default class EditEvent extends Component {
           </Form.Group>
           <Form.Group>
             <TextArea
+              value={this.state.description}
               name="description"
               onChange={this.handleChange}
               placeholder="Describe your post/event"
