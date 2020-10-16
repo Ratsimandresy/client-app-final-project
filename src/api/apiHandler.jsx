@@ -30,7 +30,7 @@ export default {
       .catch(errorHandler);
   },
   logout() {
-    return service.delete("/api/auth/logout").catch(errorHandler);
+    return service.get("/api/auth/logout").catch(errorHandler);
   },
 
   isLoggedIn() {
