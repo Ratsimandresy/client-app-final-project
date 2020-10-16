@@ -18,7 +18,25 @@ class Cards extends Component {
   }
 
   render() {
-    return <div className="cardContainer"></div>;
+    return (
+      <div>
+        {this.state.events.map((event, i) => (
+          <div key={i} className="cardContainer">
+            <div className="imgContainer">
+              <img
+                src="https://media.cntraveler.com/photos/57d961ce3e6b32bf25f5ad0f/master/w_2048,h_1536,c_limit/most-beautiful-paris-louvre-GettyImages-536267205.jpg"
+                alt="city"
+              />
+            </div>
+            <div className="details">
+              <p> {event.name} </p>
+              <p> {event.category} </p>
+              <p> {event.rate} </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 
