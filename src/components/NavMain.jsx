@@ -26,18 +26,17 @@ const NavMain = (props) => {
       </Link>
 
       <ul className="nav-list">
-      <React.Fragment>
-        <li>
-          <NavLink to="/all-users">
-            All Users
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/all-events">
-            All Events
-          </NavLink>
-        </li>
-      </React.Fragment>
+        <React.Fragment>
+          <li>
+            <NavLink to="/all-users">All Users</NavLink>
+          </li>
+          <li>
+            <NavLink to="/all-events">All Events</NavLink>
+          </li>
+          <li>
+            <NavLink to="/add-event">Add new event</NavLink>
+          </li>
+        </React.Fragment>
       </ul>
 
       <ul className="nav-list">

@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+.EventForm {
+  margin-top: -40px;
+  width: 100%;
+  padding: 5% 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formContainer {
+  width: 80%;
+  background-color: lightgray;
+  box-shadow: 0 0 10px 0 rgba(27, 26, 26, 0.5);
+  height: 600px;
+  padding: 30px 25px 30px;
+}

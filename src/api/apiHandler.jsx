@@ -54,7 +54,7 @@ export default {
       .catch(errorHandler);
   },
 
-  getOneUsr(endPoint) {
+  getOne(endPoint) {
     return service.get(endPoint);
   },
 
