@@ -62,7 +62,6 @@ export default class EditEvent extends Component {
   };
 
   render() {
-      console.log(withUser)
     return (
       <div className="EventForm">
         <Form onSubmit={this.handleSubmit} className="formContainer">

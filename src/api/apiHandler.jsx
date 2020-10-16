@@ -29,6 +29,7 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
   logout() {
     return service.get("/api/auth/logout").catch(errorHandler);
   },

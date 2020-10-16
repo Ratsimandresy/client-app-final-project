@@ -27,6 +27,8 @@ class AllEvents extends React.Component {
         return (
             <div>
                 <h1>All the Events</h1>
+                <div>      
+                </div>
                 {this.state.events.map(event => (
                     <div key={event._id}>
                         <Cards />

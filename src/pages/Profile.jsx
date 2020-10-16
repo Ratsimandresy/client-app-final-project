@@ -14,9 +14,8 @@ class Profile extends React.Component {
     apiHandler
       .getAll("/api/event")
       .then((apiRes) => {
-        // const userEvents = apiRes.filter(event => event.id_user === this.props.authContext.user._id);
-        this.setState({ userEvents: apiRes });
-        // console.log(apiRes)
+        const userEvents = apiRes.filter(event => event.userId === this.props.context.user._id);
+        this.setState({ userEvents : userEvents })
       })
       .catch();
   }
@@ -33,7 +32,15 @@ class Profile extends React.Component {
           apiHandler
             .getAll("/api/event")
             .then((apiRes) => {
-              this.setState({ userEvents: apiRes });
+                // this.props.history.push("/profile"); //redirect vers la page /profile juste après avoir edité l'événement
+                // console.log(apiRes);
+                apiHandler
+                .getAll("/api/event")
+                .then((apiRes) => {
+                  const userEvents = apiRes.filter(event => event.userId === this.props.context.user._id);
+                  this.setState({ userEvents : userEvents })
+                })
+                .catch()
             })
             .catch();
         })

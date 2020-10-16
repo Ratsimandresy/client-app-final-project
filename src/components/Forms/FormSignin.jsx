@@ -96,7 +96,7 @@ class FormSignin extends Component {
                     </Form>
                     <Message>
                         New to us?
-                        <Link to="signin"> Sign In</Link>
+                        <Link to="signin"> Sign Up</Link>
                     </Message>
                 </Grid.Column>
             </Grid>
