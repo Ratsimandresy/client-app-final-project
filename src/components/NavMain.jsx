@@ -16,39 +16,41 @@ const NavMain = (props) => {
         });
     }
 
-    return (<nav className="NavMain">
+    return (
+      <nav className="NavMain">
         <Link to="/">
-            <h3 className="logo">What's Up Paris</h3>
+          <h3 className="logo">What's Up Paris</h3>
         </Link>
 
-      <ul className="nav-list">
-        <React.Fragment>
-          <li>
-            <NavLink to="/all-users">All Users</NavLink>
-          </li>
-          <li>
-            <NavLink to="/all-events">All Events</NavLink>
-          </li>
-          <li>
-            <NavLink to="/add-event">Add new event</NavLink>
-          </li>
-        </React.Fragment>
-      </ul>
-
-      <ul className="nav-list">
-        {context.isLoggedIn && (
+        <ul className="nav-list">
           <React.Fragment>
             <li>
-              <NavLink to="/all-users">
-                All Users
-              </NavLink>
+              <NavLink to="/all-users">All Users</NavLink>
             </li>
             <li>
-              <NavLink to="/all-events">
-                All Events
-              </NavLink>
+              <NavLink to="/all-events">All Events</NavLink>
+            </li>
+            <li>
+              <NavLink to="/add-event">Add new event</NavLink>
             </li>
           </React.Fragment>
+        </ul>
+
+        <ul className="nav-list">
+          {context.isLoggedIn && (
+            <React.Fragment>
+              <li>
+                <NavLink to="/all-users">
+                  All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/all-events">
+                  All Events
+                </NavLink>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
 
         <ul className="nav-list">
