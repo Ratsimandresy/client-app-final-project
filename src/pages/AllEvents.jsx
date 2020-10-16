@@ -10,7 +10,6 @@ class AllEvents extends React.Component {
     
 
     componentDidMount()  {
-        console.log("all events")
         apiHandler
             .getAll("/api/event")
             .then((apiRes) => {
@@ -23,15 +22,12 @@ class AllEvents extends React.Component {
     }
 
     render() {
-
         return (
             <div>
                 <h1>All the Events</h1>
-                <div>      
-                </div>
                 {this.state.events.map(event => (
                     <div key={event._id}>
-                        <Cards />
+                        <Cards event={event} />
                     </div>
                 ))}
             </div>
