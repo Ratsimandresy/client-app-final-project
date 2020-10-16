@@ -29,7 +29,7 @@ export default class FormEvent extends Component {
     console.log(name);
     console.log(this.state);
     const value =
-      event.target.type === "checkbox"
+      event.target.type === "select"
         ? event.target.checked
         : event.target.type === "file"
         ? event.target.files[0]
