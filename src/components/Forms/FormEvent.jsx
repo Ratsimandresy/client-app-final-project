@@ -44,7 +44,7 @@ export default class FormEvent extends Component {
     console.log("canceled!!!!!!!");
     console.log(this.props);
     console.log(e.target);
-    // this.props.history.push("/all-events");
+    this.props.history.push("/profil");
   };
 
   handleSubmit = (event) => {
@@ -60,7 +60,7 @@ export default class FormEvent extends Component {
     apiHandler
       .createOne("/api/event/", fd)
       .then((apiRes) => {
-        // this.props.history.push("/profile");
+        this.props.history.push("/profile");
       })
       .catch((err) => console.log(err));
   };
