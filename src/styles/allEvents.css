@@ -1,0 +1,7 @@
+.all-events-flex-container {
+    border: 1px solid red;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
