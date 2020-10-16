@@ -1,7 +1,8 @@
 import React from 'react';
 import apiHandler from "../api/apiHandler";
-import { Link } from "react-router-dom";
-import UserCard from "../components/UserCard";
+import UserCard from "../components/Card/UserCard";
+import "../styles/allUsers.css";
+
 
 class AllUsers extends React.Component {
     
@@ -28,14 +29,17 @@ class AllUsers extends React.Component {
     render() {
 
         return (
-            <div className="page page-all-users">
+            <>
                 <h1 className="page-title">All the users</h1>
-                {this.state.users.map(user => (
-                    <div key={user._id}>
-                        <UserCard user={user} />
+                    <div className="page page-all-users">
+                        {this.state.users.map(user => (
+                            <div key={user._id}>
+                                <UserCard user={user} />
+                            </div>
+                        ))}
                     </div>
-                ))};
-            </div>
+            </>
+
         )
 
     }
