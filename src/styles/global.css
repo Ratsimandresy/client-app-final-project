@@ -37,4 +37,7 @@ ul {
   flex-wrap: wrap;
 }
 
-
+.error-message {
+  color: orangered;
+  font-size: 12px;
+}
