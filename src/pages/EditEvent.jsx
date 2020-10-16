@@ -65,13 +65,14 @@ export default class EditEvent extends Component {
       <div className="EventForm">
         <Form onSubmit={this.handleSubmit} className="formContainer">
           <Form.Group>
+            <label htmlFor="name"></label>
             <input
+              id="name"
               value={this.state.event.name}
               name="name"
               onChange={this.handleChange}
-              label=" name"
-              placeholder="file event name"
-              width={5}
+              placeholder="fill event name"
+              width={1}
             />
 
             <Form.Input
