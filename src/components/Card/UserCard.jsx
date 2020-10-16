@@ -1,5 +1,9 @@
 import React from 'react'
 import apiHandler from "../../api/apiHandler";
+import { Card, Icon, Image } from 'semantic-ui-react';
+import "../../styles/userCard.css";
+
+
 
 class UserCard extends React.Component {
     constructor(props){
@@ -16,10 +20,28 @@ class UserCard extends React.Component {
     render() {
         const user = { ...this.props.user }
         console.log(user)
+
         return (
-            <div>
-                <img src={user.profilImage} alt="profil picture" width="40px" />
-                <p>{user.email}</p>
+            
+            <div id="flex-usercard">
+                <Card>
+                    <Image src={user.profilImage} wrapped ui={false} />
+                    <Card.Content>
+                    <Card.Header>{user.firstName} {user.lastName}</Card.Header>
+                    <Card.Meta>
+                        <span className='date'>{user.pseudo}</span>
+                    </Card.Meta>
+                    <Card.Description>
+                        description : {user.description}
+                    </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                    <a>
+                        <Icon name='user' />
+                        25 événements créés
+                    </a>
+                    </Card.Content>
+                </Card>
             </div>
         )
 
@@ -28,3 +50,5 @@ class UserCard extends React.Component {
 }
 
 export default UserCard
+
+
