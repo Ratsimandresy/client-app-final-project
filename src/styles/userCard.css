@@ -1,4 +1,6 @@
 #flex-usercard {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
+    margin: 40px;
+
 }

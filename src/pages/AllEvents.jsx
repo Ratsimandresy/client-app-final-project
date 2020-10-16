@@ -1,7 +1,6 @@
 import React from 'react';
 import apiHandler from "../api/apiHandler";
 import Cards from "../components/Card/Cards";
-import { Link } from "react-router-dom";
 
 class AllEvents extends React.Component {
     
@@ -27,7 +26,7 @@ class AllEvents extends React.Component {
 
         return (
             <div>
-                <h1>All my Events</h1>
+                <h1>All the Events</h1>
                 {this.state.events.map(event => (
                     <div key={event._id}>
                         <Cards />
