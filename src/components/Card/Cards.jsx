@@ -37,22 +37,6 @@ class Cards extends Component {
           </div>
         ))}
       </div>
-
-    //   <div>
-    //     <div className="cardContainer">
-    //       <div className="imgContainer">
-    //         <img
-    //           src="https://media.cntraveler.com/photos/57d961ce3e6b32bf25f5ad0f/master/w_2048,h_1536,c_limit/most-beautiful-paris-louvre-GettyImages-536267205.jpg"
-    //           alt="city"
-    //         />
-    //       </div>
-    //       <div className="details">
-    //         <p> {this.state.events.name} </p>
-    //         <p> {this.state.events.category} </p>
-    //         <p> {this.state.events.rate} </p>
-    //       </div>
-    //     </div>
-    // </div>
     );
   }
 }

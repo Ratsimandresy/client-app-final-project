@@ -1,6 +1,8 @@
 import React from 'react';
 import apiHandler from "../api/apiHandler";
-import Cards from "../components/Card/Cards";
+import AllEventsCard from "../components/Card/AllEventsCard";
+import "../styles/allEvents.css";
+
 
 class AllEvents extends React.Component {
     
@@ -23,13 +25,15 @@ class AllEvents extends React.Component {
 
     render() {
         return (
-            <div>
+            <div >
                 <h1>All the Events</h1>
+                <div className="all-events-flex-container">
                 {this.state.events.map(event => (
                     <div key={event._id}>
-                        <Cards event={event} />
+                        <AllEventsCard event={event} />
                     </div>
                 ))}
+                </div>
             </div>
         )
 
