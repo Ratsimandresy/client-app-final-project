@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 
 import { UserContext } from "../Auth/UserContext";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
+
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+} from 'semantic-ui-react';
 
 class FormSignin extends Component {
   static contextType = UserContext;
@@ -43,13 +52,55 @@ class FormSignin extends Component {
 
   render() {
     return (
-      <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" />
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" />
-        <button>Submit</button>
-      </form>
+      <>
+        {/* 
+        <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" name="email" />
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" name="password" />
+          <button>Submit</button>
+        </form>
+        */}
+        <Grid 
+          textAlign='center'
+          style={
+            {height: '100vh'}
+          }
+                verticalAlign='middle'>
+                <Grid.Column style={
+                    {maxWidth: 300}
+                }>
+                    <Header as='h2' color='teal' textAlign='center'>
+                      Sign In
+                    </Header>
+                    <Form size='large'
+                      onChange={
+                          this.handleChange
+                      }
+                      onSubmit={
+                          this.handleSubmit
+                    }>
+                        <Segment stacked>
+                          <Form.Input fluid icon='user' name='email' iconPosition='left' placeholder='E-mail address'/>
+                          <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password' name='password'/>
+
+                          {this.state.errorMessage && (
+                            <p className="error-message">* {this.state.errorMessage}</p>
+                          )}
+
+                          <Button color='teal' fluid size='large'>
+                            Login
+                          </Button>
+                        </Segment>
+                    </Form>
+                    <Message>
+                        New to us?
+                        <Link to="signin"> Sign In</Link>
+                    </Message>
+                </Grid.Column>
+            </Grid>
+      </>
     );
   }
 }
