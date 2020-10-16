@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Select, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../api/apiHandler";
 import "../styles/FormEvent.css";
-import { withUser } from "../components/Auth/withUser";
+// import { withUser } from "../components/Auth/withUser";
 
 const defaultOptions = [
   { key: "sp", value: "sp", text: "sport" },
@@ -19,13 +19,6 @@ export default class EditEvent extends Component {
     infos: "",
     city: "",
   };
-
-  
-
-  //   componentDidMount() {
-  // console.log(this.props);
-
-  //   }
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -143,7 +136,7 @@ export default class EditEvent extends Component {
           <Button.Group>
             <Button onClick={this.handleCancel}>Cancel</Button>
             <Button.Or />
-            <Button color="teal">Add new event</Button>
+            <Button color="teal">Update</Button>
           </Button.Group>
         </Form>
       </div>
