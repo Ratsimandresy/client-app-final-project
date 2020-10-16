@@ -7,6 +7,7 @@ import AllUsers from "./pages/AllUsers";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/all-users" component={AllUsers} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
+        <ProtectedRoute exact path="/profile/edit" component={EditProfile} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>

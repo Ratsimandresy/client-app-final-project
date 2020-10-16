@@ -1,7 +1,7 @@
 import React from 'react'
-import apiHandler from "../../api/apiHandler";
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 import "../../styles/userCard.css";
+import { Link } from 'react-router-dom';
 
 
 
@@ -25,7 +25,7 @@ class UserCard extends React.Component {
             
             <div id="flex-usercard">
                 <Card>
-                    <Image src={user.profilImage} wrapped ui={false} />
+                    <Image src={user.profilImage} wrapped ui={false} alt="profil picture" />
                     <Card.Content>
                     <Card.Header>{user.firstName} {user.lastName}</Card.Header>
                     <Card.Meta>
@@ -36,10 +36,7 @@ class UserCard extends React.Component {
                     </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                    <a>
-                        <Icon name='user' />
-                        25 événements créés
-                    </a>
+                    <Link to={`/all-events`}>25 événements créés</Link>
                     </Card.Content>
                 </Card>
             </div>
