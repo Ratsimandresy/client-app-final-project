@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavMain from "./components/NavMain";
 import FormEvent from "./components/Forms/FormEvent";
+import SingleUser from "./pages/SingleUser";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/profile/edit/" component={EditProfile} />
+        <Route exact path="/all-users/:userId" component={SingleUser} />
         <Route component={NotFound} />
       </Switch>
     </div>

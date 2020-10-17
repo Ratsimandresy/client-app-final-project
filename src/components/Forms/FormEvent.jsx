@@ -109,7 +109,7 @@ export default class FormEvent extends Component {
             {this.state.categories.map(category => (
               <option value={category._id}>{category.label}</option>
             )
-          )}
+            )}
           </select>
           <Form.Group>
             <Form.Input
