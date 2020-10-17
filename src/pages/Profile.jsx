@@ -1,7 +1,7 @@
 import React from "react";
 import apiHandler from "../api/apiHandler";
 import { withUser } from "../components/Auth/withUser";
-import { Table, Button, Icon } from "semantic-ui-react";
+import { Table, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import "../styles/profileUser.css";
 
@@ -25,6 +25,7 @@ class Profile extends React.Component {
 
   handleClick = (event) => {
     console.log("yooooooooooooooo");
+    console.log(this.props)
   };
 
   handleDelete = (event) => {
@@ -67,6 +68,7 @@ class Profile extends React.Component {
     // const userEvents2 = this.state.userEvents;
     // console.log(this.state.userEvents);
     // console.log(this.state.userEvents[0]);
+    console.log(this.props)
 
     return (
       <div>
@@ -127,7 +129,7 @@ class Profile extends React.Component {
                         idevent={userEvent._id}
                         className="icon"
                       >
-                        <Link to={`/edit-event/${userEvent._id}`}>
+                        <Link  to={`/edit-event/${userEvent._id}`}>
                           <Icon name="edit" />
                         </Link>
                       </button>

@@ -12,84 +12,107 @@ const defaultOptions = [
 ];
 export default class EditEvent extends Component {
   state = {
-    event: {},
+    name: "",
+    description: "",
+    city: "",
+    location: "",
+    infos: "",
   };
 
-  //   componentDidMount() {
-  //     apiHandler.getOne("/api/event" + this.props._id);
-  //   }
+  componentDidMount() {
+    console.log("this is the props ===>>>>");
+    apiHandler
+      .getOne("/api/event/" + this.props.match.params.id)
+      .then((apiRes) => {
+        console.log("<================>", apiRes.data);
+        const { name, infos, description, city } = apiRes.data;
+        this.setState({ name, infos, description, city });
+      })
+      .catch((err) => console.log(err));
+  }
 
   handleChange = (event) => {
-    const name = event.target.name;
-    console.log(name);
-    console.log(this.state);
+    const key = event.target.name;
     const value =
-      event.target.type === "select"
-        ? event.target.checked
-        : event.target.type === "file"
+      event.target.type === "file"
         ? event.target.files[0]
+        : event.target.type === "checkbox"
+        ? event.target.checked
         : event.target.value;
 
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [key]: value });
   };
 
-  handleCancel = (e) => {
-    this.props.history.push("/profil");
-    // this.setState({ event: this.state });
+  isValidInput = (key) => {
+    if (this.state[key] === "") {
+      return false;
+    } else return true;
+  };
+
+  handleCancel = () => {
+    this.props.history.push("/profile");
+    this.setState({ event: this.state.event });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("submittinggggsg");
-
+    console.log("submittinggggsg");
+    console.log(this.props);
     const fd = new FormData();
 
     for (const key in this.state) {
       fd.append(key, this.state[key]);
     }
-
+    console.log(fd);
     apiHandler
       .updateOne("/api/event/" + this.props.match.params.id, fd)
       .then((apiRes) => {
-        console.log(apiRes);
-        this.setState({ event: apiRes });
-        // this.props.history.push("/profile");
+        console.log("apires ====>>>>>>", apiRes);
+        this.setState(apiRes);
+        this.props.history.push("/profile");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("error", err));
   };
 
   render() {
+    console.log("THIS IS THE STATE !!!!!!!!!!");
+
+    console.log(this.state);
+    // const { name, infos, description, city, location } = this.state;
     return (
       <div className="EventForm">
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
         <Form onSubmit={this.handleSubmit} className="formContainer">
           <Form.Group>
-            <label htmlFor="name"></label>
-            <input
+            <Form.Input
+              value={this.state.name}
               id="name"
-              value={this.state.event.name}
+              label="name"
               name="name"
+              autoComplete="off"
               onChange={this.handleChange}
-              placeholder="fill event name"
-              width={1}
+              placeholder={"fill event name"}
+              width={5}
             />
 
             <Form.Input
               value={this.state.infos}
               onChange={this.handleChange}
               name="infos"
-              label="informations"
+              label="infos"
+              autoComplete="off"
               placeholder="date format"
               width={5}
             />
           </Form.Group>
           <Form.Group>
             <Select
-              value={this.state.category}
+              // value={this.state.category}
+              onChange={this.handleChange}
               name="category"
               label="category"
               placeholder="category"
+              autoComplete="off"
               width={6}
               options={defaultOptions}
             />
@@ -99,6 +122,7 @@ export default class EditEvent extends Component {
               value={this.state.location}
               name="location"
               onChange={this.handleChange}
+              autoComplete="off"
               label="location"
               placeholder="2 Wide"
               width={7}
@@ -108,35 +132,40 @@ export default class EditEvent extends Component {
               name="city"
               onChange={this.handleChange}
               label="city"
+              autoComplete="off"
               placeholder="city"
               width={7}
             />
           </Form.Group>
-          <Form.Group>
+          {/* <Form.Group>
             <Select
-              value={this.state.tag}
+              // value={this.state.tag}
               name="tag"
               placeholder="tag"
+              onChange={this.handleChange}
+              autoComplete="off"
               width={6}
               options={defaultOptions}
             />
-          </Form.Group>
-          <Form.Group>
+          </Form.Group> */}
+          {/* <Form.Group>
             <Form.Input
-              value={this.state.mainImageUrl}
+              // value={this.state.mainImageUrl}
               name="mainImageUrl"
               onChange={this.handleChange}
+              autoComplete="off"
               label="Picture"
               type="file"
               width={8}
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group>
             <TextArea
               value={this.state.description}
               name="description"
               onChange={this.handleChange}
               placeholder="Describe your post/event"
+              autoComplete="off"
               style={{ minHeight: 90, width: 600 }}
             />
           </Form.Group>
