@@ -15,7 +15,8 @@ export default class FormEvent extends Component {
         categories: [],
         isLoading: true,
         listTags: [],
-        tags: []
+        tags: [],
+        category: ''
     };
 
     async componentDidMount() {

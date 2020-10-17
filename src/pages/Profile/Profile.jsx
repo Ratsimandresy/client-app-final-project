@@ -1,9 +1,10 @@
 import React from "react";
-import apiHandler from "../api/apiHandler";
-import { withUser } from "../components/Auth/withUser";
+import apiHandler from "../../api/apiHandler";
+import { withUser } from "../../components/Auth/withUser";
 import { Table, Button, Icon, Card, Accordion } from 'semantic-ui-react';
+import EventItem from '../../components/Profile/EventItem';
 import { Link } from "react-router-dom";
-import "../styles/profileUser.css";
+import "../../styles/profileUser.css";
 
 class Profile extends React.Component {
   state = {
@@ -25,11 +26,12 @@ class Profile extends React.Component {
       })
       .catch();
     */
-    const currentUser = await apiHandler.getMe("api/user/me");
-    console.log(currentUser);
-    if(currentUser) {
+    const data = await apiHandler.getMe("api/user/me");
+    console.log(data);
+    if(data) {
       this.setState({
-        user: currentUser,
+        user: data.currentUser,
+        userEvents: data.userEvents,
         isLoading: false,
       });
     }
@@ -156,28 +158,8 @@ class Profile extends React.Component {
           <Accordion.Content active={this.state.activeIndex === 0}>
           
             {this.state.userEvents.map((userEvent) => (
-             
-                <div className="event">
-                  <img src="" alt="" />
-                  <div className="content-event">
-                    <h3 className="event-title">Title event</h3>
-                    <p>Description event...</p>
-                    <div className="actions-btn">
-                      <button className="btn btn-show">
-                      <Icon name='eye' />Show
-                      </button>
-
-                      <button className="btn btn-edit">
-                      <Icon name='pencil' />Edit
-                      </button>
-
-                      <button className="btn btn-delete">
-                      <Icon name='trash alternate' />Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
               
+              <EventItem key={userEvent._id} {...userEvent} />
             ))}
           </Accordion.Content>
           </>
