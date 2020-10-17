@@ -59,6 +59,10 @@ export default {
     return service.get(endPoint);
   },
 
+  getMe(endPoint) {
+    return service.get(endPoint).then(res => res.data);
+  },
+
   updateOne(endPoint, data) {
     return service
       .patch(endPoint, data)
@@ -72,6 +76,4 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-
-
 };

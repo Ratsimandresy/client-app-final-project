@@ -1,7 +1,7 @@
 import React from "react";
 import apiHandler from "../api/apiHandler";
 import { withUser } from "../components/Auth/withUser";
-import { Table, Button, Icon } from 'semantic-ui-react';
+import { Table, Button, Icon, Card } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import "../styles/profileUser.css";
 
@@ -57,23 +57,38 @@ class Profile extends React.Component {
     console.log(userEvents2)
 
     return (
-      <div>
-        <h1>Mon profil</h1>
-        <br />
-        <img src={user.profilImage} alt="profile" width="140px" />
-        <h2>{user.firstName} {user.lastName}</h2>
-        <p><span>pseudo :</span>{user.pseudo}</p>
-        <p><span>email :</span>{user.email}</p>
-        <p><span>age : </span>{user.age} ans</p>
-        <p><span>description : </span>{user.description}</p>
-        <p><span>adresse :</span> {user.address}</p>
+      <div className="container">
+        <div className="page page-profile">
+        
+          <h1>Mon profil</h1>
+          <Card fluid>
+            <div className="card-profile">
 
-        <Link className="link-profil" to="/profile/edit">
-              Modifier mon profil
-        </Link>
+              <div className="card-profile-visu">
+                <img src={user.profilImage} alt="profile" width="140px" />
+              </div>
+              
+              <div className="card-profile-content">
+                <h2>{user.firstName} {user.lastName}</h2>
+                <p><span>pseudo :</span>{user.pseudo}</p>
+                <p><span>email :</span>{user.email}</p>
+                <p><span>age : </span>{user.age} ans</p>
+                <p><span>description : </span>{user.description}</p>
+                <p><span>adresse :</span> {user.address}</p>
+                <div className="actions-btn">
+                  <Link className="link-profil btn btn-edit" to="/profile/edit">
+                    Modifier mon profil
+                  </Link>
+                </div>
+              </div>
+            </div> 
+          </Card>
+
+        
 
         <h2>Mes événements</h2>
         <div id="profile-table-container">
+          {/* 
           <Table striped>
               <Table.Header>
                 <Table.Row>
@@ -101,14 +116,17 @@ class Profile extends React.Component {
                   <Table.Cell>
                     {/* <Button onClick={this.handleDelete} id={userEvent._id} className="icon">
                       <Icon name='trash alternate outline' />
-                    </Button> */}
+                    </Button>
                     <button onClick={this.handleDelete} id={userEvent._id}>DELETE</button>
                   </Table.Cell>
                 </Table.Row>
                 ))}
 
             </Table.Body>
+       
           </Table>
+          */}
+          </div>
         </div>
       </div>
     );

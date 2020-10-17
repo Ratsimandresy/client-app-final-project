@@ -13,3 +13,17 @@
     /* border: 1px solid red; */
     margin: 20px 80px 20px 80px;
 }
+
+.card-profile {
+    display: flex;
+    padding: 20px;
+}
+
+.card-profile-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-profile-visu {
+    margin-right: 20px;;
+}
