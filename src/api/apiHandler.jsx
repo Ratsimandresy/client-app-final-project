@@ -59,7 +59,18 @@ export default {
     return service.get(endPoint);
   },
 
+  getMe(endPoint) {
+    return service.get(endPoint).then(res => res.data);
+  },
+
   updateOne(endPoint, data) {
+    return service
+      .patch(endPoint, data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  updateOneElment(endPoint, data) {
     return service
       .patch(endPoint, data)
       .then((res) => res.data)
@@ -72,6 +83,4 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-
-
 };

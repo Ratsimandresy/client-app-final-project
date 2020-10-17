@@ -30,27 +30,14 @@ const NavMain = (props) => {
             <li>
               <NavLink to="/all-events">All Events</NavLink>
             </li>
-            <li>
-              <NavLink to="/add-event">Add new event</NavLink>
-            </li>
-          </React.Fragment>
-        </ul>
 
-        <ul className="nav-list">
-          {context.isLoggedIn && (
-            <React.Fragment>
+            {context.isLoggedIn && (
               <li>
-                <NavLink to="/all-users">
-                  All Users
-                </NavLink>
+                <NavLink to="/add-event">Add new event</NavLink>
               </li>
-              <li>
-                <NavLink to="/all-events">
-                  All Events
-                </NavLink>
-              </li>
-            </React.Fragment>
-          )}
+            )}
+           
+          </React.Fragment>
         </ul>
 
         <ul className="nav-list">
@@ -80,4 +67,5 @@ const NavMain = (props) => {
     </nav>
   );
 };
+
 export default withUser(NavMain);

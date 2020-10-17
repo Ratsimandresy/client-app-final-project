@@ -41,3 +41,25 @@ ul {
   color: orangered;
   font-size: 12px;
 }
+
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page {
+  padding: 20px;
+}
+
+.btn {
+  background-color: #ccc;
+  color: black;
+  border-radius: 5px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.btn.btn-edit {
+  background-color: coral;
+}

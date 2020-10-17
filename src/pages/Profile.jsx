@@ -1,7 +1,7 @@
 import React from "react";
 import apiHandler from "../api/apiHandler";
 import { withUser } from "../components/Auth/withUser";
-import { Table, Icon } from "semantic-ui-react";
+import { Table, Button, Icon, Card, Accordion } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import "../styles/profileUser.css";
 
@@ -9,9 +9,12 @@ class Profile extends React.Component {
   state = {
     userEvents: [],
     isLoading: true,
+    activeIndex: 0,
+    user: null,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    /*
     apiHandler
       .getAll("/api/event")
       .then((apiRes) => {
@@ -21,12 +24,45 @@ class Profile extends React.Component {
         this.setState({ userEvents: userEvents, isLoading: false });
       })
       .catch();
+    */
+    const currentUser = await apiHandler.getMe("api/user/me");
+    console.log(currentUser);
+    if(currentUser) {
+      this.setState({
+        user: currentUser,
+        isLoading: false,
+      });
+    }
   }
 
+  /*
+  async componentDidUpdate(prevProps, prevState) {
+    if ((prevState.userEvents !== this.state.userEvents) 
+      || (prevState.user !== this.state.user))
+    {
+      console.log('data change');
+      const upDatedUser = await apiHandler.getMe("api/user/me");
+      this.setState({
+        userEvents: this.state.userEvents, 
+        user: upDatedUser,
+        isLoading: false 
+      });
+    }
+  }
+  */
+
+
   handleClick = (event) => {
-    console.log("yooooooooooooooo");
-    console.log(this.props)
+    
   };
+
+  handleClickAccordion = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    this.setState({ activeIndex: newIndex });
+  }
 
   handleDelete = (event) => {
     this.state.userEvents.map((userEvent) => {
@@ -71,39 +107,117 @@ class Profile extends React.Component {
     console.log(this.props)
 
     return (
-      <div>
-        <h1>Mon profil</h1>
-        <br />
-        <img src={user.profilImage} alt="profile" width="140px" />
-        <h2>
-          {user.firstName} {user.lastName}
-        </h2>
-        <p>
-          <span>pseudo :</span>
-          {user.pseudo}
-        </p>
-        <p>
-          <span>email :</span>
-          {user.email}
-        </p>
-        <p>
-          <span>age : </span>
-          {user.age} ans
-        </p>
-        <p>
-          <span>description : </span>
-          {user.description}
-        </p>
-        <p>
-          <span>adresse :</span> {user.address}
-        </p>
+      <div className="container">
+        <div className="page page-profile">
+        
+          <h1>Mon profil</h1>
+          {!this.state.isLoading && (
+            <Card fluid>
+              <div className="card-profile">
+                <div className="card-profile-visu">
+                  <img src={this.state.user.profilImage} alt="profile" width="140px" />
+                </div>
+                
+                <div className="card-profile-content">
+                
+                  <h2>{this.state.user.firstName} {this.state.user.lastName}</h2>
+                  <p><span>pseudo :</span>{this.state.user.pseudo}</p>
+                  <p><span>email :</span>{this.state.user.email}</p>
+                  <p><span>age : </span>{this.state.user.age} ans</p>
+                  <p><span>description : </span>{this.state.user.description}</p>
+                  <p><span>Adresse :</span> {this.state.user.address}</p>
+                  <p><span>City :</span> {this.state.user.city}</p>
+                  <p><span>CP :</span> {this.state.user.cp}</p>
+                  <div className="actions-btn">
+                    <Link className="link-profil btn btn-edit" to="/profile/edit">
+                      Modifier mon profil
+                    </Link>
+                  </div>
+                </div>
+              </div> 
+            </Card>
+          )}
 
-        <Link className="link-profil" to="/profile/edit">
-          Modifier mon profil
-        </Link>
+        
 
         <h2>Mes événements</h2>
-        <div id="profile-table-container">
+        
+        <Accordion styled>
+        {this.state.userEvents.length > 0 && (
+          <>
+          <Accordion.Title
+            active={this.state.activeIndex === 0}
+            index={0}
+            onClick={this.handleClickAccordion}
+          >
+            <Icon name='dropdown' />
+            My events
+          </Accordion.Title>
+
+          <Accordion.Content active={this.state.activeIndex === 0}>
+          
+            {this.state.userEvents.map((userEvent) => (
+             
+                <div className="event">
+                  <img src="" alt="" />
+                  <div className="content-event">
+                    <h3 className="event-title">Title event</h3>
+                    <p>Description event...</p>
+                    <div className="actions-btn">
+                      <button className="btn btn-show">
+                      <Icon name='eye' />Show
+                      </button>
+
+                      <button className="btn btn-edit">
+                      <Icon name='pencil' />Edit
+                      </button>
+
+                      <button className="btn btn-delete">
+                      <Icon name='trash alternate' />Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              
+            ))}
+          </Accordion.Content>
+          </>
+        )}
+
+          <Accordion.Title
+            active={this.state.activeIndex === 1}
+            index={1}
+            onClick={this.handleClickAccordion}
+          >
+            <Icon name='dropdown' />
+            My comments
+          </Accordion.Title>
+          <Accordion.Content active={this.state.activeIndex === 1}>
+            <p>
+              There are many breeds of dogs. Each breed varies in size and
+              temperament. Owners often select a breed of dog that they find to be
+              compatible with their own lifestyle and desires from a companion.
+            </p>
+          </Accordion.Content>
+
+          <Accordion.Title
+            active={this.state.activeIndex === 1}
+            index={1}
+            onClick={this.handleClickAccordion}
+          >
+            <Icon name='dropdown' />
+            My messages
+          </Accordion.Title>
+          <Accordion.Content active={this.state.activeIndex === 1}>
+            <p>
+              There are many breeds of dogs. Each breed varies in size and
+              temperament. Owners often select a breed of dog that they find to be
+              compatible with their own lifestyle and desires from a companion.
+            </p>
+          </Accordion.Content>
+        </Accordion>
+
+          {/* 
           <Table striped>
             <Table.Header>
               <Table.Row>
@@ -137,15 +251,16 @@ class Profile extends React.Component {
                     <Table.Cell>
                       {/* <Button onClick={this.handleDelete} id={userEvent._id} className="icon">
                       <Icon name='trash alternate outline' />
-                    </Button> */}
-                      <button onClick={this.handleDelete} id={userEvent._id}>
-                        DELETE
-                      </button>
-                    </Table.Cell>
-                  </Table.Row>
+                    </Button>
+                    <button onClick={this.handleDelete} id={userEvent._id}>DELETE</button>
+                  </Table.Cell>
+                </Table.Row>
                 ))}
             </Table.Body>
+       
           </Table>
+          */}
+          
         </div>
       </div>
     );
