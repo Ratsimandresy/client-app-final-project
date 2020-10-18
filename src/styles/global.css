@@ -75,3 +75,9 @@ ul {
 .btn.btn-show {
   background-color: rgb(133, 175, 69);
 }
+
+.ui.tiny.label.event-tag {
+  text-transform: uppercase;
+  font-size: .65rem;
+  margin-right: 8px;
+}
