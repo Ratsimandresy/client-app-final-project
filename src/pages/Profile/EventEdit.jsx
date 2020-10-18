@@ -18,6 +18,7 @@ export default class EditEvent extends Component {
     tags: [],
     category: "",
     currentEvent: "",
+    _id: "",
   };
 
   async componentDidMount() {
@@ -88,7 +89,7 @@ export default class EditEvent extends Component {
   handlePlace = (place) => {
     const location = place.geometry;
     location.formattedAddress = place.place_name;
-
+    console.log("LOCATION HERE!!!!!!!!!", location);
     const splitAdress = place.place_name.split(",");
     // console.log(splitAdress);
     // console.log(splitAdress[1]);
@@ -123,8 +124,16 @@ export default class EditEvent extends Component {
       console.log("-------key form-----", key, this.state[key]);
     }
 
+    // for (const key in this.state) {
+    //   if (key === "location") {
+    //     fd.append("location", JSON.stringify(this.state.location));
+    //   } else {
+    //     fd.append(key, this.state[key]);
+    //   }
+    // }
+
     apiHandler
-      .updateOne("/api/event/", fd)
+      .updateOne("/api/event/" + this.props.match.params.id, fd)
       .then((apiRes) => {
         this.props.history.push("/profile");
       })
@@ -218,7 +227,7 @@ export default class EditEvent extends Component {
             <Button.Group>
               <Button onClick={this.handleCancel}>Cancel</Button>
               <Button.Or />
-              <Button color="teal">Add new event</Button>
+              <Button color="teal">Edit event</Button>
             </Button.Group>
           </Form>
         )}
