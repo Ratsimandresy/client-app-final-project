@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import EditEvent from "../src/pages/EditEvent";
 import Home from "./pages/Home";
 import AllEvents from "./pages/AllEvents";
 import AllUsers from "./pages/AllUsers";
@@ -24,12 +23,19 @@ function App() {
         <Route exact path="/all-events" component={AllEvents} />
         <Route exact path="/all-users" component={AllUsers} />
         <Route exact path="/add-event" component={FormEvent} />
-        <Route exact path="/edit-event/:id" component={EditEvent} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/profile" component={Profile} />
-        <ProtectedRoute exact path="/profile/event/:id/edit" component={ProfileEventEdit} />
-        <ProtectedRoute exact path="/profile/event/:id/details" component={ProfileEventDetails} />
+        <ProtectedRoute
+          exact
+          path="/profile/event/:id/edit"
+          component={ProfileEventEdit}
+        />
+        <ProtectedRoute
+          exact
+          path="/profile/event/:id/details"
+          component={ProfileEventDetails}
+        />
         <ProtectedRoute exact path="/profile/edit/" component={ProfileEdit} />
         <Route component={NotFound} />
       </Switch>

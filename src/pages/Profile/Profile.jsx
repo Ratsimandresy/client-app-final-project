@@ -106,6 +106,7 @@ class Profile extends React.Component {
     // const userEvents2 = this.state.userEvents;
     // console.log(this.state.userEvents);
     // console.log(this.state.userEvents[0]);
+    console.log(this.props)
 
     return (
       <div className="container">
@@ -224,7 +225,7 @@ class Profile extends React.Component {
                         idevent={userEvent._id}
                         className="icon"
                       >
-                        <Link to={`/edit-event/${userEvent._id}`}>
+                        <Link  to={`/edit-event/${userEvent._id}`}>
                           <Icon name="edit" />
                         </Link>
                       </button>
