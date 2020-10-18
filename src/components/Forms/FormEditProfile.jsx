@@ -2,7 +2,7 @@ import React from 'react';
 import API from '../../api/apiHandler';
 import {withUser} from "../Auth/withUser";
 import {withRouter} from "react-router-dom";
-
+import AutoComplete from "../utils/AutoComplete";
 import {
     Button,
     Card,
@@ -24,7 +24,11 @@ class FormEditProfile extends React.Component {
         gender: '',
         profilImage: '',
         age: '',
-        pseudo: ''
+        pseudo: '',
+        address: '',
+        cp: '',
+        city: '',
+        formattedAdress: '',
     }
 
     async componentDidMount() {
@@ -40,7 +44,11 @@ class FormEditProfile extends React.Component {
                 password,
                 profilImage,
                 pseudo,
-                description
+                description,
+                address,
+                cp,
+                city,
+                formattedAdress,
             } = loadedUser;
             this.setState({
                 user: loadedUser,
@@ -53,13 +61,18 @@ class FormEditProfile extends React.Component {
                 profilImage,
                 gender,
                 pseudo,
-                description
+                description,
+                address,
+                cp,
+                city,
+                formattedAdress
             });
         } catch (errApi) {
             console.log(errApi);
             this.setState({errorMessage: errApi, isLoading: false});
         }
     }
+
     handleChange = (event) => {
         const key = event.target.name;
         console.log('handleChange')
@@ -81,8 +94,12 @@ class FormEditProfile extends React.Component {
             age,
             address,
             newPassword,
-            description
+            description,
+            cp,
+            city,
+            
         } = this.state;
+        const formattedAddress = `${address}, ${cp}, ${city}`;
         console.log(age);
         const fd = new FormData();
         fd.append("firstName", firstName);
@@ -92,6 +109,9 @@ class FormEditProfile extends React.Component {
         fd.append("profilImage", profilImage);
         fd.append("age", age);
         fd.append("address", address);
+        fd.append("cp", cp);
+        fd.append("city", city);
+        fd.append("formattedAddress", formattedAddress);
         fd.append("description", description);
         fd.append("newPassword", newPassword);
 
@@ -180,6 +200,7 @@ class FormEditProfile extends React.Component {
                                 type="number"/>
                         </div>
 
+
                         <div className="form-group">
                             <span>Gender:
                             </span>
@@ -207,6 +228,24 @@ class FormEditProfile extends React.Component {
                             <input id="input-age" name="address"
                                 value={
                                     this.state.address
+                                }
+                                type="text"/>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="input-cp">Code Postal</label>
+                            <input id="input-cp" name="cp"
+                                value={
+                                    this.state.cp
+                                }
+                                type="text"/>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="input-city">City</label>
+                            <input id="input-city" name="city"
+                                value={
+                                    this.state.city
                                 }
                                 type="text"/>
                         </div>

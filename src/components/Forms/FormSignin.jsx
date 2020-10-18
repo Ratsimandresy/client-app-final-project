@@ -41,6 +41,7 @@ class FormSignin extends Component {
     apiHandler
       .signin(this.state)
       .then((data) => {
+        console.log(data);
         this.context.setUser(data);
         this.props.history.push("/");
       })

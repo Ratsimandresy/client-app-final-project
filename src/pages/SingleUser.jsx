@@ -11,6 +11,7 @@ class SingleUser extends React.Component {
     
     componentDidMount() {
         console.log(this.props.match.params.userId)
+        console.log("heyheyhey")
         apiHandler
             .getOne("/api/user", this.props.match.params.userId)
             .then((apiRes) => {
