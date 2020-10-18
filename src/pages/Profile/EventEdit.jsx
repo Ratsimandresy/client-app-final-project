@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Form, Select, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
@@ -91,14 +90,15 @@ export default class EditEvent extends Component {
     location.formattedAddress = place.place_name;
 
     const splitAdress = place.place_name.split(",");
-    console.log(splitAdress);
-    console.log(splitAdress[1]);
+    // console.log(splitAdress);
+    // console.log(splitAdress[1]);
     const splitCity = splitAdress[1].split(" ");
-    console.log(splitCity);
+    // console.log(splitCity);
     const cp = splitCity[1];
     const city = splitCity[2];
 
-    console.log(place);
+    console.log("THIS IS THE PLACE", place);
+    console.log(place.context[1].text);
     this.setState({ location, city, cp });
   };
 

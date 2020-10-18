@@ -73,12 +73,12 @@ export default {
       .catch(errorHandler);
   },
 
-  updateOneElment(endPoint, data) {
-    return service
-      .patch(endPoint, data)
-      .then((res) => res.data)
-      .catch(errorHandler);
-  },
+  // updateOneElment(endPoint, data) {
+  //   return service
+  //     .patch(endPoint, data)
+  //     .then((res) => res.data)
+  //     .catch(errorHandler);
+  // },
 
   deleteone(endPoint, data) {
     return service
