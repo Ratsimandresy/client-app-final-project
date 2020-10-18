@@ -12,9 +12,9 @@ class SingleUser extends React.Component {
     componentDidMount() {
         console.log(this.props.match.params.eventId)
         apiHandler
-            .getOne("/api/event", this.props.match.params.eventId)
+            .getOne("/api/event/", this.props.match.params.eventId)
             .then((apiRes) => {
-                this.setState({ event: apiRes.data })
+                this.setState({ event: apiRes })
                 console.log(this.state)
             })
             .catch((error) => {

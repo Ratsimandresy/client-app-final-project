@@ -13,9 +13,10 @@ class SingleUser extends React.Component {
         console.log(this.props.match.params.userId)
         console.log("heyheyhey")
         apiHandler
-            .getOne("/api/user", this.props.match.params.userId)
+            .getOne("/api/user/", this.props.match.params.userId)
             .then((apiRes) => {
-                this.setState({ user: apiRes.data })
+                console.log(apiRes)
+                this.setState({ user: apiRes })
                 console.log(this.state)
             })
             .catch((error) => {
