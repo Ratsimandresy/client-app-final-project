@@ -4,27 +4,27 @@ import "../../styles/Cards.css";
 
 class Cards extends Component {
 
-  constructor(props){
-    super(props);
+  // constructor(props){
+  //   super(props);
 
-    this.state = {
-      event: this.props.event,
-    }
-  }
+  //   this.state = {
+  //     event: this.props.event,
+  //   }
+  // }
 
 
-  componentDidMount() {
-    apiHandler
-      .getAll("api/event/sortedbyrate")
-      .then((apiRes) => {
-        // console.log(apiRes);
-        this.setState({ events: apiRes });
-      })
-      .catch((err) => console.log(err));
-  }
+  // componentDidMount() {
+  //   apiHandler
+  //     .getAll("api/event/sortedbyrate")
+  //     .then((apiRes) => {
+  //       // console.log(apiRes);
+  //       this.setState({ events: apiRes });
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   render() {
-    console.log(this.props.event.mainImageUrl)
+    console.log("---------------------->",this.props.event)
     return (
       <div>
         <div className="cardContainer">
@@ -35,9 +35,9 @@ class Cards extends Component {
             />
           </div>
           <div className="details">
-            <p><h3> {this.state.event.name} </h3></p>
-            <p><em>{this.state.event.description}</em> </p>
-            <p>note: {this.state.event.noteAverage} </p>
+            <p><h3> {this.props.event.name} </h3></p>
+            <p><em>{this.props.event.description}</em> </p>
+            <p>note: {this.props.event.noteAverage} </p>
           </div>
         </div>
     </div>

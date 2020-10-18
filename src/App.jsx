@@ -13,6 +13,8 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavMain from "./components/NavMain";
 import FormEvent from "./components/Forms/FormEvent";
+import SingleUser from "./pages/SingleUser";
+import SingleEvent from "./pages/SingleEvent";
 
 function App() {
   return (
@@ -25,7 +27,10 @@ function App() {
         <Route exact path="/add-event" component={FormEvent} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/all-users/:userId" component={SingleUser} />
+        <Route exact path="/all-events/:eventId" component={SingleEvent} />
         <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/profile/edit/" component={ProfileEdit} />
         <ProtectedRoute
           exact
           path="/profile/event/:id/edit"
@@ -36,7 +41,6 @@ function App() {
           path="/profile/event/:id/details"
           component={ProfileEventDetails}
         />
-        <ProtectedRoute exact path="/profile/edit/" component={ProfileEdit} />
         <Route component={NotFound} />
       </Switch>
     </div>
