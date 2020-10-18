@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NavMain from "./components/NavMain";
 import FormEvent from "./components/Forms/FormEvent";
 import SingleUser from "./pages/SingleUser";
+import SingleEvent from "./pages/SingleEvent";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/profile/edit/" component={EditProfile} />
         <Route exact path="/all-users/:userId" component={SingleUser} />
+        <Route exact path="/all-events/:eventId" component={SingleEvent} />
         <Route component={NotFound} />
       </Switch>
     </div>

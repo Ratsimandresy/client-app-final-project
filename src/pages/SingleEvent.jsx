@@ -6,15 +6,15 @@ import "../styles/singleUser.css";
 class SingleUser extends React.Component {
 
     state = {
-        user: null,
+        event: null,
     };
-    
+
     componentDidMount() {
-        console.log(this.props.match.params.userId)
+        console.log(this.props.match.params.eventId)
         apiHandler
-            .getOne("/api/user", this.props.match.params.userId)
+            .getOne("/api/event", this.props.match.params.eventId)
             .then((apiRes) => {
-                this.setState({ user: apiRes.data })
+                this.setState({ event: apiRes.data })
                 console.log(this.state)
             })
             .catch((error) => {
@@ -23,14 +23,15 @@ class SingleUser extends React.Component {
     }
 
     render() {
-        if(!this.state.user) {
-            return <div>Loading the user...</div>
+        if(!this.state.event) {
+            return <div>Loading the event...</div>
         }
 
         return (
             <div id="main">
-                {/* <h1>Single user</h1> */}
-                <div id="singleUser-main">
+                <h1>EVENT</h1>
+                <h2>{this.state.event.name}</h2>
+                {/* <div id="singleUser-main">
                     <div className="singleUser-container">
                         <div>
                             <h1>{this.state.user.lastName} {this.state.user.firstName}</h1>
@@ -44,7 +45,7 @@ class SingleUser extends React.Component {
                         <p>age <br /> <span>{this.state.user.age} ans</span></p><br />
                         <p>genre <br /> <span>{this.state.user.gender}</span></p><br />
                         <p><div className="description-singleUser"><i>A propos <br /> <span>{this.state.user.description}</span></i></div></p>
-                </div>
+                </div> */}
             </div>
         )
     }
