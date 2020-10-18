@@ -225,7 +225,7 @@ class Profile extends React.Component {
                         idevent={userEvent._id}
                         className="icon"
                       >
-                        <Link  to={`/edit-event/${userEvent._id}`}>
+                        <Link  to={`/edit-event/${userEvent._id}/edit`}>
                           <Icon name="edit" />
                         </Link>
                       </button>
