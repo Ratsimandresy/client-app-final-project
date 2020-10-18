@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Form, Select, TextArea, Button } from "semantic-ui-react";
-import apiHandler from "../api/apiHandler";
-import "../styles/FormEvent.css";
-// import { withUser } from "../components/Auth/withUser";
+import apiHandler from "../../api/apiHandler";
+import "../../styles/FormEvent.css";
 
 const defaultOptions = [
   { key: "sp", value: "sp", text: "sport" },
@@ -10,7 +9,8 @@ const defaultOptions = [
   { key: "np", value: "np", text: "nice place" },
   { key: "pl", value: "pl", text: "plan" },
 ];
-export default class EditEvent extends Component {
+
+class EventEdit extends Component {
   state = {
     name: "",
     description: "",
@@ -75,10 +75,6 @@ export default class EditEvent extends Component {
   };
 
   render() {
-    console.log("THIS IS THE STATE !!!!!!!!!!");
-
-    console.log(this.state);
-    // const { name, infos, description, city, location } = this.state;
     return (
       <div className="EventForm">
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
@@ -179,3 +175,5 @@ export default class EditEvent extends Component {
     );
   }
 }
+
+export default EventEdit;

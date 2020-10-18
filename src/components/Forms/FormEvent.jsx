@@ -16,6 +16,7 @@ export default class FormEvent extends Component {
     isLoading: true,
     listTags: [],
     tags: [],
+    category: "",
   };
 
   async componentDidMount() {
@@ -117,7 +118,6 @@ export default class FormEvent extends Component {
   render() {
     return (
       <div className="EventForm">
-        {" "}
         {!this.state.isLoading && (
           <Form onSubmit={this.handleSubmit} className="formContainer">
             <Form.Group>
@@ -138,25 +138,16 @@ export default class FormEvent extends Component {
                 width={5}
               />
             </Form.Group>
-            {/* <Form.Group>
-              <Select
-                name="category"
-                label="category"
-                placeholder="category"
-                width={6}
-                options={this.state.categories}
-              />
-            </Form.Group> */}
+
             <select name="category" id="category" onChange={this.handleChange}>
               <option key={0} value="-1" disabled>
                 select a category
               </option>
               {this.state.categories.map((category) => (
                 <option key={category._id} value={category._id}>
-                  {" "}
                   {category.label}
                 </option>
-              ))}{" "}
+              ))}
             </select>
 
             <Form.Group>
@@ -172,7 +163,7 @@ export default class FormEvent extends Component {
                     />
                     {tag.label}
                   </div>
-                ))}{" "}
+                ))}
               </div>
             </Form.Group>
 
@@ -210,7 +201,7 @@ export default class FormEvent extends Component {
               <Button color="teal">Add new event</Button>
             </Button.Group>
           </Form>
-        )}{" "}
+        )}
       </div>
     );
   }

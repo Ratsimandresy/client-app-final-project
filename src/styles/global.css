@@ -42,7 +42,6 @@ ul {
   font-size: 12px;
 }
 
-
 .container {
   margin: 0 auto;
   width: 100%;
@@ -57,9 +56,22 @@ ul {
   color: black;
   border-radius: 5px;
   padding: 5px 12px;
+  border: 0;
   font-size: 12px;
 }
 
+.btn:hover {
+  cursor:pointer;
+}
+
 .btn.btn-edit {
-  background-color: coral;
+  background-color: rgb(255, 123, 0);
+}
+
+.btn.btn-delete {
+  background-color: rgb(231, 27, 27);
+}
+
+.btn.btn-show {
+  background-color: rgb(133, 175, 69);
 }
