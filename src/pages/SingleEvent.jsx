@@ -14,8 +14,10 @@ class SingleUser extends React.Component {
         apiHandler
             .getOne("/api/event/", this.props.match.params.eventId)
             .then((apiRes) => {
+                console.log("------------------",apiRes)
                 this.setState({ event: apiRes })
-                console.log(this.state)
+                // console.log(this.state)
+                // console.log(this.state.event.userId)
             })
             .catch((error) => {
                 console.log(error)
@@ -29,23 +31,18 @@ class SingleUser extends React.Component {
 
         return (
             <div id="main">
-                <h1>EVENT</h1>
-                <h2>{this.state.event.name}</h2>
-                {/* <div id="singleUser-main">
+                <div id="singleUser-main">
                     <div className="singleUser-container">
                         <div>
-                            <h1>{this.state.user.lastName} {this.state.user.firstName}</h1>
+                            <h1>EVENT</h1>
+                            <h2>{this.state.event.name}</h2>
                             <br />
-                            <p>pseudo <br /> <span>{this.state.user.pseudo}</span></p>
+                            <p>Un événement créé par :  <br /> <span>{this.state.event.userId.firstName} {this.state.event.userId.lastName}</span></p>
                         </div>
-                        <Image src={this.state.user.profilImage} size='medium' rounded alt="profil picture" width="100px" />
+                        <Image src={this.state.event.mainImageUrl} size='medium' rounded alt="profil picture" width="100px" />
                     </div>
-                        <p>email <br /> <span>{this.state.user.email}</span></p><br />
-                        <p>adresse <br /> <span>{this.state.user.address}</span></p><br />
-                        <p>age <br /> <span>{this.state.user.age} ans</span></p><br />
-                        <p>genre <br /> <span>{this.state.user.gender}</span></p><br />
-                        <p><div className="description-singleUser"><i>A propos <br /> <span>{this.state.user.description}</span></i></div></p>
-                </div> */}
+                    <p><div className="description-singleUser"><i>A propos <br /> <span>{this.state.event.description}</span></i></div></p>
+                </div>
             </div>
         )
     }
