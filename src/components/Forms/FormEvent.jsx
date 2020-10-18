@@ -139,7 +139,7 @@ export default class FormEvent extends Component {
               />
             </Form.Group>
 
-            <select name="category" id="category" onChange={this.handleChange}>
+            <select name="category" id="category" onChange={this.handleChange} required>
               <option key={0} value="-1">
                 select a category
               </option>
