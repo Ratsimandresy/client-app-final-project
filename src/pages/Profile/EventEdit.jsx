@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Form, Select, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
 import AutoComplete from "../../components/utils/AutoComplete";
+
+import {withRouter} from 'react-router-dom';
+import {buildFormData} from '../../components/utils/buildFormData';
+
 import "../../styles/FormEvent.css";
 
 export default class EditEvent extends Component {
@@ -16,7 +20,8 @@ export default class EditEvent extends Component {
     isLoading: true,
     listTags: [],
     tags: [],
-    category: "",
+    category: null,
+    httpResponse: null,
     currentEvent: "",
     _id: "",
   };
@@ -29,20 +34,24 @@ export default class EditEvent extends Component {
       );
       const categories = await apiHandler.getAll("/api/categories/");
       const tags = await apiHandler.getAll("/api/tags/");
-      const { name, description, infos, city } = currentEvent;
+      const { name, description, infos, city, category } = currentEvent;
       console.log(categories);
       console.log(tags);
+      console.log(currentEvent);
 
-      if (tags) {
+      if (tags && categories) {
         this.setState({
           name,
           description,
           infos,
           currentEvent,
           city,
+          categories,
+          category,
           listTags: tags.tags,
           isLoading: false,
         });
+        console.log(this.state);
       }
     } catch (errApi) {
       this.setState({
@@ -111,31 +120,18 @@ export default class EditEvent extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submittinggggg");
-
     const fd = new FormData();
 
-    for (const key in this.state) {
-      if (key === "tags") {
-        fd.append("tags", JSON.stringify(this.state.tags));
-      } else if (key === "location") {
-        fd.append("location", JSON.stringify(this.state.location));
-      } else {
-        fd.append(key, this.state[key]);
-      }
-      console.log("-------key form-----", key, this.state[key]);
-    }
-
-    // for (const key in this.state) {
-    //   if (key === "location") {
-    //     fd.append("location", JSON.stringify(this.state.location));
-    //   } else {
-    //     fd.append(key, this.state[key]);
-    //   }
-    // }
-
+    const {
+      httpResponse,
+      ...data
+    } = this.state;
+    
+    console.log(data);
+    buildFormData(fd, data);
+    
     apiHandler
-      .updateOne(this.props.match.params.id, fd)
+      .updateOne("/api/event/"+this.props.match.params.id, fd)
       .then((apiRes) => {
         this.props.history.push("/profile");
       })
@@ -144,11 +140,13 @@ export default class EditEvent extends Component {
 
   render() {
     console.log(this.state.currentEvent);
+    console.log(this.props.match.params.id);
     return (
       <div className="EventForm">
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
         {!this.state.isLoading && (
           <Form onSubmit={this.handleSubmit} className="formContainer">
+            
             <Form.Group>
               <Form.Input
                 value={this.state.name}
@@ -158,7 +156,7 @@ export default class EditEvent extends Component {
                 placeholder="file event name"
                 width={5}
               />
-
+            
               <Form.Input
                 onChange={this.handleChange}
                 name="infos"
@@ -181,14 +179,20 @@ export default class EditEvent extends Component {
             </Form.Group>
 
             <select name="category" id="category" onChange={this.handleChange}>
-              <option key={0} value="-1">
-                select a category
-              </option>
+              
+              {this.state.category ? (
+                <option value={this.state.category._id}>{this.state.category.label}</option>
+              ) : (
+                <option key={0}>
+                  select a category
+                </option>
+              )}
               {this.state.categories.map((category) => (
                 <option key={category._id} value={category._id}>
                   {category.label}
                 </option>
               ))}
+             
             </select>
 
             <Form.Group>
@@ -240,7 +244,7 @@ export default class EditEvent extends Component {
             <Button.Group>
               <Button onClick={this.handleCancel}>Cancel</Button>
               <Button.Or />
-              <Button color="teal">Edit event</Button>
+              <Button color="teal">Update event</Button>
             </Button.Group>
           </Form>
         )}

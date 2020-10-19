@@ -3,6 +3,9 @@ import API from '../../api/apiHandler';
 import {withUser} from "../Auth/withUser";
 import {withRouter} from "react-router-dom";
 import AutoComplete from "../utils/AutoComplete";
+
+import { buildFormData } from '../utils/buildFormData';
+
 import {
     Button,
     Card,
@@ -102,18 +105,13 @@ class FormEditProfile extends React.Component {
         const formattedAddress = `${address}, ${cp}, ${city}`;
         console.log(age);
         const fd = new FormData();
-        fd.append("firstName", firstName);
-        fd.append("lastName", lastName);
-        fd.append("pseudo", pseudo);
-        fd.append("email", email);
-        fd.append("profilImage", profilImage);
-        fd.append("age", age);
-        fd.append("address", address);
-        fd.append("cp", cp);
-        fd.append("city", city);
-        fd.append("formattedAddress", formattedAddress);
-        fd.append("description", description);
-        fd.append("newPassword", newPassword);
+        
+        const {
+            httpResponse,
+            ...data
+        } = this.state;
+        
+        buildFormData(fd, data);
 
         API.updateOne("api/user/update", fd).then((resApi) => {
             console.log(resApi);
