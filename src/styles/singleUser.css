@@ -6,6 +6,13 @@
 
 }
 
+#main-global-singleuser {
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 #main-singleuser {
     display: flex;
     justify-content: center;
@@ -47,5 +54,23 @@ span {
 }
 
 .event-description-singleuser {
+    font-size: 12px;
+}
+
+.singleuser-category {
+    background-color: #ff8387;
+    color: white;
+    width: auto;
+    border-radius: 3px;
+    padding: 3px 6px 3px 6px;
+    font-size: 12px;
+}
+
+.singleuser-tags {
+    background-color: #51a2aa;
+    color: white;
+    width: auto;
+    border-radius: 3px;
+    padding: 3px 6px 3px 6px;
     font-size: 12px;
 }
