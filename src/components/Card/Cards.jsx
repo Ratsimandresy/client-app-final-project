@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 class Cards extends Component {
   state = {
     events: [],
+    isLoading: true,
   };
 
   componentDidMount() {
@@ -14,13 +15,18 @@ class Cards extends Component {
       .getAll("api/event/sortedbyrate")
       .then((apiRes) => {
         console.log(apiRes);
-        this.setState({ events: apiRes });
+        this.setState({ events: apiRes, isLoading: false });
       })
       .catch((err) => console.log(err));
   }
   render() {
     return (
+      
       <div id="cards-main-container">
+        
+
+        {this.state.isLoading && (
+          <>
         {this.state.events.map((event, i) => (
           <Link key={event.name} to={`/all-events/${event._id}`}>
           <div className="cardContainer">
@@ -39,7 +45,9 @@ class Cards extends Component {
           </div>
           </Link>
         ))}
-      </div>
+        </>
+      )} 
+      </div> 
     );
   }
 }
