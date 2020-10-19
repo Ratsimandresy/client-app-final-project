@@ -66,6 +66,13 @@ export default {
     return service.get(endPoint).then((res) => res.data);
   },
 
+  // updateOne(endPoint, data) {
+  //   return service
+  //     .patch(endPoint, data)
+  //     .then((res) => res.data)
+  //     .catch(errorHandler);
+  // },
+
   updateOne(endPoint, data) {
     return service
       .patch(endPoint, data)
