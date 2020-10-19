@@ -1,6 +1,6 @@
 import React from 'react';
 import apiHandler from "../api/apiHandler";
-import { Image, Icon } from 'semantic-ui-react';
+import { Image, Accordion, Icon } from 'semantic-ui-react';
 import "../styles/singleUser.css";
 
 class SingleUser extends React.Component {
@@ -16,7 +16,7 @@ class SingleUser extends React.Component {
             .then((apiRes) => {
                 console.log(apiRes)
                 apiHandler
-                    .getAll("/api/event/ofaspecificuser/"+this.props.match.params.userId )
+                    .getAll("/api/event/ofaspecificuser/" + this.props.match.params.userId )
                     .then((apiResult) => {
                         this.setState({event: apiResult})
                         // console.log("hello",this.state)
@@ -46,6 +46,7 @@ class SingleUser extends React.Component {
                         </div>
                         <Image src={this.state.user.profilImage} size='medium' rounded alt="profil picture" width="100px" />
                     </div>
+                    <div>
                         <p>email <br /> <span>{this.state.user.email}</span></p><br />
                         <p>adresse <br /> <span>{this.state.user.address}</span></p><br />
                         <p>age <br /> <span>{this.state.user.age} ans</span></p><br />
@@ -54,6 +55,7 @@ class SingleUser extends React.Component {
                         {this.state.event.map(event => (
                         <p>{event.name}</p>
                         ))}
+                    </div>
                 </div>
             </div>
         )

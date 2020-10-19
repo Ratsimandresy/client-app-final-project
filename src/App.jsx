@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -18,6 +15,7 @@ import NavMain from "./components/NavMain";
 import FormEvent from "./components/Forms/FormEvent";
 import SingleUser from "./pages/SingleUser";
 import SingleEvent from "./pages/SingleEvent";
+import Comment from "../src/components/Comment/Comment";
 
 function App() {
   return (
@@ -32,6 +30,7 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/all-users/:userId" component={SingleUser} />
         <Route exact path="/all-events/:eventId" component={SingleEvent} />
+        <Route exact path="/comment" component={Comment} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/profile/edit/" component={ProfileEdit} />
         <ProtectedRoute
