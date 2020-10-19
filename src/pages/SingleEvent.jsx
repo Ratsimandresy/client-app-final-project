@@ -16,8 +16,6 @@ class SingleUser extends React.Component {
             .then((apiRes) => {
                 console.log("------------------",apiRes)
                 this.setState({ event: apiRes })
-                // console.log(this.state)
-                // console.log(this.state.event.userId)
             })
             .catch((error) => {
                 console.log(error)

@@ -7,17 +7,21 @@ class SingleUser extends React.Component {
 
     state = {
         user: null,
+        event: null,
     };
     
     componentDidMount() {
-        console.log(this.props.match.params.userId)
-        console.log("heyheyhey")
         apiHandler
             .getOne("/api/user/", this.props.match.params.userId)
             .then((apiRes) => {
-                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>",apiRes)
+                console.log(apiRes)
+                apiHandler
+                    .getAll("/api/event/ofaspecificuser/"+this.props.match.params.userId )
+                    .then((apiResult) => {
+                        this.setState({event: apiResult})
+                        // console.log("hello",this.state)
+                    })
                 this.setState({ user: apiRes })
-                console.log(this.state)
             })
             .catch((error) => {
                 console.log(error)
@@ -27,11 +31,12 @@ class SingleUser extends React.Component {
     render() {
         if(!this.state.user) {
             return <div>Loading the user...</div>
+        } else if (!this.state.event) {
+            return <div>Loading the user...</div>
         }
 
         return (
             <div id="main">
-                {/* <h1>Single user</h1> */}
                 <div id="singleUser-main">
                     <div className="singleUser-container">
                         <div>
@@ -46,6 +51,9 @@ class SingleUser extends React.Component {
                         <p>age <br /> <span>{this.state.user.age} ans</span></p><br />
                         <p>genre <br /> <span>{this.state.user.gender}</span></p><br />
                         <p><div className="description-singleUser"><i>A propos <br /> <span>{this.state.user.description}</span></i></div></p>
+                        {this.state.event.map(event => (
+                        <p>{event.name}</p>
+                        ))}
                 </div>
             </div>
         )
