@@ -81,6 +81,62 @@ class FormEvent extends Component {
     this.setState({ location, city, cp });
   };
 
+  //   handleCancel = (e) => {
+  //     this.props.history.push("/profil");
+  //   };
+
+  //   handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     console.log(this.state.location);
+
+  //     const newData = new Object();
+
+  //     const fd = new FormData();
+  //     const { httpResponse, ...data } = this.state;
+  //     console.log(data);
+  //     console.log(buildFormData(fd, data));
+
+  //     for (const [key, value] of Object.entries(fd)) {
+  //       console.log(`${key}: ${value}`);
+  handleChange = (event) => {
+    const name = event.target.name;
+    const value =
+      event.target.type === "select"
+        ? event.target.checked
+        : event.target.type === "file"
+        ? event.target.files[0]
+        : event.target.value;
+
+    this.setState({ [name]: value });
+  };
+
+  handleChangeCheckbox = (event) => {
+    const { name, value } = event.target;
+    console.log(name);
+    const newTags = [...this.state.tags];
+    if (event.target.checked) {
+      newTags.push(value);
+      this.setState({ tags: newTags });
+    } else {
+      newTags.splice(event.target.value, 1);
+      this.setState({ tags: newTags });
+    }
+  };
+
+  handlePlace = (place) => {
+    const location = place.geometry;
+    location.formattedAddress = place.place_name;
+
+    const splitAdress = place.place_name.split(",");
+
+    const splitCity = splitAdress[1].split(" ");
+    const cp = splitCity[1];
+    const city = splitCity[2];
+
+    console.log(place);
+    this.setState({ location, city, cp });
+  };
+
   handleCancel = (e) => {
     this.props.history.push("/profil");
   };
@@ -88,8 +144,6 @@ class FormEvent extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state.location);
-
-    const newData = new Object();
 
     const fd = new FormData();
     const { httpResponse, ...data } = this.state;
@@ -100,14 +154,12 @@ class FormEvent extends Component {
       console.log(`${key}: ${value}`);
     }
 
-    if (this.state.formIsValid) {}
-      apiHandler
-        .createOne("/api/event/", fd)
-        .then((apiRes) => {
-          this.props.history.push("/profile");
-        })
-        .catch((err) => console.log(err));
-    
+    apiHandler
+      .createOne("/api/event/", fd)
+      .then((apiRes) => {
+        this.props.history.push("/profile");
+      })
+      .catch((err) => console.log(err));
   };
 
   render() {
@@ -204,10 +256,120 @@ class FormEvent extends Component {
               <Button color="teal">Add new event</Button>
             </Button.Group>
           </Form>
-        )}{" "}
+        )}
       </div>
     );
   }
 }
+
+//     if (this.state.formIsValid) {}
+//       apiHandler
+//         .createOne("/api/event/", fd)
+//         .then((apiRes) => {
+//           this.props.history.push("/profile");
+//         })
+//         .catch((err) => console.log(err));
+
+//   };
+
+//   render() {
+//     return (
+//       <div className="EventForm">
+//         {" "}
+//         {!this.state.isLoading && (
+//           <Form onSubmit={this.handleSubmit} className="formContainer">
+//             <Form.Group>
+//               <Form.Input
+//                 name="name"
+//                 onChange={this.handleChange}
+//                 required
+//                 label=" name"
+//                 placeholder="file event name"
+//                 width={5}
+//               />
+
+//               <Form.Input
+//                 onChange={this.handleChange}
+//                 name="infos"
+//                 label="informations"
+//                 type="date"
+//                 placeholder="date format"
+//                 width={5}
+//               />
+//             </Form.Group>
+
+//             <select
+//               name="category"
+//               id="category"
+//               onChange={this.handleChange}
+//               required
+//             >
+//               <option key={0}>select a category</option>
+//               {this.state.categories.map((category) => (
+//                 <option key={category._id} value={category._id}>
+//                   {" "}
+//                   {category.label}{" "}
+//                 </option>
+//               ))}{" "}
+//             </select>
+
+//             <Form.Group>
+//               <label>Tags</label>
+//               <div className="tags-list">
+//                 {this.state.listTags.map((tag) => (
+//                   <div key={tag._id}>
+//                     <input
+//                       type="checkbox"
+//                       value={tag._id}
+//                       onChange={this.handleChangeCheckbox}
+//                       name="tags"
+//                     />{" "}
+//                     {tag.label}{" "}
+//                   </div>
+//                 ))}
+//               </div>
+//             </Form.Group>
+
+//             <Form.Group>
+//               <Form.Input
+//                 name="mainImageUrl"
+//                 onChange={this.handleChange}
+//                 required
+//                 label="Picture"
+//                 type="file"
+//                 width={8}
+//               />
+//             </Form.Group>
+//             <Form.Group>
+//               <TextArea
+//                 name="description"
+//                 onChange={this.handleChange}
+//                 required
+//                 placeholder="Describe your post/event"
+//                 style={{
+//                   minHeight: 90,
+//                   width: 600,
+//                 }}
+//               />
+//             </Form.Group>
+
+//             <div className="form-group">
+//               <label className="label" htmlFor="location">
+//                 Address
+//               </label>
+//               <AutoComplete required onSelect={this.handlePlace} />
+//             </div>
+
+//             <Button.Group>
+//               <Button onClick={this.handleCancel}>Cancel</Button>
+//               <Button.Or />
+//               <Button color="teal">Add new event</Button>
+//             </Button.Group>
+//           </Form>
+//         )}{" "}
+//       </div>
+//     );
+//   }
+// }
 
 export default withRouter(FormEvent);
