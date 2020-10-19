@@ -16,6 +16,10 @@ class Comments extends Component {
     });
   };
 
+  resetingComment = () => {
+    this.setState({ content: "" });
+  };
+
   handelSubmit = (e) => {
     e.preventDefault();
     console.log("<<<<<<<==========comment SUBMITTED =====>>>>>");
@@ -30,6 +34,7 @@ class Comments extends Component {
         console.log("APIRES===>>>>", apiRes);
         this.setState({ content });
       })
+      .then(this.resetingComment())
       .catch((err) => console.log(err));
   };
 
@@ -92,7 +97,7 @@ class Comments extends Component {
             defaultValue={this.state.content}
           />
           <Button
-            onSubmit={this.handelSubmit}
+            // onClick={this.handleClick}
             content="Add Reply"
             labelPosition="left"
             icon="edit"
