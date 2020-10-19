@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import API from '../../api/apiHandler';
 import {withUser} from "../Auth/withUser";
 import {withRouter} from "react-router-dom";
 import AutoComplete from "../utils/AutoComplete";
 
-import { buildFormData } from '../utils/buildFormData';
+import {buildFormData} from '../utils/buildFormData';
 
 import {
     Button,
@@ -21,55 +21,35 @@ class FormEditProfile extends React.Component {
         user: null,
         isLoading: true,
         errorMessage: null,
-        firstName: '',
-        lastName: '',
-        newPassword: '',
-        gender: '',
-        profilImage: '',
-        age: '',
-        pseudo: '',
-        address: '',
-        cp: '',
-        city: '',
-        formattedAdress: '',
+        firstName: null,
+        lastName: null,
+        newPassword: null,
+        gender: null,
+        profilImage: null,
+        age: null,
+        pseudo: null,
+        address: null,
+        cp: null,
+        city: null,
+        formattedAdress: null
     }
 
     async componentDidMount() {
         try {
             const loadedUser = await API.getMe("/api/user/me");
             console.log(loadedUser);
-            const {
-                firstName,
-                lastName,
-                email,
-                gender,
-                age,
-                password,
-                profilImage,
-                pseudo,
-                description,
-                address,
-                cp,
-                city,
-                formattedAdress,
-            } = loadedUser;
-            this.setState({
-                user: loadedUser,
-                isLoading: false,
-                firstName,
-                lastName,
-                email,
-                password,
-                age,
-                profilImage,
-                gender,
-                pseudo,
-                description,
-                address,
-                cp,
-                city,
-                formattedAdress
+            delete loadedUser.userEvents
+            for (const key in loadedUser.currentUser) {
+                if (loadedUser.currentUser.hasOwnProperty(key)) {
+                    const element = loadedUser.currentUser[key];
+                    console.log(key);
+                    this.setState({[key]: element});
+                }
+            };
+            this.setState({ // user: loadedUser,
+                isLoading: false
             });
+            console.log(this.state);
         } catch (errApi) {
             console.log(errApi);
             this.setState({errorMessage: errApi, isLoading: false});
@@ -86,60 +66,68 @@ class FormEditProfile extends React.Component {
         this.setState({[key]: value});
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
-        const {
-            firstName,
-            lastName,
-            email,
-            profilImage,
-            pseudo,
-            age,
-            address,
-            newPassword,
-            description,
-            cp,
-            city,
-            
-        } = this.state;
-        const formattedAddress = `${address}, ${cp}, ${city}`;
-        console.log(age);
+
+        // const formattedAddress = `${address}, ${cp}, ${city}`;
+        // console.log(age);
         const fd = new FormData();
-        
+
         const {
             httpResponse,
             ...data
         } = this.state;
-        
-        buildFormData(fd, data);
 
-        API.updateOne("api/user/update", fd).then((resApi) => {
-            console.log(resApi);
-            this.props.history.push("/profile");
-        }).catch((errApi) => {
+        buildFormData(fd, data);
+        try {
+            const updatedUser = await API.updateOne("api/user/update", fd);
+            console.log(updatedUser);
+        } catch (errApi) {
             console.log(errApi);
-        });
+        };
     };
 
 
     render() {
+
         return (<div className="form form-edit-profile"> {
             !this.state.isLoading && (<div className="container">
                 <Card>
                     <form className="form form-edit-profile"
-                        onChange={
-                            this.handleChange
-                        }
+
                         onSubmit={
                             this.handleSubmit
                     }>
                         <div className="form-group">
                             <label htmlFor="input-profileImage">Profil Picture</label>
-                            <input id="input-profileImage" name="profilImage" type="file"/>
+                            {this.state.profilImage ? (
+                                <>
+                                    <img 
+                                        src={this.state.profilImage}
+                                        alt=""
+                                    />
+                                    <input 
+                                        id="input-profileImage" 
+                                        name="profilImage"
+                                        onChange={this.handleChange}
+                                        type="file"
+                                    />
+                                </>
+                            ) : (
+                                <input 
+                                    id="input-profileImage"
+                                    name="profilImage"
+                                    onChange={this.handleChange}
+                                    type="file"
+                                />
+                            )}
                         </div>
                         <div className="form-group">
                             <label htmlFor="input-firstName">First Name</label>
                             <input id="input-firstName" name="firstName"
+                                onChange={
+                                    this.handleChange
+                                }
                                 value={
                                     this.state.firstName
                                 }
@@ -152,6 +140,9 @@ class FormEditProfile extends React.Component {
                                 value={
                                     this.state.lastName
                                 }
+                                onChange={
+                                    this.handleChange
+                                }
                                 type="text"/>
                         </div>
 
@@ -161,12 +152,20 @@ class FormEditProfile extends React.Component {
                                 value={
                                     this.state.pseudo
                                 }
+                                onChange={
+                                    this.handleChange
+                                }
                                 type="text"/>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="input-lastName">Description</label>
-                            <textarea id="input-description" row="5" name="desciption"> 
+                            <label htmlFor="input-description">Description</label>
+                            <textarea 
+                                onChange={this.handleChange}
+                                id="input-description"
+                                row="5"
+                                name="description"
+                            >
                                 {this.state.description}
                             </textarea>
                         </div>
@@ -177,6 +176,9 @@ class FormEditProfile extends React.Component {
                                 value={
                                     this.state.email
                                 }
+                                onChange={
+                                    this.handleChange
+                                }
                                 type="text"/>
                         </div>
 
@@ -185,6 +187,9 @@ class FormEditProfile extends React.Component {
                             <input id="input-password" name="newPassword"
                                 value={
                                     this.state.newPassword
+                                }
+                                onChange={
+                                    this.handleChange
                                 }
                                 type="password"/>
                         </div>
@@ -195,27 +200,67 @@ class FormEditProfile extends React.Component {
                                 value={
                                     this.state.age
                                 }
+                                onChange={
+                                    this.handleChange
+                                }
                                 type="number"/>
                         </div>
-
 
                         <div className="form-group">
                             <span>Gender:
                             </span>
                             <label htmlFor="input-men"> {
-                                this.state.gender === 'male' ? (<input id="input-men" name="gender" value="male" type="radio" checked/>) : (<input id="input-men" name="gender" value="male" type="radio"/>)
+                                this.state.gender === 'male' ? (<input id="input-men"
+                                    onChange={
+                                        this.handleChange
+                                    }
+                                    name="gender"
+                                    value="male"
+                                    type="radio"
+                                    checked/>) : (<input id="input-men"
+                                    onChange={
+                                        this.handleChange
+                                    }
+                                    name="gender"
+                                    value="male"
+                                    type="radio"/>)
                             }
                                 Men
                             </label>
 
                             <label htmlFor="input-women"> {
-                                this.state.gender === 'female' ? (<input id="input-women" name="gender" value="female" type="radio" checked/>) : (<input id="input-women" name="gender" value="female" type="radio"/>)
+                                this.state.gender === 'female' ? (<input id="input-women"
+                                    onChange={
+                                        this.handleChange
+                                    }
+                                    name="gender"
+                                    value="female"
+                                    type="radio"
+                                    checked/>) : (<input id="input-women" name="gender"
+                                    onChange={
+                                        this.handleChange
+                                    }
+                                    value="female"
+                                    type="radio"/>)
                             }
                                 Women
                             </label>
 
                             <label htmlFor="input-other"> {
-                                this.state.gender === 'other' ? (<input id="input-other" name="gender" value="other" type="radio" checked/>) : (<input id="input-other" name="gender" value="other" type="radio"/>)
+                                this.state.gender === 'other' ? (<input id="input-other"
+                                    onChange={
+                                        this.handleChange
+                                    }
+                                    name="gender"
+                                    value="other"
+                                    type="radio"
+                                    checked/>) : (<input id="input-other"
+                                    onChange={
+                                        this.handleChange
+                                    }
+                                    name="gender"
+                                    value="other"
+                                    type="radio"/>)
                             }
                                 Other
                             </label>
@@ -227,6 +272,9 @@ class FormEditProfile extends React.Component {
                                 value={
                                     this.state.address
                                 }
+                                onChange={
+                                    this.handleChange
+                                }
                                 type="text"/>
                         </div>
 
@@ -235,6 +283,9 @@ class FormEditProfile extends React.Component {
                             <input id="input-cp" name="cp"
                                 value={
                                     this.state.cp
+                                }
+                                onChange={
+                                    this.handleChange
                                 }
                                 type="text"/>
                         </div>
@@ -245,8 +296,12 @@ class FormEditProfile extends React.Component {
                                 value={
                                     this.state.city
                                 }
+                                onChange={
+                                    this.handleChange
+                                }
                                 type="text"/>
                         </div>
+
                         <Button fluid>Update</Button>
                     </form>
                 </Card>
