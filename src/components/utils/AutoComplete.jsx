@@ -74,6 +74,7 @@ class AutocompletePlace extends Component {
           value={this.props.defaultValue || this.state.search}
           onChange={this.handleSearchChange}
           placeholder="Type an address"
+          required
         />
         <ul className="AutocompletePlace-results">
           {results.map((place) => (
