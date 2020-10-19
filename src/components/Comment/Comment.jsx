@@ -9,7 +9,6 @@ class Comments extends Component {
   };
 
   handlechange = (e) => {
-    console.log(this.state.comment);
     const name = e.target.name;
     const key = e.target.value;
     this.setState({
@@ -21,15 +20,22 @@ class Comments extends Component {
     e.preventDefault();
     console.log("<<<<<<<==========comment SUBMITTED =====>>>>>");
 
-    const fd = new FormData();
-    buildFormData(fd, this.state);
+    const { content } = this.state;
 
-    API.createOne("api/comments", fd)
-      .then((apiRes) => console.log(apiRes))
+    const newContent = { content: content }; //! create a new object 'cause of THE BODYYYYYYYYYY [Object: null prototype] { blablablablablablabla: '' }
+
+    API.createOne("api/comments", newContent)
+      .then((apiRes) => {
+        console.log("CONTENT TWO HERE ===>>>", newContent);
+        console.log("APIRES===>>>>", apiRes);
+        this.setState({ content });
+      })
       .catch((err) => console.log(err));
   };
 
   render() {
+    const { content } = this.state;
+    console.log("NEW VALUE OF CONTENT == >>", content);
     return (
       <Form onSubmit={this.handelSubmit}>
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
@@ -37,23 +43,6 @@ class Comments extends Component {
           <Header as="h3" dividing>
             Comments
           </Header>
-
-          <Comment>
-            <Comment.Avatar
-              alt="avatar"
-              src="https://react.semantic-ui.com/images/avatar/small/matt.jpg"
-            />
-            <Comment.Content>
-              <Comment.Author as="a">Matt</Comment.Author>
-              <Comment.Metadata>
-                <div>Today at 5:42PM</div>
-              </Comment.Metadata>
-              <Comment.Text>How artistic!</Comment.Text>
-              <Comment.Actions>
-                <Comment.Action>Reply</Comment.Action>
-              </Comment.Actions>
-            </Comment.Content>
-          </Comment>
 
           <Comment>
             <Comment.Avatar
@@ -74,6 +63,7 @@ class Comments extends Component {
                 <Comment.Action>Reply</Comment.Action>
               </Comment.Actions>
             </Comment.Content>
+
             <Comment.Group>
               <Comment>
                 <Comment.Avatar
@@ -94,44 +84,21 @@ class Comments extends Component {
             </Comment.Group>
           </Comment>
 
-          <Comment>
-            <Comment.Avatar
-              alt="avatar"
-              src="https://react.semantic-ui.com/images/avatar/small/joe.jpg"
-            />
-            <Comment.Content>
-              <Comment.Author as="a">Joe Henderson</Comment.Author>
-              <Comment.Metadata>
-                <div>5 days ago</div>
-              </Comment.Metadata>
-              <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
-              <Comment.Actions>
-                <Comment.Action>Reply</Comment.Action>
-              </Comment.Actions>
-            </Comment.Content>
-          </Comment>
-
-          <Form reply>
-            <Form.TextArea
-              onChange={this.handlechange}
-              value={this.state.comment}
-            />
-            <Button
-              content="Add Reply"
-              labelPosition="left"
-              icon="edit"
-              primary
-            />
-          </Form>
+          <Form.TextArea
+            onChange={this.handlechange}
+            name="content"
+            id="content"
+            placeholder="Add comment"
+            defaultValue={this.state.content}
+          />
+          <Button
+            onSubmit={this.handelSubmit}
+            content="Add Reply"
+            labelPosition="left"
+            icon="edit"
+            primary
+          />
         </Comment.Group>
-        <Form.TextArea onChange={this.handlechange} name="content" id="content" value={this.state.content} />
-        <Button
-          onSubmit={this.handelSubmit}
-          content="Add Reply"
-          labelPosition="left"
-          icon="edit"
-          primary
-        />
       </Form>
     );
   }
