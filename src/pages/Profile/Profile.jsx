@@ -58,6 +58,33 @@ class Profile extends React.Component {
     
   };
 
+  handlerClickDelete = async (id) => {
+    try{
+      console.log(id);
+      const deletedEvent = await apiHandler.delete_one("/api/event/", id);
+      const newUserEvents = [...this.state.userEvents];
+      console.log(newUserEvents);
+      const fileteredArray = newUserEvents.filter(e => {
+        if(e._id !== id) {
+          return e;
+        }
+      });
+
+      console.log(fileteredArray);
+      this.setState({
+        userEvents: fileteredArray
+      });
+
+    }catch(errApi){
+      console.log(errApi);
+    }
+
+    
+    //console.log(deletedEvent);
+  }
+
+
+
   handleClickAccordion = (e, titleProps) => {
     const { index } = titleProps;
     const { activeIndex } = this.state;
@@ -160,7 +187,11 @@ class Profile extends React.Component {
           
             {this.state.userEvents.map((userEvent) => (
               
-              <EventItem key={userEvent._id} {...userEvent} />
+              <EventItem 
+                key={userEvent._id} 
+                {...userEvent} 
+                handlerDelete={this.handlerClickDelete}
+              />
             ))}
           </Accordion.Content>
           </>
