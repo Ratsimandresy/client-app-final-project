@@ -66,16 +66,16 @@ export default {
     return service.get(endPoint).then((res) => res.data);
   },
 
-  updateOne(endPoint, data) {
-    return service
-      .patch(endPoint, data)
-      .then((res) => res.data)
-      .catch(errorHandler);
-  },
+  // updateOne(endPoint, data) {
+  //   return service
+  //     .patch(endPoint, data)
+  //     .then((res) => res.data)
+  //     .catch(errorHandler);
+  // },
 
-  updateOneElment(endPoint, data) {
+  updateOne(eventId, data) {
     return service
-      .patch(endPoint, data)
+      .patch(`/api/event/${eventId}`, data)
       .then((res) => res.data)
       .catch(errorHandler);
   },
