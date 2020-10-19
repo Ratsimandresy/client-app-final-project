@@ -25,8 +25,7 @@ class Cards extends Component {
       <div id="cards-main-container">
         
 
-        {this.state.isLoading && (
-          <>
+
         {this.state.events.map((event, i) => (
           <Link key={event.name} to={`/all-events/${event._id}`}>
           <div className="cardContainer">
@@ -45,8 +44,7 @@ class Cards extends Component {
           </div>
           </Link>
         ))}
-        </>
-      )} 
+
       </div> 
     );
   }

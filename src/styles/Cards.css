@@ -1,6 +1,6 @@
 .cardContainer {
   width: 210px;
-  height: 270px;
+  height: 260px;
   border: 0.5px solid #336397;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
@@ -9,6 +9,10 @@
   /* align-items: center; */
   margin: 25px;
   padding: 4px;
+}
+
+.cardContainer-cards {
+  height: auto;
 }
 
 /* .cardContainer .imgContainer {
