@@ -86,4 +86,11 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+  delete_one(endPoint, id) {
+    return service
+      .delete(`${endPoint}${id}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };
