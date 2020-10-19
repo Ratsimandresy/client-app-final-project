@@ -2,6 +2,7 @@ import React from "react";
 import apiHandler from "../api/apiHandler";
 import { Image, Accordion, Icon } from "semantic-ui-react";
 import "../styles/singleUser.css";
+import { Link } from "react-router-dom";
 
 class SingleUser extends React.Component {
   state = {
@@ -21,7 +22,7 @@ class SingleUser extends React.Component {
           )
           .then((apiResult) => {
             this.setState({ event: apiResult });
-            console.log("hello",this.state)
+            console.log("hello", this.state);
           });
         this.setState({ user: apiRes });
       })
@@ -103,15 +104,23 @@ class SingleUser extends React.Component {
               </Accordion.Title>
               <Accordion.Content active={this.state.activeIndex === 0}>
                 {this.state.event.map((event) => (
-                  <div id="event-singleuser-container">
-                    <div>
-                      <img src={event.mainImageUrl} alt="eventImage" width="100px" />
-                    </div>
-                    <div id="event-singleuser-name-descr">
+                  <Link key={event.name} to={`/all-events/${event._id}`}>
+                    <div id="event-singleuser-container">
+                      <div>
+                        <img
+                          src={event.mainImageUrl}
+                          alt="eventImage"
+                          width="100px"
+                        />
+                      </div>
+                      <div id="event-singleuser-name-descr">
                         <h4>{event.name}</h4>
-                        <p className="event-description-singleuser">{event.description}</p>
+                        <p className="event-description-singleuser">
+                          {event.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </Accordion.Content>
             </Accordion>
