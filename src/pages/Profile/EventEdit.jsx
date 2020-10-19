@@ -23,7 +23,6 @@ export default class EditEvent extends Component {
     category: null,
     httpResponse: null,
     currentEvent: "",
-    _id: "",
   };
 
   async componentDidMount() {

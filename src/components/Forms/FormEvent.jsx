@@ -81,8 +81,6 @@ class FormEvent extends Component {
         event.preventDefault();
         console.log(this.state.location);
 
-        const newData = new Object();
-
         const fd = new FormData();
         const {
             httpResponse,
@@ -95,12 +93,9 @@ class FormEvent extends Component {
             console.log(`${key}: ${value}`);
         }
 
-
-
-        if(this.state.formIsValid) {}
-          apiHandler.createOne("/api/event/", fd).then((apiRes) => {
-              this.props.history.push("/profile");
-          }).catch((err) => console.log(err));
+        apiHandler.createOne("/api/event/", fd).then((apiRes) => {
+            this.props.history.push("/profile");
+        }).catch((err) => console.log(err));
         
         
     };
