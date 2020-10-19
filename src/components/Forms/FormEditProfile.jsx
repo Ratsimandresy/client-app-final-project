@@ -222,8 +222,8 @@ class FormEditProfile extends React.Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="input-age">Address</label>
-                            <input id="input-age" name="address"
+                            <label htmlFor="input-address">Address</label>
+                            <input id="input-address" name="address"
                                 value={
                                     this.state.address
                                 }
