@@ -124,7 +124,7 @@ class Comments extends Component {
             />
           </Form>
         </Comment.Group>
-        <Form.TextArea name="content" id="content" value={this.state.content} />
+        <Form.TextArea onChange={this.handlechange} name="content" id="content" value={this.state.content} />
         <Button
           onSubmit={this.handelSubmit}
           content="Add Reply"

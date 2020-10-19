@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import apiHandler from "../../api/apiHandler";
 import "../../styles/Cards.css";
+import { Link } from "react-router-dom";
+
 
 class Cards extends Component {
-  
   state = {
     events: [],
   };
@@ -18,11 +19,11 @@ class Cards extends Component {
       .catch((err) => console.log(err));
   }
   render() {
-
     return (
-      <div>
+      <div id="cards-main-container">
         {this.state.events.map((event, i) => (
-          <div key={i} className="cardContainer">
+          <Link key={event.name} to={`/all-events/${event._id}`}>
+          <div className="cardContainer">
             <div className="imgContainer">
               <img
                 src="https://media.cntraveler.com/photos/57d961ce3e6b32bf25f5ad0f/master/w_2048,h_1536,c_limit/most-beautiful-paris-louvre-GettyImages-536267205.jpg"
@@ -30,11 +31,13 @@ class Cards extends Component {
               />
             </div>
             <div className="details">
-              <p> {event.name} </p>
-              <p> {event.category} </p>
-              <p> {event.rate} </p>
+              <h4> {event.name} </h4>
+              <div className="category-cards">
+                <p className="cat-cards-p"> {event.category.label} </p>
+              </div>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     );

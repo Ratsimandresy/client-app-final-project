@@ -16,7 +16,7 @@ class Home extends React.Component {
           <SearchBar />
         </dir>
         <section className="sectionCard">
-          <div className="mainCardContainer">
+          <div className="mainCardContainer1">
             <Cards />
           </div>
         </section>

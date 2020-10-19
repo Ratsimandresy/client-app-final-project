@@ -127,7 +127,6 @@ class FormEditProfile extends React.Component {
   render() {
     return (
       <div className="form form-edit-profile">
-        {" "}
         {!this.state.isLoading && (
           <div className="container">
             <Card>
@@ -254,27 +253,15 @@ class FormEditProfile extends React.Component {
                     )}
                     Women
                   </label>
-
-                  <label htmlFor="input-other">
-                    {" "}
-                    {this.state.gender === "other" ? (
-                      <input
-                        id="input-other"
-                        name="gender"
-                        value="other"
-                        type="radio"
-                        checked
-                      />
-                    ) : (
-                      <input
-                        id="input-other"
-                        name="gender"
-                        value="other"
-                        type="radio"
-                      />
-                    )}
-                    Other
-                  </label>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="input-address">Address</label>
+                  <input
+                    id="input-address"
+                    name="address"
+                    value={this.state.address}
+                    type="text"
+                  />
                 </div>
 
                 <div className="form-group">
@@ -310,7 +297,7 @@ class FormEditProfile extends React.Component {
               </form>
             </Card>
           </div>
-        )}{" "}
+        )}
       </div>
     );
   }
