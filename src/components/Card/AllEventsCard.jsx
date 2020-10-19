@@ -4,40 +4,25 @@ import "../../styles/Cards.css";
 
 class Cards extends Component {
 
-  // constructor(props){
-  //   super(props);
-
-  //   this.state = {
-  //     event: this.props.event,
-  //   }
-  // }
-
-
-  // componentDidMount() {
-  //   apiHandler
-  //     .getAll("api/event/sortedbyrate")
-  //     .then((apiRes) => {
-  //       // console.log(apiRes);
-  //       this.setState({ events: apiRes });
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
-
   render() {
     console.log("---------------------->",this.props.event)
     return (
       <div>
-        <div className="cardContainer">
+        <div className="cardContainer cardContainer-cards">
           <div className="imgContainer">
             <img
               src={this.props.event.mainImageUrl}
               alt="city"
+              height="200px"
             />
           </div>
           <div className="details">
             <p><h3> {this.props.event.name} </h3></p>
-            <p><em>{this.props.event.description}</em> </p>
             <p>note: {this.props.event.noteAverage} </p>
+            <p>by : {this.props.event.userId.firstName} {this.props.event.userId.lastName}</p>
+            <div className="category-cards">
+                <p className="cat-cards-p"> {this.props.event.category.label} </p>
+              </div>
           </div>
         </div>
     </div>
