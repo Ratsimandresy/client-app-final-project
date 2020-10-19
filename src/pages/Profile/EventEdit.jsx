@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Form, Select, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
@@ -24,6 +23,7 @@ export default class EditEvent extends Component {
     category: null,
     httpResponse: null,
     currentEvent: "",
+    _id: "",
   };
 
   async componentDidMount() {
@@ -98,17 +98,18 @@ export default class EditEvent extends Component {
   handlePlace = (place) => {
     const location = place.geometry;
     location.formattedAddress = place.place_name;
-
+    console.log("LOCATION HERE!!!!!!!!!", location);
     const splitAdress = place.place_name.split(",");
-    console.log(splitAdress);
-    console.log(splitAdress[1]);
+    // console.log(splitAdress);
+    // console.log(splitAdress[1]);
     const splitCity = splitAdress[1].split(" ");
-    console.log(splitCity);
+    // console.log(splitCity);
     const cp = splitCity[1];
     const city = splitCity[2];
 
-    console.log(place);
-    this.setState({ location, city, cp });
+    console.log("THIS IS THE PLACE", place);
+    console.log(place.context[1].text);
+    this.setState({ location, city: place.context[1].text, cp });
   };
 
   handleCancel = (e) => {
@@ -142,6 +143,7 @@ export default class EditEvent extends Component {
     console.log(this.props.match.params.id);
     return (
       <div className="EventForm">
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
         {!this.state.isLoading && (
           <Form onSubmit={this.handleSubmit} className="formContainer">
             
@@ -163,6 +165,16 @@ export default class EditEvent extends Component {
                 type="date"
                 placeholder="date format"
                 width={5}
+              />
+
+              <Form.Input
+                onChange={this.handleChange}
+                name="city"
+                value={this.state.city}
+                label="city"
+                type="text"
+                placeholder="city"
+                width={4}
               />
             </Form.Group>
 
