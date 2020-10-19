@@ -73,9 +73,9 @@ export default {
   //     .catch(errorHandler);
   // },
 
-  updateOne(eventId, data) {
+  updateOne(endPoint, data) {
     return service
-      .patch(`/api/event/${eventId}`, data)
+      .patch(endPoint, data)
       .then((res) => res.data)
       .catch(errorHandler);
   },
