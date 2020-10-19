@@ -75,7 +75,7 @@ export default {
 
   updateOne(eventId, data) {
     return service
-      .patch(`/api/event/${eventId}`, data)
+      .patch(eventId, data)
       .then((res) => res.data)
       .catch(errorHandler);
   },
