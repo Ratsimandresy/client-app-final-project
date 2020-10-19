@@ -45,7 +45,7 @@ class FormEditProfile extends React.Component {
                     console.log(key);
                     this.setState({[key]: element});
                 }
-            };
+            }
             this.setState({ // user: loadedUser,
                 isLoading: false
             });
