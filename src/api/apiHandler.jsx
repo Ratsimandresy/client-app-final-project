@@ -66,19 +66,19 @@ export default {
     return service.get(endPoint).then((res) => res.data);
   },
 
-  updateOne(endPoint, data) {
-    return service
-      .patch(endPoint, data)
-      .then((res) => res.data)
-      .catch(errorHandler);
-  },
-
-  // updateOneElment(endPoint, data) {
+  // updateOne(endPoint, data) {
   //   return service
   //     .patch(endPoint, data)
   //     .then((res) => res.data)
   //     .catch(errorHandler);
   // },
+
+  updateOne(eventId, data) {
+    return service
+      .patch(`/api/event/${eventId}`, data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
   deleteone(endPoint, data) {
     return service

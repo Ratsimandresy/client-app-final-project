@@ -100,7 +100,7 @@ export default class EditEvent extends Component {
 
     console.log("THIS IS THE PLACE", place);
     console.log(place.context[1].text);
-    this.setState({ location, city, cp });
+    this.setState({ location, city: place.context[1].text, cp });
   };
 
   handleCancel = (e) => {
@@ -118,6 +118,8 @@ export default class EditEvent extends Component {
     for (const key in this.state) {
       if (key === "tags") {
         fd.append("tags", JSON.stringify(this.state.tags));
+      } else if (key === "location") {
+        fd.append("location", JSON.stringify(this.state.location));
       } else {
         fd.append(key, this.state[key]);
       }
@@ -133,7 +135,7 @@ export default class EditEvent extends Component {
     // }
 
     apiHandler
-      .updateOne("/api/event/" + this.props.match.params.id, fd)
+      .updateOne(this.props.match.params.id, fd)
       .then((apiRes) => {
         this.props.history.push("/profile");
       })
@@ -144,6 +146,7 @@ export default class EditEvent extends Component {
     console.log(this.state.currentEvent);
     return (
       <div className="EventForm">
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
         {!this.state.isLoading && (
           <Form onSubmit={this.handleSubmit} className="formContainer">
             <Form.Group>
@@ -165,10 +168,20 @@ export default class EditEvent extends Component {
                 placeholder="date format"
                 width={5}
               />
+
+              <Form.Input
+                onChange={this.handleChange}
+                name="city"
+                value={this.state.city}
+                label="city"
+                type="text"
+                placeholder="city"
+                width={4}
+              />
             </Form.Group>
 
             <select name="category" id="category" onChange={this.handleChange}>
-              <option key={0} value="-1" disabled>
+              <option key={0} value="-1">
                 select a category
               </option>
               {this.state.categories.map((category) => (
