@@ -46,7 +46,7 @@ class SingleUser extends React.Component {
     }
 
     return (
-      <div id="main">
+      <div id="main-singleuser">
         <div id="singleUser-main">
           <div className="singleUser-container">
             <div>

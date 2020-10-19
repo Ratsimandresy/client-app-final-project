@@ -6,7 +6,7 @@
 
 }
 
-#main {
+#main-singleuser {
     display: flex;
     justify-content: center;
 }
@@ -17,7 +17,7 @@
     margin: 100px 0 100px 0;
 }
 
-p {
+#main-singleuser p {
     font-size: 16px;
     color: rgb(107, 107, 107);
 }
