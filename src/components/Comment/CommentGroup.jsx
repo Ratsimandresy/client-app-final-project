@@ -31,6 +31,10 @@ class CommentGroup extends Component {
         });
 
         this.setState({ comments: comment });
+        API.getOne("/api/event/", this.props.eventId).then((event) => {
+          console.log("HEREEEE EVENT!!!!", event);
+          event.comments.push(apiRes);
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -38,6 +42,7 @@ class CommentGroup extends Component {
   renderComment = (eventId) => {
     const { comments } = this.state;
     // console.log(this.props);
+
     console.log("EVENTID HERE!!!!!====>", eventId);
     return comments.map((comment) => {
       const { content } = comment;
