@@ -20,6 +20,7 @@ import FormCreateCategory from "./components/Forms/FormCreateCategory";
 import FormEditCategory from "./components/Forms/FormEditCategory";
 import FormCreateTag from "./components/Forms/FormCreateTag";
 import FormEditTag from "./components/Forms/FormEditTag";
+import FormCreateUser from "./components/Forms/FormCreateUser";
 
 
 
@@ -41,6 +42,7 @@ function App() {
         <ProtectedRoute exact path="/Admin/category-edit/:id" component={FormEditCategory} />
         <ProtectedRoute exact path="/Admin/tag-create" component={FormCreateTag} />
         <ProtectedRoute exact path="/Admin/tag-edit/:id" component={FormEditTag} />
+        <ProtectedRoute exact path="/Admin/user-create" component={FormCreateUser} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/profile/edit/" component={ProfileEdit} />
         <ProtectedRoute exact path="/profile/event/:id/edit" component={ProfileEventEdit} />
