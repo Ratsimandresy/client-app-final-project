@@ -7,6 +7,7 @@ import "../../styles/comments.css";
 class CommentGroup extends Component {
   state = {
     comments: [{ _id: 0, content: "this is a hard coded comment", eventId: 1 }],
+    commentInEvent: [],
   };
 
   componentDidMount() {
