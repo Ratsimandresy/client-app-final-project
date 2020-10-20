@@ -22,29 +22,26 @@ class Cards extends Component {
   render() {
     return (
 
-      <div id="cards-main-container">
-        {!this.state.isLoading && (
-        <>
-          {this.state.events.map((event, i) => (
-            <Link key={event.name} to={`/all-events/${event._id}`}>
-              <div className="cardContainer">
-                <div className="imgContainer">
-                  <img
-                    src="https://media.cntraveler.com/photos/57d961ce3e6b32bf25f5ad0f/master/w_2048,h_1536,c_limit/most-beautiful-paris-louvre-GettyImages-536267205.jpg"
-                    alt="city"
-                  />
-                </div>
-                <div className="details">
-                  <h4> {event.name} </h4>
-                  <div className="category-cards">
-                    <p className="cat-cards-p"> {event.category.label} </p>
-                  </div>
-                </div>
+
+        {this.state.events.map((event, i) => (
+          <Link key={event.name} to={`/all-events/${event._id}`}>
+          <div className="cardContainer">
+            <div className="imgContainer">
+              <img
+                src="https://media.cntraveler.com/photos/57d961ce3e6b32bf25f5ad0f/master/w_2048,h_1536,c_limit/most-beautiful-paris-louvre-GettyImages-536267205.jpg"
+                alt="city"
+              />
+            </div>
+            <div className="details">
+              <h4> {event.name} </h4>
+              <div className="category-cards">
+                <p className="cat-cards-p"> {event.category.label} </p>
               </div>
-            </Link>
-          ))}
-        </>
-        )}
+            </div>
+          </div>
+          </Link>
+        ))}
+
       </div> 
      
     )

@@ -1,26 +1,45 @@
 import React from "react";
+import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import apiHandler from "../api/apiHandler";
-import { Image, Icon } from "semantic-ui-react";
+import { Image, Label, Icon } from "semantic-ui-react";
 import "../styles/singleUser.css";
 import { Link } from "react-router-dom";
+
+const Map = ReactMapboxGl({
+  accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+});
 
 class SingleUser extends React.Component {
   state = {
     event: null,
+    isLoading: true,
+    lng: 2.349014, // Default lng and lat set to the center of paris.
+    lat: 48.864716,
+    zoom: 12, // used for map zoom level
   };
 
-  componentDidMount() {
+
+  async componentDidMount() {
     console.log(this.props.match.params.eventId);
-    apiHandler
-      .getOne("/api/event/", this.props.match.params.eventId)
-      .then((apiRes) => {
-        console.log("------------------", apiRes);
-        this.setState({ event: apiRes });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const currentEvent = await apiHandler.getOne(
+        "api/event/",
+        this.props.match.params.eventId
+      );
+      console.log("cuurentevent : ", currentEvent)
+      if (currentEvent) {
+        this.setState({
+          isLoading: false,
+          event: currentEvent,
+          lng: currentEvent.location.coordinates[0],
+          lat: currentEvent.location.coordinates[1],
+        })
+      }
+    } catch (errApi) {
+      console.log(errApi);
+    }
   }
+
 
   render() {
     if (!this.state.event) {
@@ -38,17 +57,26 @@ class SingleUser extends React.Component {
               <p>
                 Un événement créé par : <br />{" "}
                 <Link to={`/all-users/${this.state.event.userId._id}`}>
-                    <span>
+                  <span>
                     {this.state.event.userId.firstName}{" "}
                     {this.state.event.userId.lastName}
-                    </span>               
+                  </span>
                 </Link>
               </p>
-              <span className="singleuser-category">
+              <Label className="event-tag" size="tiny" color="orange">
                 {this.state.event.category.label}
-              </span><br/>
-              {this.state.event.tags.map(tag =>  (
-                  <span className="singleuser-tags">{tag.label}</span>
+              </Label>
+              <br />
+              {this.state.event.tags.map((tag) => (
+                <Label
+                  color="teal"
+                  className="event-tag singleuser-tags"
+                  size="tiny"
+                  key={tag._id}
+                  tag
+                >
+                  {tag.label}
+                </Label>
               ))}
             </div>
             <Image
@@ -66,6 +94,29 @@ class SingleUser extends React.Component {
               </i>
             </div>
           </p>
+          <div className="map-container-single-event">
+            <Map
+              style="mapbox://styles/mapbox/light-v10"
+              zoom={[12]}
+              containerStyle={{
+                // top: 0,
+                // left: 0,
+                // bottom: 0,
+                // right: 0,
+                // position: "absolute",
+                height: 300 + "px",
+              }}
+              center={[this.state.lng, this.state.lat]}
+            >
+              <Marker coordinates={this.state.event.location.coordinates}>
+                <img
+                  src=" https://img.icons8.com/color/48/000000/marker.png"
+                  width="30px"
+                  alt=""
+                />
+              </Marker>
+            </Map>
+          </div>
         </div>
       </div>
     );
