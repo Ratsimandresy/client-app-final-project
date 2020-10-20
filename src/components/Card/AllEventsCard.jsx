@@ -17,7 +17,7 @@ class Cards extends Component {
             />
           </div>
           <div className="details">
-            <p><h3> {this.props.event.name} </h3></p>
+            <h3> {this.props.event.name} </h3>
             <p>note: {this.props.event.noteAverage} </p>
             <p>by : {this.props.event.userId.firstName} {this.props.event.userId.lastName}</p>
             <div className="category-cards">
