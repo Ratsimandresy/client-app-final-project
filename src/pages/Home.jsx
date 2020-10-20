@@ -52,9 +52,11 @@ class Home extends React.Component {
 
     centerEventOnMap = (param) => {
       console.log(param);
+      const toggle = !this.state.btnToggle;
       this.setState({
         lng: param[0],
         lat: param[1],
+        btnToggle: toggle,
       });
     }
 
@@ -82,7 +84,9 @@ class Home extends React.Component {
           </div>
           <section className = "sectionCard">
             <div>
-              <Checkbox toggle checked={this.state.btnToggle} onClick={this.handlerToggle} />
+              <div className="container-toggle">
+                <Checkbox toggle checked={this.state.btnToggle} onClick={this.handlerToggle} />
+              </div>
 
               <Sidebar.Pushable as={Segment}>
                 <Sidebar
