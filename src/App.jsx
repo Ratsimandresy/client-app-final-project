@@ -23,6 +23,7 @@ import FormEditTag from "./components/Forms/FormEditTag";
 import FormCreateUser from "./components/Forms/FormCreateUser";
 
 
+import CommentGroup from "./components/Comment/CommentGroup";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <ProtectedRoute exact path="/Admin/tag-create" component={FormCreateTag} />
         <ProtectedRoute exact path="/Admin/tag-edit/:id" component={FormEditTag} />
         <ProtectedRoute exact path="/Admin/user-create" component={FormCreateUser} />
+        <Route exact path="/comment" component={CommentGroup} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/profile/edit/" component={ProfileEdit} />
         <ProtectedRoute exact path="/profile/event/:id/edit" component={ProfileEventEdit} />
