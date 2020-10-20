@@ -10,12 +10,8 @@ class EditProfile extends React.Component {
                 <div>
                     <FormEditProfile />
                 </div>
-    
             </div>
         )
-
     }
-
 }
-
-export default EditProfile
+export default EditProfile;
