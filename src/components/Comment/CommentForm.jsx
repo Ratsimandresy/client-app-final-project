@@ -6,10 +6,12 @@ import "../../styles/comments.css";
 class CommentForm extends Component {
   state = {
     content: "",
+    eventId: this.props.eventId,
+    userId: this.props.userId,
   };
 
   handleChange = (e) => {
-    console.log(this.props);
+    // console.log(this.props);
     // console.log(e.target);
     const name = e.target.name;
     const value = e.target.value;
