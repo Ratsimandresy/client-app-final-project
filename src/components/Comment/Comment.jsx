@@ -40,8 +40,7 @@ class SingleComment extends Component {
                 <div>{this.formatDate(today)}</div>
               </Comment.Metadata>
               <Comment.Text style={{ color: "rgb(21, 73, 73)" }}>
-                {" "}
-                {this.props.content}
+                {this.props.content} 
               </Comment.Text>
             </Comment.Content>
           </Comment>

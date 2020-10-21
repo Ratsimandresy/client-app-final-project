@@ -31,6 +31,7 @@ class SingleUser extends React.Component {
         this.setState({
           isLoading: false,
           event: currentEvent,
+          
           lng: currentEvent.location.coordinates[0],
           lat: currentEvent.location.coordinates[1],
         });
