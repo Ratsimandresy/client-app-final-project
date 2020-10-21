@@ -22,6 +22,7 @@ import FormCreateTag from "./components/Forms/FormCreateTag";
 import FormEditTag from "./components/Forms/FormEditTag";
 import FormCreateUser from "./components/Forms/FormCreateUser";
 import FormEditUser from "./components/Forms/FormEditUser";
+import AdminFormEditEvent from "./components/Forms/AdminFormEditEvent";
 
 
 import CommentGroup from "./components/Comment/CommentGroup";
@@ -47,6 +48,7 @@ function App() {
         <ProtectedRoute exact path="/Admin/user-create" component={FormCreateUser} />
         <ProtectedRoute exact path="/Admin/user-edit/:id" component={FormEditUser} />
         <ProtectedRoute exact path="/Admin/event-create" component={FormEvent} />
+        <ProtectedRoute exact path="/Admin/event-edit/:id" component={AdminFormEditEvent} />
         <Route exact path="/comment" component={CommentGroup} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/profile/edit/" component={ProfileEdit} />

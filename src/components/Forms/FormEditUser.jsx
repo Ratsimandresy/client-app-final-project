@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Segment, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
 import AutoComplete from "../utils/AutoComplete";
+import { buildFormData } from "../utils/buildFormData";
 
 class FormEditUser extends Component {
   state = {
@@ -49,20 +50,30 @@ class FormEditUser extends Component {
   handleChange = (event) => {
     const key = event.target.name;
 
-    this.setState({ [key]: event.target.value }, () => { console.log(this.state);
-     });
+    const value =
+    event.target.type === "select"
+      ? event.target.checked
+      : event.target.type === "file"
+      ? event.target.files[0]
+      : event.target.value;
+
+    this.setState({ [key]: value }, () => {
+      console.log(this.state);
+    });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const fd = new FormData();
 
+    const { httpResponse, ...data } = this.state;
+
+    buildFormData(fd, data);
+    
     apiHandler
-      .updateOne(
-        "/api/admin/users/" + this.props.match.params.id,
-        this.state
-      )
+      .updateOne("/api/admin/users/" + this.props.match.params.id, fd)
       .then((apiResLabel) => {
-        // this.props.history.push("/Admin");
+        this.props.history.push("/Admin");
         console.log(apiResLabel);
       })
       .catch((error) => {
@@ -106,7 +117,7 @@ class FormEditUser extends Component {
               iconPosition="left"
               placeholder="email"
             />
-            <Form.Input
+            {/* <Form.Input
               fluid
               icon="heart"
               name="password"
@@ -114,7 +125,7 @@ class FormEditUser extends Component {
               iconPosition="left"
               placeholder="new password"
               value={this.state.newPassword}
-            />
+            /> */}
             <Form.Input
               value={this.state.pseudo}
               fluid

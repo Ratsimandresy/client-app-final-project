@@ -371,11 +371,11 @@ class Admin extends Component {
                       <p>{event.userId}</p>
                     </Table.Cell>
                     <Table.Cell>
-                      {/* <Link to={`Admin/user-edit/${user._id}`}> */}
+                      <Link to={`Admin/event-edit/${event._id}`}>
                       <button>
                         <Icon name="edit" />
                       </button>
-                      {/* </Link> */}
+                      </Link>
                     </Table.Cell>
                     <Table.Cell>
                       <button
