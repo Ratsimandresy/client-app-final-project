@@ -25,30 +25,22 @@ class Admin extends Component {
     categories: null,
     tags: null,
     users: null,
+    events: null,
   };
-
-  //   componentDidMount() {
-  //     apiHandler
-  //       .getAll("/api/admin/categories")
-  //       .then((apiRes) => {
-  //         this.setState({ categories: apiRes });
-  //         console.log(this.state.categories);
-  //       })
-  //       .catch((apiErr) => {
-  //         console.log(apiErr);
-  //       });
-  //   }
 
   async componentDidMount() {
     try {
       const categoriesApi = await apiHandler.getAll("/api/admin/categories");
       const tagsApi = await apiHandler.getAll("/api/admin/tags");
-      const usersApi = await apiHandler.getAll("/api/admin/users")  
-      this.setState({ 
-            categories: categoriesApi,
-            tags: tagsApi,
-            users: usersApi,
-        });
+      const usersApi = await apiHandler.getAll("/api/admin/users");
+      const eventsApi = await apiHandler.getAll("/api/admin/events");
+
+      this.setState({
+        categories: categoriesApi,
+        tags: tagsApi,
+        users: usersApi,
+        events: eventsApi,
+      });
       console.log(this.state);
     } catch (errApi) {
       console.log(errApi);
@@ -114,6 +106,24 @@ class Admin extends Component {
       });
   };
 
+  handleDeleteEvent = (event, eventId) => {
+    const eventsArray = this.state.events;
+    console.log(eventId);
+    apiHandler
+      .deleteone(`/api/admin/events/${eventId}`)
+      .then((apiRes) => {
+          console.log(eventsArray)
+        const newEventsArray = eventsArray.filter((item) => item._id !== eventId);
+
+        console.log(newEventsArray);
+
+        this.setState({ events: newEventsArray });
+      })
+      .catch((apiError) => {
+        console.log(apiError);
+      });
+  };
+
   render() {
     if (!this.state.categories) {
       return (
@@ -127,8 +137,7 @@ class Admin extends Component {
       <div>
         <h1 className="page page-admin">Page Admin</h1>
         <Accordion styled>
-
-{/* /////////////////// CATEGORIES /////////////////////////////////////////////////////////////////////////////// */}
+          {/* /////////////////// CATEGORIES /////////////////////////////////////////////////////////////////////////////// */}
 
           <Accordion.Title
             active={this.state.activeIndex === 0}
@@ -183,8 +192,8 @@ class Admin extends Component {
             </Table>
           </Accordion.Content>
 
-{/* /////////////////// TAGS /////////////////////////////////////////////////////////////////////////////// */}
-          
+          {/* /////////////////// TAGS /////////////////////////////////////////////////////////////////////////////// */}
+
           <Accordion.Title
             active={this.state.activeIndex === 1}
             index={1}
@@ -238,7 +247,7 @@ class Admin extends Component {
             </Table>
           </Accordion.Content>
 
-{/* ////////////////// USERS //////////////////////////////////////////////////////////////////////////////// */}
+          {/* ////////////////// USERS //////////////////////////////////////////////////////////////////////////////// */}
 
           <Accordion.Title
             active={this.state.activeIndex === 2}
@@ -261,6 +270,7 @@ class Admin extends Component {
                   <Table.HeaderCell>Pseudo</Table.HeaderCell>
                   <Table.HeaderCell>Prénom</Table.HeaderCell>
                   <Table.HeaderCell>Nom</Table.HeaderCell>
+                  <Table.HeaderCell>Id</Table.HeaderCell>
                   <Table.HeaderCell>email</Table.HeaderCell>
                   <Table.HeaderCell>Ville</Table.HeaderCell>
                   <Table.HeaderCell>Modifier</Table.HeaderCell>
@@ -285,6 +295,10 @@ class Admin extends Component {
                     </Table.Cell>
                     <Table.Cell>
                       {" "}
+                      <p>{user._id}</p>
+                    </Table.Cell>
+                    <Table.Cell>
+                      {" "}
                       <p>{user.email}</p>
                     </Table.Cell>
                     <Table.Cell>
@@ -292,16 +306,81 @@ class Admin extends Component {
                       <p>{user.city}</p>
                     </Table.Cell>
                     <Table.Cell>
-                      {/* <Link to={`Admin/tag-edit/${tag._id}`}> */}
+                      <Link to={`Admin/user-edit/${user._id}`}>
                         <button>
                           <Icon name="edit" />
                         </button>
-                      {/* </Link> */}
+                      </Link>
                     </Table.Cell>
                     <Table.Cell>
                       <button
                         onClick={(e) => {
                           this.handleDeleteUser(e, user._id);
+                        }}
+                      >
+                        <Icon disabled name="trash" />
+                      </button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </Accordion.Content>
+
+          {/* ////////////////// EVENTS //////////////////////////////////////////////////////////////////////////////// */}
+
+          <Accordion.Title
+            active={this.state.activeIndex === 3}
+            index={3}
+            onClick={this.handleClickAccordion}
+          >
+            <Icon name="dropdown" />
+            Evenements
+          </Accordion.Title>
+          <Accordion.Content active={this.state.activeIndex === 3}>
+            <Link to="Admin/event-create">
+            <Button color="teal" fluid size="large">
+              Créer un nouvel événement
+            </Button>
+            </Link>
+
+            <Table fixed>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Nom</Table.HeaderCell>
+                  <Table.HeaderCell>Adresse</Table.HeaderCell>
+                  <Table.HeaderCell>Utilisateur</Table.HeaderCell>
+                  <Table.HeaderCell>Modifier</Table.HeaderCell>
+                  <Table.HeaderCell>Supprimer</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+
+              <Table.Body>
+                {this.state.events.map((event) => (
+                  <Table.Row key={event._id}>
+                    <Table.Cell>
+                      {" "}
+                      <p>{event.name}</p>
+                    </Table.Cell>
+                    <Table.Cell>
+                      {" "}
+                      <p>{event.location.formattedAddress}</p>
+                    </Table.Cell>
+                    <Table.Cell>
+                      {" "}
+                      <p>{event.userId}</p>
+                    </Table.Cell>
+                    <Table.Cell>
+                      {/* <Link to={`Admin/user-edit/${user._id}`}> */}
+                      <button>
+                        <Icon name="edit" />
+                      </button>
+                      {/* </Link> */}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <button
+                        onClick={(e) => {
+                          this.handleDeleteEvent(e, event._id);
                         }}
                       >
                         <Icon disabled name="trash" />

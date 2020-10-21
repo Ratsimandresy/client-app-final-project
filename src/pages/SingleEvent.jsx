@@ -4,6 +4,7 @@ import apiHandler from "../api/apiHandler";
 import { Image, Label, Icon } from "semantic-ui-react";
 import "../styles/singleUser.css";
 import { Link } from "react-router-dom";
+import CommentGroup from "../components/Comment/CommentGroup";
 
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
@@ -18,7 +19,6 @@ class SingleUser extends React.Component {
     zoom: 12, // used for map zoom level
   };
 
-
   async componentDidMount() {
     console.log(this.props.match.params.eventId);
     try {
@@ -26,28 +26,29 @@ class SingleUser extends React.Component {
         "api/event/",
         this.props.match.params.eventId
       );
-      console.log("cuurentevent : ", currentEvent)
+      console.log("cuurentevent : ", currentEvent);
       if (currentEvent) {
         this.setState({
           isLoading: false,
           event: currentEvent,
           lng: currentEvent.location.coordinates[0],
           lat: currentEvent.location.coordinates[1],
-        })
+        });
       }
     } catch (errApi) {
       console.log(errApi);
     }
   }
 
-
   render() {
     if (!this.state.event) {
       return <div>Loading the event...</div>;
     }
+    console.log(this.props);
 
     return (
       <div id="main-global-singleuser">
+        <pre>{JSON.stringify(this.props.match, null, 2)}</pre>
         <div id="singleUser-main">
           <div className="singleUser-container">
             <div>
@@ -118,6 +119,7 @@ class SingleUser extends React.Component {
             </Map>
           </div>
         </div>
+        <CommentGroup userId={this.state.event.userId._id} eventId={this.props.match.params.eventId} />
       </div>
     );
   }

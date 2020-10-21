@@ -6,13 +6,14 @@ import "../../styles/comments.css";
 
 class CommentGroup extends Component {
   state = {
-    comments: [{ _id: 0, content: "this is a hard coded comment" }],
+    comments: [{ _id: 0, content: "this is a hard coded comment", eventId: 1 }],
+    commentInEvent: [],
   };
 
   componentDidMount() {
     API.getAll("/api/comments")
       .then((apiRes) => {
-        console.log(apiRes);
+        console.log("APIRES!!!!!!!!!", apiRes);
         this.setState({ comments: apiRes });
       })
       .catch((err) => console.log(err));
@@ -27,28 +28,38 @@ class CommentGroup extends Component {
         comment.push({
           _id: apiRes._id,
           content: apiRes.content,
+          eventId: apiRes.eventId,
         });
 
         this.setState({ comments: comment });
+        API.updateOne("/api/event/" + this.props.eventId, apiRes).then((event) => {
+          console.log("HEREEEE EVENT!!!!", event);
+          event.comments.push(apiRes);
+          // let commentInEvent = [...event.comments];
+          // commentInEvent.push(apiRes);
+          // this.setState({ commentInEvent });
+        });
       })
       .catch((err) => console.log(err));
   };
 
-  handleCommentEdit = () => {
-    console.log("edited!!!!!!");
-  };
-
-  renderComment = () => {
+  renderComment = (eventId) => {
     const { comments } = this.state;
+    // console.log(this.props);
+
+    console.log("EVENTID HERE!!!!!====>", eventId);
     return comments.map((comment) => {
       const { content } = comment;
-      return (
-        <SingleComment
-          handleCommentEdit={this.handleCommentEdit}
-          key={comment._id}
-          content={content}
-        />
-      );
+
+      if (eventId === comment.eventId) {
+        return (
+          <SingleComment
+            handleCommentEdit={this.handleCommentEdit}
+            key={comment._id}
+            content={content}
+          />
+        );
+      }
     });
   };
 
@@ -58,13 +69,18 @@ class CommentGroup extends Component {
         className="commentGroup
       "
       >
-        {this.renderComment()}
-        <CommentForm handleCommentSubmit={this.handleCommentSubmit} />
+        <pre> {JSON.stringify(this.props, null, 2)} </pre>
+
+        {this.renderComment(this.props.eventId)}
+
+        <CommentForm
+          userId={this.props.userId}
+          eventId={this.props.eventId}
+          handleCommentSubmit={this.handleCommentSubmit}
+        />
       </div>
     );
   }
 }
 
 export default CommentGroup;
-
-

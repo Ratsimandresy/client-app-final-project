@@ -2,61 +2,78 @@ import React, { Component } from "react";
 import { Form, Segment, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
 import AutoComplete from "../utils/AutoComplete";
-import { buildFormData } from "../utils/buildFormData";
 
-class FormCreateUser extends Component {
+class FormEditUser extends Component {
   state = {
-    formattedAddress: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    password: null,
+    pseudo: null,
+    age: null,
+    description: null,
+    profilImage: null,
     address: null,
+    city: null,
+    formattedAddress: null,
+    gender: null,
+    newPassword: null,
   };
 
-  handleChange = (event) => {
-    const value =
-      event.target.type === "file"
-        ? event.target.files[0]
-        : event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
+  componentDidMount() {
+    console.log(this.props);
 
+    apiHandler
+      .getOne("/api/admin/users/", this.props.match.params.id)
+      .then((apiRes) => {
+        console.log(apiRes);
+
+        this.setState({
+          firstName: apiRes.firstName,
+          lastName: apiRes.lastName,
+          email: apiRes.email,
+          password: apiRes.password,
+          pseudo: apiRes.pseudo,
+          age: apiRes.age,
+          description: apiRes.description,
+          profilImage: apiRes.profilImage,
+          address: apiRes.address,
+          city: apiRes.city,
+          formattedAddress: apiRes.formattedAddress,
+          gender: apiRes.gender,
+        });
+        console.log(this.state);
+      });
+  }
+
+  handleChange = (event) => {
     const key = event.target.name;
-    this.setState({ [key]: value }, () => console.log(this.state));
+
+    this.setState({ [key]: event.target.value }, () => { console.log(this.state);
+     });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submitting");
-    console.log(this.state);
-
-    const fd = new FormData();
-
-    for (let key in this.state) {
-      fd.append(key, this.state[key]);
-    }
 
     apiHandler
-      .createOne("/api/admin/users", fd)
-      .then((apiRes) => {
-        this.props.history.push("/Admin");
-        console.log(apiRes);
+      .updateOne(
+        "/api/admin/users/" + this.props.match.params.id,
+        this.state
+      )
+      .then((apiResLabel) => {
+        // this.props.history.push("/Admin");
+        console.log(apiResLabel);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
       });
-  };
-
-  handlePlace = (place) => {
-    this.setState(
-      { formattedAddress: place.place_name, address: place.place_name },
-      () => {
-        console.log(this.state);
-      }
-    );
   };
 
   render() {
     return (
       <div>
-        <h1>CREER UN USER</h1>
+        <h1>edit user</h1>
         <Form
           size="large"
           onChange={this.handleChange}
@@ -64,6 +81,7 @@ class FormCreateUser extends Component {
         >
           <Segment stacked>
             <Form.Input
+              value={this.state.firstName}
               fluid
               icon="heart"
               name="firstName"
@@ -72,6 +90,7 @@ class FormCreateUser extends Component {
               placeholder="firstName"
             />
             <Form.Input
+              value={this.state.lastName}
               fluid
               icon="heart"
               type="text"
@@ -80,6 +99,7 @@ class FormCreateUser extends Component {
               placeholder="lastName"
             />
             <Form.Input
+              value={this.state.email}
               fluid
               icon="heart"
               name="email"
@@ -92,9 +112,11 @@ class FormCreateUser extends Component {
               name="password"
               type="password"
               iconPosition="left"
-              placeholder="password"
+              placeholder="new password"
+              value={this.state.newPassword}
             />
             <Form.Input
+              value={this.state.pseudo}
               fluid
               icon="heart"
               name="pseudo"
@@ -103,6 +125,7 @@ class FormCreateUser extends Component {
               placeholder="pseudo"
             />
             <Form.Input
+              value={this.state.age}
               fluid
               type="number"
               icon="heart"
@@ -112,6 +135,7 @@ class FormCreateUser extends Component {
             />
             <Form.Input>
               <TextArea
+                value={this.state.description}
                 fluid
                 icon="heart"
                 name="description"
@@ -129,6 +153,7 @@ class FormCreateUser extends Component {
               type="file"
             />
             <Form.Input
+              value={this.state.city}
               fluid
               icon="heart"
               name="city"
@@ -146,7 +171,7 @@ class FormCreateUser extends Component {
               <option value="other">autre</option>
             </select>
             <Button color="teal" fluid size="large">
-              Et hop! Un nouvel utilisateur
+              Editer cet utilisateur
             </Button>
           </Segment>
         </Form>
@@ -155,4 +180,4 @@ class FormCreateUser extends Component {
   }
 }
 
-export default FormCreateUser;
+export default FormEditUser;

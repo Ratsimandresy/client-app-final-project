@@ -129,7 +129,7 @@ class Home extends React.Component {
                 </div>
               </Sidebar>
               <Sidebar.Pusher>
-                <Card.Group itemsPerRow={3}>
+                <Card.Group itemsPerRow={5}>
                   {this.state.events.map((event) => (
                     <HomeEventItem key={event._id} {...event} getCoordo={this.centerEventOnMap}/>
                     
