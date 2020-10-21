@@ -7,9 +7,8 @@ import UserLoggedActions from '../Event/ActionsLoggedUser';
 
 import "../../styles/HomeEventItem.css";
 
-const HomeEventItem = (props) => {
-    console.log(props.context.user);
-    const { _id, getCoordo, name, description, userId, location, mainImageUrl, category } = props;
+const HomeEventItem = (props) => {  
+    const { _id, getCoordo, name, description, userId, location, mainImageUrl, category, getIsLoading } = props;
     
     const sendCoordinates = (evt, coordos) => {
         evt.preventDefault();
@@ -26,27 +25,25 @@ const HomeEventItem = (props) => {
 
     return (
         <Card key={_id} className="home-event-item">
-        <div className="img-container">
-          <Link to={`/all-events/${_id}`}> 
-            <img src={mainImageUrl} alt="" /> 
-          </Link>
+            <div className="img-container">
+                <Link to={`/all-events/${_id}`}> 
+                    <img src={mainImageUrl} alt="" /> 
+                </Link>
 
-          <p className="event-description">{description.substring(0, 50)}</p>
-          <Label color="orange">{category.label}</Label>
-          <address>{location.formattedAddress}</address>
-          <p className="event-author"><strong>Author: </strong>{userId.firstName || userId.pseudo}</p>
-          <div className="actions-btn">
-                <div className="cummun-action">
-                    <Link key={name} to={`/all-events/${_id}`}> 
-                        <Icon name="eye" color="black"/>
-                    </Link>
-                    <Icon name="map marker alternate" onClick={(e) => {sendCoordinates(e, location.coordinates)}} color="black"/>                          
-                </div> 
-             {props.context.isLoggedIn && (
-                <UserLoggedActions eventId={_id}/>
-              )}
-          </div>           
-        </div>       
+                <p className="event-description">{description.substring(0, 50)}</p>
+                <Label color="orange">{category.label}</Label>
+                <address>{location.formattedAddress}</address>
+                <p className="event-author"><strong>Author: </strong>{userId.firstName || userId.pseudo}</p>
+                <div className="actions-btn">
+                    <div className="cummun-action">
+                        <Link key={name} to={`/all-events/${_id}`}> 
+                            <Icon name="eye" color="black"/>
+                        </Link>
+                        <Icon name="map marker alternate" onClick={(e) => {sendCoordinates(e, location.coordinates)}} color="black"/>                          
+                    </div> 
+                    
+                </div>           
+            </div>       
         </Card>
     )
     

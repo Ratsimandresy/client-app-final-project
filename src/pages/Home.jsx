@@ -10,7 +10,7 @@ import {Sidebar, Segment, Checkbox, Card, Icon, Label } from 'semantic-ui-react'
 import API from '../api/apiHandler';
 
 import ReactMapboxGl, {Layer, Feature, Marker} from "react-mapbox-gl";
-
+import SpinnerLoader from '../components/Loader/spinnerLoader';
 const Map = ReactMapboxGl({accessToken: process.env.REACT_APP_MAPBOX_TOKEN},{height: '100%'});
 
 class Home extends React.Component {
@@ -21,6 +21,7 @@ class Home extends React.Component {
         lng: 2.349014, // Default lng and lat set to the center of paris.
         lat: 48.864716,
         zoom: 12,
+        isLoading: true,
         animations: {
           direction: 'right',
           animation: 'push',
@@ -31,7 +32,6 @@ class Home extends React.Component {
     async componentDidMount() {
       try {
         const events = await API.getAll("api/event/sortedbyrate");
-        console.log(events);
         if(events) {
           this.setState({
             isLoading:false,
@@ -79,6 +79,9 @@ class Home extends React.Component {
 
       return (
         <div className="page page-home">
+          {this.state.isLoading && (
+            <SpinnerLoader />
+          )}  
           <div>
             <SearchBar /> 
           </div>
@@ -131,7 +134,7 @@ class Home extends React.Component {
               <Sidebar.Pusher>
                 <Card.Group itemsPerRow={5}>
                   {this.state.events.map((event) => (
-                    <HomeEventItem key={event._id} {...event} getCoordo={this.centerEventOnMap}/>
+                    <HomeEventItem key={event._id} {...event} getCoordo={this.centerEventOnMap} getIsLoading={this.handlerLoading}/>
                     
                   ))}
                 </Card.Group>

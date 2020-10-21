@@ -4,6 +4,7 @@ import UserCard from "../components/Card/UserCard";
 // import "../styles/allUsers.css";
 import { Link } from "react-router-dom";
 import { Grid, Pagination } from 'semantic-ui-react';
+import SpinnerLoader from '../components/Loader/spinnerLoader';
 
 
 class AllUsers extends React.Component {
@@ -26,6 +27,11 @@ class AllUsers extends React.Component {
             .catch((apiErr) => {
                 console.log(apiErr)
             })
+            .finally(() => {
+              this.setState({
+                isLoading:false
+              });
+            });
     }
 
     render() {
@@ -33,6 +39,9 @@ class AllUsers extends React.Component {
         return (
             <>
                 <h1 className="page-title">All the users</h1>
+                {this.state.isLoading && (
+                  <SpinnerLoader />
+                )}
                     <div className="page page-all-users">
                     <Grid>
                         <Grid.Row columns={3}>                        
