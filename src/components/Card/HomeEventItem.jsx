@@ -3,16 +3,25 @@ import {withUser} from '../Auth/withUser';
 import { Card, Icon, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+import UserLoggedActions from '../Event/ActionsLoggedUser';
+
 import "../../styles/HomeEventItem.css";
 
 const HomeEventItem = (props) => {
-    console.log(props);
+    console.log(props.context.user);
     const { _id, getCoordo, name, description, userId, location, mainImageUrl, category } = props;
     
     const sendCoordinates = (evt, coordos) => {
         evt.preventDefault();
         console.log('click');
         getCoordo(coordos);
+    }
+
+    const addEventToFav = (evt, idEvent) => {
+        evt.preventDefault();
+        console.log('add to favevent');
+        console.log(idEvent);
+
     }
 
     return (
@@ -27,27 +36,14 @@ const HomeEventItem = (props) => {
           <address>{location.formattedAddress}</address>
           <p className="event-author"><strong>Author: </strong>{userId.firstName || userId.pseudo}</p>
           <div className="actions-btn">
-              <Link key={name} to={`/all-events/${_id}`}> 
-                <Icon name="eye" color="black"/>
-              </Link>
-              <Icon name="map marker alternate" onClick={(e) => {sendCoordinates(e, location.coordinates)}} color="black"/>                          
-              {props.context.isLoggedIn && (
-                <div className="actions-favoris">
-                  <div className="add-fav-event">
-                      <Icon name="heart" color="green" />
-                      <Icon name="heart" color="red" />
-                  </div>
-
-                  <div className="add-like-event">
-                      <Icon name="thumbs up outline" color="green"/>
-                      <Icon name="thumbs up" color="red"/>
-                  </div>
-
-                  <div className="add-fav-user">
-                      <Icon name="add user" color="green"/>
-                      <Icon name="remove user" color="red"/>
-                  </div>
-                </div>
+                <div className="cummun-action">
+                    <Link key={name} to={`/all-events/${_id}`}> 
+                        <Icon name="eye" color="black"/>
+                    </Link>
+                    <Icon name="map marker alternate" onClick={(e) => {sendCoordinates(e, location.coordinates)}} color="black"/>                          
+                </div> 
+             {props.context.isLoggedIn && (
+                <UserLoggedActions eventId={_id}/>
               )}
           </div>           
         </div>       

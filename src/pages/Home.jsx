@@ -51,7 +51,7 @@ class Home extends React.Component {
     handleSidebarHide = (param) => this.setState({ visible: param });
 
     centerEventOnMap = (param) => {
-      console.log(param);
+      //console.log(param);
       const toggle = !this.state.btnToggle;
       this.setState({
         lng: param[0],
