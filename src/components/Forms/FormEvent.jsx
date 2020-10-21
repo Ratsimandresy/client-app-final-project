@@ -186,6 +186,14 @@ class FormEvent extends Component {
                 placeholder="date format"
                 width={5}
               />
+              <Form.Input
+                onChange={this.handleChange}
+                name="time"
+                label="time"
+                type="time"
+                placeholder="hour format"
+                width={5}
+              />
             </Form.Group>
 
             <select
