@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Segment, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
+import "../../styles/admin.css";
 
 class FormCreateCategory extends Component {
   state = {
@@ -24,8 +25,8 @@ class FormCreateCategory extends Component {
     apiHandler
       .createOne("/api/admin/categories", this.state)
       .then((apiResLabel) => {
-        this.props.history.push("/Admin"); 
-        console.log(apiResLabel)
+        this.props.history.push("/Admin");
+        console.log(apiResLabel);
       })
       .catch((error) => {
         console.log(error);
@@ -34,26 +35,30 @@ class FormCreateCategory extends Component {
 
   render() {
     return (
-      <div>
-        <h1>CREATE A CATEGORY</h1>
-        <Form
-          size="large"
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
-        >
-          <Segment stacked>
-            <Form.Input
-              fluid
-              icon="heart"
-              name="label"
-              iconPosition="left"
-              placeholder="Nouvelle catégorie"
-            />
-            <Button color="teal" fluid size="large">
-              Go pour ta nouvelle catégorie
-            </Button>
-          </Segment>
-        </Form>
+      <div className="admin-forms-main-container">
+        <div className="admin-forms-h1">
+          <h2>Create a new category</h2>
+        </div>
+        <div className="admin-forms-form">
+          <Form
+            size="large"
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+          >
+            <Segment stacked>
+              <Form.Input
+                fluid
+                icon="heart"
+                name="label"
+                iconPosition="left"
+                placeholder="Nouvelle catégorie"
+              />
+              <Button color="teal" fluid size="large">
+                Go pour ta nouvelle catégorie
+              </Button>
+            </Segment>
+          </Form>
+        </div>
       </div>
     );
   }

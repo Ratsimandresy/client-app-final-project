@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Segment, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
-
+import "../../styles/admin.css";
 
 class FormCreateTag extends Component {
   state = {
@@ -35,26 +35,30 @@ class FormCreateTag extends Component {
 
   render() {
     return (
-      <div>
-        <h1>CREATE A TAG</h1>
-        <Form
-          size="large"
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
-        >
-          <Segment stacked>
-            <Form.Input
-              fluid
-              icon="heart"
-              name="label"
-              iconPosition="left"
-              placeholder="Nouveau Tag"
-            />
-            <Button color="teal" fluid size="large">
-              Go pour ton nouveau tag
-            </Button>
-          </Segment>
-        </Form>
+      <div className="admin-forms-main-container">
+        <div className="admin-forms-h1">
+          <h2>Create a new tag</h2>
+        </div>
+        <div className="admin-forms-form">
+          <Form
+            size="large"
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+          >
+            <Segment stacked>
+              <Form.Input
+                fluid
+                icon="heart"
+                name="label"
+                iconPosition="left"
+                placeholder="Nouveau Tag"
+              />
+              <Button color="teal" fluid size="large">
+                Go pour ton nouveau tag
+              </Button>
+            </Segment>
+          </Form>
+        </div>
       </div>
     );
   }
