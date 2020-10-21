@@ -62,6 +62,13 @@ export default {
       .catch(errorHandler);
   },
 
+  get_one(endPoint) {
+    return service
+      .get(endPoint)
+      .then((resDb) => resDb.data)
+      .catch(errorHandler);
+  },
+
   getMe(endPoint) {
     return service.get(endPoint).then((res) => res.data);
   },
