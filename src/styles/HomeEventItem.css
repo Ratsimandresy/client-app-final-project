@@ -6,3 +6,7 @@
 .actions-logged-user{
     display: flex;
 }
+
+.link-marker:hover {
+    cursor:pointer;
+}
