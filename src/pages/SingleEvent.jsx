@@ -8,10 +8,14 @@ import {withUser} from '../components/Auth/withUser';
 import SpinnerLoader from '../components/Loader/spinnerLoader';
 import CommentGroup from "../components/Comment/CommentGroup";
 import { ActionsLoggedUser } from "../components/Event/ActionsLoggedUser";
+import moment from "moment";
 
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
 });
+
+let frDate;
+
 
 class SingleUser extends React.Component {
   state = {
@@ -37,7 +41,7 @@ class SingleUser extends React.Component {
           
           lng: currentEvent.location.coordinates[0],
           lat: currentEvent.location.coordinates[1],
-        });
+        }, () => {console.log(this.state)});
       }
     } catch (errApi) {
       console.log(errApi);
@@ -78,6 +82,14 @@ class SingleUser extends React.Component {
                     {this.state.event.userId.lastName}
                   </span>
                 </Link>
+              <p>
+                <br/>
+                <Icon  name='calendar alternate outline' /> {moment(this.state.event.time).format("dddd DD MMMM YYYY")}
+                <br/>
+                <Icon  name='clock outline' /> {moment(this.state.event.time).format("hh:mm A")}
+                <br/>
+                <Icon  name='map marker alternate' /> {this.state.event.location.formattedAddress}
+              </p>
               </p>
               <Label className="event-tag" size="tiny" color="orange">
                 {this.state.event.category.label}

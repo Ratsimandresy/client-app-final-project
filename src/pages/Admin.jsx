@@ -112,8 +112,10 @@ class Admin extends Component {
     apiHandler
       .deleteone(`/api/admin/events/${eventId}`)
       .then((apiRes) => {
-          console.log(eventsArray)
-        const newEventsArray = eventsArray.filter((item) => item._id !== eventId);
+        console.log(eventsArray);
+        const newEventsArray = eventsArray.filter(
+          (item) => item._id !== eventId
+        );
 
         console.log(newEventsArray);
 
@@ -134,264 +136,268 @@ class Admin extends Component {
       );
     }
     return (
-      <div>
-        <h1 className="page page-admin">Page Admin</h1>
-        <Accordion styled>
-          {/* /////////////////// CATEGORIES /////////////////////////////////////////////////////////////////////////////// */}
+      <div id="admin-main-container">
+        <div id="admin-h1">
+          <h1 className="page page-admin">My dashboard</h1>
+        </div>
+        <div id="admin-accordion-container">
+          <Accordion fluid styled>
+            {/* /////////////////// CATEGORIES /////////////////////////////////////////////////////////////////////////////// */}
 
-          <Accordion.Title
-            active={this.state.activeIndex === 0}
-            index={0}
-            onClick={this.handleClickAccordion}
-          >
-            <Icon name="dropdown" />
-            Catégories
-          </Accordion.Title>
-          <Accordion.Content active={this.state.activeIndex === 0}>
-            <Link to="Admin/category-create">
-              <Button color="teal" fluid size="large">
-                Créer une nouvelle catégorie
-              </Button>
-            </Link>
+            <Accordion.Title
+              active={this.state.activeIndex === 0}
+              index={0}
+              onClick={this.handleClickAccordion}
+            >
+              <Icon name="dropdown" />
+              Categories
+            </Accordion.Title>
+            <Accordion.Content active={this.state.activeIndex === 0}>
+              <Link to="Admin/category-create">
+                <Button color="teal" fluid size="large">
+                  Create a new category
+                </Button>
+              </Link>
 
-            <Table fixed>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Label</Table.HeaderCell>
-                  <Table.HeaderCell>Modifier</Table.HeaderCell>
-                  <Table.HeaderCell>Supprimer</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
+              <Table fixed>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Label</Table.HeaderCell>
+                    <Table.HeaderCell>Edit</Table.HeaderCell>
+                    <Table.HeaderCell>Delete</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
 
-              <Table.Body>
-                {this.state.categories.map((category) => (
-                  <Table.Row key={category.label}>
-                    <Table.Cell>
-                      {" "}
-                      <p>{category.label}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Link to={`Admin/category-edit/${category._id}`}>
-                        <button>
-                          <Icon name="edit" />
+                <Table.Body>
+                  {this.state.categories.map((category) => (
+                    <Table.Row key={category.label}>
+                      <Table.Cell>
+                        {" "}
+                        <p>{category.label}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Link to={`Admin/category-edit/${category._id}`}>
+                          <button>
+                            <Icon name="edit" />
+                          </button>
+                        </Link>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <button
+                          onClick={(e) => {
+                            this.handleDelete(e, category._id);
+                          }}
+                        >
+                          <Icon disabled name="trash" />
                         </button>
-                      </Link>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <button
-                        onClick={(e) => {
-                          this.handleDelete(e, category._id);
-                        }}
-                      >
-                        <Icon disabled name="trash" />
-                      </button>
-                    </Table.Cell>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </Accordion.Content>
+
+            {/* /////////////////// TAGS /////////////////////////////////////////////////////////////////////////////// */}
+
+            <Accordion.Title
+              active={this.state.activeIndex === 1}
+              index={1}
+              onClick={this.handleClickAccordion}
+            >
+              <Icon name="dropdown" />
+              Tags
+            </Accordion.Title>
+            <Accordion.Content active={this.state.activeIndex === 1}>
+              <Link to="Admin/tag-create">
+                <Button color="teal" fluid size="large">
+                  Create a new tag
+                </Button>
+              </Link>
+
+              <Table fixed>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Label</Table.HeaderCell>
+                    <Table.HeaderCell>Edit</Table.HeaderCell>
+                    <Table.HeaderCell>Delete</Table.HeaderCell>
                   </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </Accordion.Content>
+                </Table.Header>
 
-          {/* /////////////////// TAGS /////////////////////////////////////////////////////////////////////////////// */}
-
-          <Accordion.Title
-            active={this.state.activeIndex === 1}
-            index={1}
-            onClick={this.handleClickAccordion}
-          >
-            <Icon name="dropdown" />
-            Tags
-          </Accordion.Title>
-          <Accordion.Content active={this.state.activeIndex === 1}>
-            <Link to="Admin/tag-create">
-              <Button color="teal" fluid size="large">
-                Créer un nouveau tag
-              </Button>
-            </Link>
-
-            <Table fixed>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Label</Table.HeaderCell>
-                  <Table.HeaderCell>Modifier</Table.HeaderCell>
-                  <Table.HeaderCell>Supprimer</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-
-              <Table.Body>
-                {this.state.tags.map((tag) => (
-                  <Table.Row key={tag.label}>
-                    <Table.Cell>
-                      {" "}
-                      <p>{tag.label}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Link to={`Admin/tag-edit/${tag._id}`}>
-                        <button>
-                          <Icon name="edit" />
+                <Table.Body>
+                  {this.state.tags.map((tag) => (
+                    <Table.Row key={tag.label}>
+                      <Table.Cell>
+                        {" "}
+                        <p>{tag.label}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Link to={`Admin/tag-edit/${tag._id}`}>
+                          <button>
+                            <Icon name="edit" />
+                          </button>
+                        </Link>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <button
+                          onClick={(e) => {
+                            this.handleDeleteTag(e, tag._id);
+                          }}
+                        >
+                          <Icon disabled name="trash" />
                         </button>
-                      </Link>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <button
-                        onClick={(e) => {
-                          this.handleDeleteTag(e, tag._id);
-                        }}
-                      >
-                        <Icon disabled name="trash" />
-                      </button>
-                    </Table.Cell>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </Accordion.Content>
+
+            {/* ////////////////// USERS //////////////////////////////////////////////////////////////////////////////// */}
+
+            <Accordion.Title
+              active={this.state.activeIndex === 2}
+              index={2}
+              onClick={this.handleClickAccordion}
+            >
+              <Icon name="dropdown" />
+              Users
+            </Accordion.Title>
+            <Accordion.Content active={this.state.activeIndex === 2}>
+              <Link to="Admin/user-create">
+                <Button color="teal" fluid size="large">
+                  Create a new user
+                </Button>
+              </Link>
+
+              <Table fixed>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Pseudo</Table.HeaderCell>
+                    <Table.HeaderCell>First name</Table.HeaderCell>
+                    <Table.HeaderCell>Last name</Table.HeaderCell>
+                    <Table.HeaderCell>Id</Table.HeaderCell>
+                    <Table.HeaderCell>email</Table.HeaderCell>
+                    <Table.HeaderCell>City</Table.HeaderCell>
+                    <Table.HeaderCell>Edit</Table.HeaderCell>
+                    <Table.HeaderCell>Delete</Table.HeaderCell>
                   </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </Accordion.Content>
+                </Table.Header>
 
-          {/* ////////////////// USERS //////////////////////////////////////////////////////////////////////////////// */}
-
-          <Accordion.Title
-            active={this.state.activeIndex === 2}
-            index={2}
-            onClick={this.handleClickAccordion}
-          >
-            <Icon name="dropdown" />
-            Utilisateurs
-          </Accordion.Title>
-          <Accordion.Content active={this.state.activeIndex === 2}>
-            <Link to="Admin/user-create">
-              <Button color="teal" fluid size="large">
-                Créer un nouvel utilisateur
-              </Button>
-            </Link>
-
-            <Table fixed>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Pseudo</Table.HeaderCell>
-                  <Table.HeaderCell>Prénom</Table.HeaderCell>
-                  <Table.HeaderCell>Nom</Table.HeaderCell>
-                  <Table.HeaderCell>Id</Table.HeaderCell>
-                  <Table.HeaderCell>email</Table.HeaderCell>
-                  <Table.HeaderCell>Ville</Table.HeaderCell>
-                  <Table.HeaderCell>Modifier</Table.HeaderCell>
-                  <Table.HeaderCell>Supprimer</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-
-              <Table.Body>
-                {this.state.users.map((user) => (
-                  <Table.Row key={user._id}>
-                    <Table.Cell>
-                      {" "}
-                      <p>{user.pseudo}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      <p>{user.firstName}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      <p>{user.lastName}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      <p>{user._id}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      <p>{user.email}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      <p>{user.city}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Link to={`Admin/user-edit/${user._id}`}>
-                        <button>
-                          <Icon name="edit" />
+                <Table.Body>
+                  {this.state.users.map((user) => (
+                    <Table.Row key={user._id}>
+                      <Table.Cell>
+                        {" "}
+                        <p>{user.pseudo}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {" "}
+                        <p>{user.firstName}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {" "}
+                        <p>{user.lastName}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {" "}
+                        <p>{user._id}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {" "}
+                        <p>{user.email}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {" "}
+                        <p>{user.city}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Link to={`Admin/user-edit/${user._id}`}>
+                          <button>
+                            <Icon name="edit" />
+                          </button>
+                        </Link>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <button
+                          onClick={(e) => {
+                            this.handleDeleteUser(e, user._id);
+                          }}
+                        >
+                          <Icon disabled name="trash" />
                         </button>
-                      </Link>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <button
-                        onClick={(e) => {
-                          this.handleDeleteUser(e, user._id);
-                        }}
-                      >
-                        <Icon disabled name="trash" />
-                      </button>
-                    </Table.Cell>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </Accordion.Content>
+
+            {/* ////////////////// EVENTS //////////////////////////////////////////////////////////////////////////////// */}
+
+            <Accordion.Title
+              active={this.state.activeIndex === 3}
+              index={3}
+              onClick={this.handleClickAccordion}
+            >
+              <Icon name="dropdown" />
+              Events
+            </Accordion.Title>
+            <Accordion.Content active={this.state.activeIndex === 3}>
+              <Link to="Admin/event-create">
+                <Button color="teal" fluid size="large">
+                  Create a new event
+                </Button>
+              </Link>
+
+              <Table fixed>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Name</Table.HeaderCell>
+                    <Table.HeaderCell>Address</Table.HeaderCell>
+                    <Table.HeaderCell>User Id</Table.HeaderCell>
+                    <Table.HeaderCell>Edit</Table.HeaderCell>
+                    <Table.HeaderCell>Delete</Table.HeaderCell>
                   </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </Accordion.Content>
+                </Table.Header>
 
-          {/* ////////////////// EVENTS //////////////////////////////////////////////////////////////////////////////// */}
-
-          <Accordion.Title
-            active={this.state.activeIndex === 3}
-            index={3}
-            onClick={this.handleClickAccordion}
-          >
-            <Icon name="dropdown" />
-            Evenements
-          </Accordion.Title>
-          <Accordion.Content active={this.state.activeIndex === 3}>
-            <Link to="Admin/event-create">
-            <Button color="teal" fluid size="large">
-              Créer un nouvel événement
-            </Button>
-            </Link>
-
-            <Table fixed>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Nom</Table.HeaderCell>
-                  <Table.HeaderCell>Adresse</Table.HeaderCell>
-                  <Table.HeaderCell>Utilisateur</Table.HeaderCell>
-                  <Table.HeaderCell>Modifier</Table.HeaderCell>
-                  <Table.HeaderCell>Supprimer</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-
-              <Table.Body>
-                {this.state.events.map((event) => (
-                  <Table.Row key={event._id}>
-                    <Table.Cell>
-                      {" "}
-                      <p>{event.name}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      <p>{event.location.formattedAddress}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {" "}
-                      <p>{event.userId}</p>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Link to={`Admin/event-edit/${event._id}`}>
-                      <button>
-                        <Icon name="edit" />
-                      </button>
-                      </Link>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <button
-                        onClick={(e) => {
-                          this.handleDeleteEvent(e, event._id);
-                        }}
-                      >
-                        <Icon disabled name="trash" />
-                      </button>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </Accordion.Content>
-        </Accordion>
+                <Table.Body>
+                  {this.state.events.map((event) => (
+                    <Table.Row key={event._id}>
+                      <Table.Cell>
+                        {" "}
+                        <p>{event.name}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {" "}
+                        <p>{event.location.formattedAddress}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {" "}
+                        <p>{event.userId}</p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Link to={`Admin/event-edit/${event._id}`}>
+                          <button>
+                            <Icon name="edit" />
+                          </button>
+                        </Link>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <button
+                          onClick={(e) => {
+                            this.handleDeleteEvent(e, event._id);
+                          }}
+                        >
+                          <Icon disabled name="trash" />
+                        </button>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </Accordion.Content>
+          </Accordion>
+        </div>
       </div>
     );
   }

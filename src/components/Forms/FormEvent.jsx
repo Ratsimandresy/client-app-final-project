@@ -14,6 +14,7 @@ class FormEvent extends Component {
     mainImageUrl: null,
     location: null,
     infos: null,
+    time: null,
     city: null,
     categories: [],
     isLoading: true,
@@ -112,7 +113,7 @@ class FormEvent extends Component {
 
   handleChangeCheckbox = (event) => {
     const { name, value } = event.target;
-    console.log(name);
+    console.log(event.target);
     const newTags = [...this.state.tags];
     if (event.target.checked) {
       newTags.push(value);
@@ -177,22 +178,14 @@ class FormEvent extends Component {
                 placeholder="file event name"
                 width={5}
               />
-
-              <Form.Input
-                onChange={this.handleChange}
-                name="infos"
-                label="informations"
-                type="date"
-                placeholder="date format"
-                width={5}
-              />
               <Form.Input
                 onChange={this.handleChange}
                 name="time"
                 label="time"
-                type="time"
-                placeholder="hour format"
+                type="datetime-local"
+                placeholder="hour"
                 width={5}
+                required
               />
             </Form.Group>
 
@@ -213,7 +206,7 @@ class FormEvent extends Component {
 
             <Form.Group>
               <label>Tags</label>
-              <div className="tags-list">
+              <div className="tags-list" >
                 {this.state.listTags.map((tag) => (
                   <div key={tag._id}>
                     <input

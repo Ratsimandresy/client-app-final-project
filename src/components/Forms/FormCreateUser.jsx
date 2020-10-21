@@ -3,6 +3,7 @@ import { Form, Segment, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
 import AutoComplete from "../utils/AutoComplete";
 import { buildFormData } from "../utils/buildFormData";
+import "../../styles/admin.css";
 
 class FormCreateUser extends Component {
   state = {
@@ -55,101 +56,105 @@ class FormCreateUser extends Component {
 
   render() {
     return (
-      <div>
-        <h1>CREER UN USER</h1>
-        <Form
-          size="large"
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
-        >
-          <Segment stacked>
-            <Form.Input
-              fluid
-              icon="heart"
-              name="firstName"
-              type="text"
-              iconPosition="left"
-              placeholder="firstName"
-            />
-            <Form.Input
-              fluid
-              icon="heart"
-              type="text"
-              name="lastName"
-              iconPosition="left"
-              placeholder="lastName"
-            />
-            <Form.Input
-              fluid
-              icon="heart"
-              name="email"
-              iconPosition="left"
-              placeholder="email"
-            />
-            <Form.Input
-              fluid
-              icon="heart"
-              name="password"
-              type="password"
-              iconPosition="left"
-              placeholder="password"
-            />
-            <Form.Input
-              fluid
-              icon="heart"
-              name="pseudo"
-              type="text"
-              iconPosition="left"
-              placeholder="pseudo"
-            />
-            <Form.Input
-              fluid
-              type="number"
-              icon="heart"
-              name="age"
-              iconPosition="left"
-              placeholder="age"
-            />
-            <Form.Input>
-              <TextArea
+      <div className="admin-forms-main-container">
+        <div className="admin-forms-h1">
+          <h2>Create a new user</h2>
+        </div>
+        <div className="admin-forms-form">
+          <Form
+            size="large"
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+          >
+            <Segment stacked>
+              <Form.Input
                 fluid
                 icon="heart"
-                name="description"
+                name="firstName"
                 type="text"
                 iconPosition="left"
-                placeholder="description"
+                placeholder="firstName"
               />
-            </Form.Input>
-            <Form.Input
-              fluid
-              icon="heart"
-              name="profilImage"
-              iconPosition="left"
-              placeholder="profilImage"
-              type="file"
-            />
-            <Form.Input
-              fluid
-              icon="heart"
-              name="city"
-              iconPosition="left"
-              placeholder="ville"
-              type="text"
-            />
-            <div>
-              <AutoComplete onSelect={this.handlePlace} />
-            </div>
-            <select name="gender">
-              <option value="">Genre</option>
-              <option value="male">homme</option>
-              <option value="female">femme</option>
-              <option value="other">autre</option>
-            </select>
-            <Button color="teal" fluid size="large">
-              Et hop! Un nouvel utilisateur
-            </Button>
-          </Segment>
-        </Form>
+              <Form.Input
+                fluid
+                icon="heart"
+                type="text"
+                name="lastName"
+                iconPosition="left"
+                placeholder="lastName"
+              />
+              <Form.Input
+                fluid
+                icon="heart"
+                name="email"
+                iconPosition="left"
+                placeholder="email"
+              />
+              <Form.Input
+                fluid
+                icon="heart"
+                name="password"
+                type="password"
+                iconPosition="left"
+                placeholder="password"
+              />
+              <Form.Input
+                fluid
+                icon="heart"
+                name="pseudo"
+                type="text"
+                iconPosition="left"
+                placeholder="pseudo"
+              />
+              <Form.Input
+                fluid
+                type="number"
+                icon="heart"
+                name="age"
+                iconPosition="left"
+                placeholder="age"
+              />
+              <Form.Input>
+                <TextArea
+                  fluid
+                  icon="heart"
+                  name="description"
+                  type="text"
+                  iconPosition="left"
+                  placeholder="description"
+                />
+              </Form.Input>
+              <Form.Input
+                fluid
+                icon="heart"
+                name="profilImage"
+                iconPosition="left"
+                placeholder="profilImage"
+                type="file"
+              />
+              <Form.Input
+                fluid
+                icon="heart"
+                name="city"
+                iconPosition="left"
+                placeholder="ville"
+                type="text"
+              />
+              <div>
+                <AutoComplete onSelect={this.handlePlace} />
+              </div>
+              <select name="gender">
+                <option value="">Genre</option>
+                <option value="male">homme</option>
+                <option value="female">femme</option>
+                <option value="other">autre</option>
+              </select>
+              <Button color="teal" fluid size="large">
+                Create !
+              </Button>
+            </Segment>
+          </Form>
+        </div>
       </div>
     );
   }
