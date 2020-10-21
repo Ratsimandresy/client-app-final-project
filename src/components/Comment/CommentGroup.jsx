@@ -32,9 +32,12 @@ class CommentGroup extends Component {
         });
 
         this.setState({ comments: comment });
-        API.getOne("/api/event/", this.props.eventId).then((event) => {
+        API.updateOne("/api/event/" + this.props.eventId, apiRes).then((event) => {
           console.log("HEREEEE EVENT!!!!", event);
           event.comments.push(apiRes);
+          // let commentInEvent = [...event.comments];
+          // commentInEvent.push(apiRes);
+          // this.setState({ commentInEvent });
         });
       })
       .catch((err) => console.log(err));
