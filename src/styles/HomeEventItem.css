@@ -1,6 +1,6 @@
-.home-event-item .actions-btn{
-    display: flex;
-    justify-content: space-between;
+.home-event-item .actions-btn {
+  display: flex;
+  justify-content: space-between;
 }
 
 .actions-logged-user{

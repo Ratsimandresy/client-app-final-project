@@ -12,15 +12,15 @@ import {
   Checkbox,
   Card,
   Icon,
-  Label
-} from 'semantic-ui-react';
-import API from '../api/apiHandler';
-
-import ReactMapboxGl, {Layer, Feature, Marker} from "react-mapbox-gl";
-import SpinnerLoader from '../components/Loader/spinnerLoader';
-const Map = ReactMapboxGl({
-  accessToken: process.env.REACT_APP_MAPBOX_TOKEN
-}, {height: '100%'});
+  Label,
+} from "semantic-ui-react";
+import API from "../api/apiHandler";
+import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import SpinnerLoader from "../components/Loader/spinnerLoader";
+const Map = ReactMapboxGl(
+  { accessToken: process.env.REACT_APP_MAPBOX_TOKEN },
+  { height: "100%" }
+);
 
 class Home extends React.Component {
   state = {
@@ -42,131 +42,113 @@ class Home extends React.Component {
     try {
       const events = await API.getAll("api/event/sortedbyrate");
       if (events) {
-        this.setState({isLoading: false, events});
+        this.setState({
+          isLoading: false,
+          events,
+        });
       }
-
     } catch (errApi) {
       console.log(errApi);
-      this.setState({isLoading: false});
+      this.setState({
+        isLoading: false,
+      });
     }
-
   }
 
-  handleSidebarHide = (param) => this.setState({visible: param});
+  handleSidebarHide = (param) => this.setState({ visible: param });
 
-  centerEventOnMap = (param) => { // console.log(param);
+  centerEventOnMap = (param) => {
+    //console.log(param);
     const toggle = !this.state.btnToggle;
-    this.setState({lng: param[0], lat: param[1], btnToggle: toggle});
-  }
+    this.setState({
+      lng: param[0],
+      lat: param[1],
+      btnToggle: toggle,
+    });
+  };
 
   handlerToggle = () => {
-    console.log('handlerToggle');
-    if (this.state.btnToggle) 
-      this.handleSidebarHide(this.state.btnToggle);
-     else {
+    console.log("handlerToggle");
+    if (this.state.btnToggle) this.handleSidebarHide(this.state.btnToggle);
+    else {
       this.handleSidebarHide(this.state.btnToggle);
     }
     const toggle = !this.state.btnToggle;
 
-    this.setState({btnToggle: toggle});
-  }
-
+    this.setState({ btnToggle: toggle });
+  };
 
   render() {
     console.log(this.props.context.isLoggedIn);
 
     return (
       <div className="page page-home">
-        {
-        this.state.isLoading && (
-          <SpinnerLoader/>)
-      }
+        {this.state.isLoading && <SpinnerLoader />}
         <div>
-          <SearchBar/>
+          <SearchBar />
         </div>
         <section className="sectionCard">
           <div>
             <div className="container-toggle">
-              <Checkbox toggle
-                checked={
-                  this.state.btnToggle
-                }
-                onClick={
-                  this.handlerToggle
-                }/>
+              <Checkbox
+                toggle
+                checked={this.state.btnToggle}
+                onClick={this.handlerToggle}
+              />
             </div>
 
             <Sidebar.Pushable as={Segment}>
-              <Sidebar as={Segment}
-                animation={
-                  this.state.animations.animation
-                }
-                icon='labeled'
+              <Sidebar
+                as={Segment}
+                animation={this.state.animations.animation}
+                icon="labeled"
                 inverted
-                onHide={
-                  this.handleSidebarHide
-                }
+                onHide={this.handleSidebarHide}
                 vertical
                 direction="right"
-                visible={
-                  this.state.btnToggle
-                }
-                width='very wide'>
-
-                <div className="container-map"
-                  size={
-                    {height: '100%'}
-                }>
-
-                  <Map style="mapbox://styles/mapbox/light-v10"
-                    zoom={
-                      [12]
-                    }
-                    containerStyle={
-                      {
-                        top: 0,
-                        left: 0,
-                        bottom: 0,
-                        right: 0,
-                        height: '700px',
-                        position: 'absolute'
-                      }
-                    }
-                    center={
-                      [this.state.lng, this.state.lat]
-                  }>
-                    {
-                    this.state.events.map((event) => (
-                      <Marker key={
-                          event._id
-                        }
-                        coordinates={
-                          event.location.coordinates
-                      }>
-                        <img src=" https://img.icons8.com/color/48/000000/marker.png" width="30px" alt=""/>
+                visible={this.state.btnToggle}
+                width="very wide"
+              >
+                <div className="container-map" size={{ height: "100%" }}>
+                  <Map
+                    style="mapbox://styles/mapbox/light-v10"
+                    zoom={[12]}
+                    containerStyle={{
+                      top: 0,
+                      left: 0,
+                      bottom: 0,
+                      right: 0,
+                      height: "700px",
+                      position: "absolute",
+                    }}
+                    center={[this.state.lng, this.state.lat]}
+                  >
+                    {this.state.events.map((event) => (
+                      <Marker
+                        key={event._id}
+                        coordinates={event.location.coordinates}
+                      >
+                        <img
+                          src=" https://img.icons8.com/color/48/000000/marker.png"
+                          width="30px"
+                          alt=""
+                        />
                       </Marker>
-                    ))
-                  } </Map>
+                    ))}
+                  </Map>
                 </div>
               </Sidebar>
               <Sidebar.Pusher>
                 <Card.Group itemsPerRow={5}>
-                  {
-                  this.state.events.map((event) => (
-                    <HomeEventItem key={
-                        event._id
-                      }
+                  {this.state.events.map((event) => (
+                    <HomeEventItem
+                      key={event._id}
                       {...event}
-                      getCoordo={
-                        this.centerEventOnMap
-                      }
-                      getIsLoading={
-                        this.handlerLoading
-                      }/>
-
-                  ))
-                } </Card.Group>
-
+                      getCoordo={this.centerEventOnMap}
+                      getIsLoading={this.handlerLoading}
+                    />
+                  ))}
+                </Card.Group>
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           </div>
