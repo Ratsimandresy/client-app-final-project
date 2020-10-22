@@ -59,7 +59,8 @@ const NavMain = (props) => {
             </li>
             <li>
               <NavLink style={{ color: "white" }} to="/profile">
-                {context.user && context.user.email}
+                {/* {context.user && context.user.email} */}
+                My Profile
               </NavLink>
             </li>
             <li>

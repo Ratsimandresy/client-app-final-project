@@ -129,67 +129,68 @@ class Profile extends React.Component {
     console.log(this.props);
 
     return (
-      <div className="container">
-        <div className="page page-profile">
-          <div>
-            <h1>Welcome {this.state.user.firstName} {this.state.user.lastName}</h1>
-          </div>
+      <div className="profile-main-container">
+        <div className="profile-wrap">
           {!this.state.isLoading && (
-            
-            <Card fluid>
-              <div className="card-profile">
-                <div className="card-profile-visu">
-                  <img
-                    src={this.state.user.profilImage}
-                    alt="profile"
-                    width="140px"
-                  />
-                </div>
+            <>
+              <div className="profile-title-h1">
+                <h2>
+                  Welcome {this.state.user.firstName} {this.state.user.lastName}
+                </h2>
+              </div>
 
-                <div className="card-profile-content">
-                  <h2>
-                    {this.state.user.firstName} {this.state.user.lastName}
-                  </h2>
-                  <p>
-                    <span>pseudo :</span>
-                    {this.state.user.pseudo}
-                  </p>
-                  <p>
-                    <span>email :</span>
-                    {this.state.user.email}
-                  </p>
-                  <p>
-                    <span>age : </span>
-                    {this.state.user.age} ans
-                  </p>
-                  <p>
-                    <span>description : </span>
-                    {this.state.user.description}
-                  </p>
-                  <p>
-                    <span>Adresse :</span> {this.state.user.address}
-                  </p>
-                  <p>
-                    <span>City :</span> {this.state.user.city}
-                  </p>
-                  <p>
-                    <span>CP :</span> {this.state.user.cp}
-                  </p>
-                  <div className="actions-btn">
-                    <Link
-                      className="link-profil btn btn-edit"
-                      to="/profile/edit"
-                    >
-                      Modifier mon profil
-                    </Link>
+              <Card fluid>
+                <div className="card-profile">
+                  <div className="card-profile-visu">
+                    <img
+                      src={this.state.user.profilImage}
+                      alt="profile"
+                    />
+                  </div>
+
+                  <div className="card-profile-content">
+                    {/* <h2>
+                      {this.state.user.firstName} {this.state.user.lastName}
+                    </h2> */}
+                    <div>
+                    <p>
+                      <span>pseudo : </span>
+                      {this.state.user.pseudo}
+                    </p>
+                    <p>
+                      <span>email : </span>
+                      {this.state.user.email}
+                    </p>
+                    <p>
+                      <span>age : </span>
+                      {this.state.user.age} ans
+                    </p>
+                    <p>
+                      <span>description : </span>
+                      {this.state.user.description}
+                    </p>
+                    <p>
+                      <span>address : </span> {this.state.user.address}
+                    </p>
+                    </div>
+                    <div className="action-btn">
+                      <Link
+                        // className="link-profil btn btn-edit"
+                        to="/profile/edit"
+                      >
+                        <Button basic color="teal">
+                          Edit my profile
+                        </Button>
+                        
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </>
           )}
 
-          <h2>Mes événements</h2>
-        
+          <div className="accordion-container"> 
 
           <Accordion styled>
             {this.state.userEvents.length > 0 && (
@@ -249,6 +250,7 @@ class Profile extends React.Component {
               </p>
             </Accordion.Content>
           </Accordion>
+          </div>
 
           {/* 
           <Table striped>
