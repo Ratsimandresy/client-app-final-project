@@ -3,8 +3,6 @@ import { withUser } from "../Auth/withUser";
 import { Card, Icon, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-import UserLoggedActions from "../Event/ActionsLoggedUser";
-
 import "../../styles/HomeEventItem.css";
 
 const HomeEventItem = (props) => {
@@ -17,7 +15,6 @@ const HomeEventItem = (props) => {
     location,
     mainImageUrl,
     category,
-    getIsLoading,
   } = props;
 
   const sendCoordinates = (evt, coordos) => {

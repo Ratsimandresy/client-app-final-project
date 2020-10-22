@@ -155,11 +155,9 @@ class Home extends React.Component {
                 >
                   {this.state.events.map((event) => (
                     <HomeEventItem
-                      data-aos="fade-right"
                       key={event._id}
                       {...event}
                       getCoordo={this.centerEventOnMap}
-                      getIsLoading={this.handlerLoading}
                     />
                   ))}
                 </Card.Group>
