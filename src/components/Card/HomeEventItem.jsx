@@ -3,8 +3,6 @@ import {withUser} from '../Auth/withUser';
 import {Card, Icon, Label} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
-import UserLoggedActions from '../Event/ActionsLoggedUser';
-
 import "../../styles/HomeEventItem.css";
 
 const HomeEventItem = (props) => {
@@ -17,21 +15,19 @@ const HomeEventItem = (props) => {
     location,
     mainImageUrl,
     category,
-    getIsLoading
   } = props;
 
   const sendCoordinates = (evt, coordos) => {
     evt.preventDefault();
     console.log('click');
     getCoordo(coordos);
-  }
+  };
 
   const addEventToFav = (evt, idEvent) => {
     evt.preventDefault();
     console.log('add to favevent');
     console.log(idEvent);
-
-  }
+  };
 
   return (
     <Card key={_id}
@@ -49,9 +45,7 @@ const HomeEventItem = (props) => {
           description.substring(0, 50)
         }</p>
         <Label color="orange">
-          {
-          category.label
-        }</Label>
+          {category.label}</Label>
         <address> {
           location.formattedAddress
         }</address>

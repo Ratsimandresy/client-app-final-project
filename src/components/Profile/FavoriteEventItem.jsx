@@ -6,13 +6,16 @@ import "../../styles/EventItem.css";
 import api from '../../api/apiHandler';
 import apiHandler from '../../api/apiHandler';
 
-const EventItem = (props) => {
-    const {name, description, mainImageUrl, _id, handlerDelete} = props.event;
+const FavoriteEventItem = (props) => {
+    const {name, description, mainImageUrl, _id} = props.event;
+    const { deleteFavEvent } = props;
     console.log(props);
+
     const handlerClick = (e) => {
         e.preventDefault();
-        console.log('click delete');
-        handlerDelete(_id);
+        console.log('click fav delete');
+        
+        deleteFavEvent(_id);
     }
 
     return (
@@ -55,4 +58,4 @@ const EventItem = (props) => {
     )
 }
 
-export default EventItem;
+export default FavoriteEventItem;
