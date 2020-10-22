@@ -62,8 +62,7 @@ const Footer = () => {
       </div>
       <div id="footer-bottom-part">
         <p>
-          © autumn 2020 | <Icon name="heart" /> Rico Laura Laurent{" "}
-          <Icon name="heart" />| 248 Iron hack Cohort | Thankkkkx buddies
+          <Icon name="copyright outline" /> autumn 2020 | <Icon name="heart"/> Rico Laura Laurent <Icon name="heart"/>| 248 Iron hack Cohort | Thankkkkx buddies
         </p>
       </div>
     </div>
