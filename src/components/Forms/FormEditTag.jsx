@@ -55,7 +55,6 @@ class FormEditTag extends Component {
               <Form.Input
                 value={this.state.label}
                 fluid
-                icon="heart"
                 name="label"
                 iconPosition="left"
                 onChange={this.handleChange}

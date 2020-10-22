@@ -1,0 +1,10 @@
+.gender-label {
+    font-size: 14px;
+}
+
+.gender-checkbox-signup {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
