@@ -194,7 +194,7 @@ class FormEditUser extends Component {
           <div className="admin-return-btn">
             <Link to="/Admin">
               <Button basic color="teal">
-                Retour
+                Back
               </Button>
             </Link>
           </div>

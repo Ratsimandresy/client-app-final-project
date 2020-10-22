@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import apiHandler from "../../api/apiHandler";
 import { Link } from "react-router-dom";
-import { Label, Image, Icon } from "semantic-ui-react";
+import { Label, Image, Icon, Button } from "semantic-ui-react";
 import "../../styles/SingleEvent.css";
 // import "../../styles/EventDetails.css";
 import moment from "moment";
@@ -41,7 +41,6 @@ class EventDetails extends Component {
     return (
       // <div className="page page-profile-event-details">
       <div className="main-global-singleevent">
-        {" "}
         {!this.state.isLoading && (
           <div className="singleEvent-main">
             <div className="singleEvent-container">
@@ -124,6 +123,13 @@ class EventDetails extends Component {
                   />
                 </Marker>
               </Map>
+              <div className="back-btn-event-details">
+                <Link to="/profile">
+                  <Button basic color="teal">
+                    Back
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         )}{" "}
