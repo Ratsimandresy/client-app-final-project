@@ -25,6 +25,7 @@ import FormEditUser from "./components/Forms/FormEditUser";
 import AdminFormEditEvent from "./components/Forms/AdminFormEditEvent";
 import CommentGroup from "./components/Comment/CommentGroup";
 import SearchBar from "./components/SearchBar/SearchBar";
+import OneEventCard from "./pages/extra-pages/OneEventCard";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/all-users/:userId" component={SingleUser} />
         <Route exact path="/all-events/:eventId" component={SingleEvent} />
+        <Route exact path="/OneEventCard" component={OneEventCard} />
         <ProtectedRoute exact path="/Admin" component={Admin} />
         <ProtectedRoute
           exact
