@@ -9,11 +9,11 @@ import SpinnerLoader from '../components/Loader/spinnerLoader';
 import CommentGroup from "../components/Comment/CommentGroup";
 import {ActionsLoggedUser} from "../components/Event/ActionsLoggedUser";
 import moment from "moment";
+import "../styles/SingleEvent.css";
 
 const Map = ReactMapboxGl({accessToken: process.env.REACT_APP_MAPBOX_TOKEN});
 
 let frDate;
-
 
 class SingleUser extends React.Component {
   state = {
@@ -125,9 +125,9 @@ class SingleUser extends React.Component {
             />
           </div>
           <p>
-            <div className="description-singleUser">
+            <div className="description-singleEvent">
               <i>
-                A propos
+                About
                 <br/>
                 <span> {
                   this.state.event.description

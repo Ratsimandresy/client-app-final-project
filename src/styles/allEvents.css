@@ -1,7 +1,5 @@
 .all-events-flex-container {
-    border: 3px solid red;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
-

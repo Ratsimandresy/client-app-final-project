@@ -85,10 +85,7 @@ class SingleUser extends React.Component {
                     <p>
                         age
                         <br/>
-                        <span> {
-                            this.state.user.age
-                        }
-                            ans</span>
+                        <span> {this.state.user.age} ans</span>
                     </p>
                     <br/>
                     <p>

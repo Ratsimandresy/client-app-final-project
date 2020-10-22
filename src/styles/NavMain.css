@@ -1,6 +1,6 @@
 .NavMain {
-  background-color: rgb(155, 148, 134);
-  color: rgb(57, 57, 57);
+  background-color: #17232a;
+  color: white;
   display: flex;
   align-items: center;
   padding: 20px;
@@ -10,6 +10,10 @@
 .NavMain .nav-list {
   margin-left: auto;
   display: flex;
+}
+
+.NavMain NavLink {
+  color: white;
 }
 
 .NavMain .nav-list li:not(:last-child) {

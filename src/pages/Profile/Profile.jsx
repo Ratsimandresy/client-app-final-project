@@ -57,7 +57,6 @@ class Profile extends React.Component {
   }
   */
 
-
   handleClick = (event) => {};
 
   handlerClickDelete = async (id) => {
@@ -66,7 +65,7 @@ class Profile extends React.Component {
       const deletedEvent = await apiHandler.delete_one("/api/event/", id);
       const newUserEvents = [...this.state.userEvents];
       console.log(newUserEvents);
-      const fileteredArray = newUserEvents.filter(e => {
+      const fileteredArray = newUserEvents.filter((e) => {
         if (e._id !== id) {
           return e;
         }

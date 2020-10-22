@@ -10,6 +10,8 @@ import {
 import apiHandler from "../../api/apiHandler";
 import AutoComplete from "../utils/AutoComplete";
 import { buildFormData } from "../utils/buildFormData";
+import { Link } from "react-router-dom";
+import "../../styles/admin.css";
 
 class AdminFormEditEvent extends Component {
   state = {
@@ -26,6 +28,7 @@ class AdminFormEditEvent extends Component {
     btnToggle: false,
     tagsDisabled: true,
     toggleDisabled: false,
+    formattedAddress: null,
   };
 
   async componentDidMount() {
@@ -43,9 +46,13 @@ class AdminFormEditEvent extends Component {
           listTags: tags.tags,
           listCategories: categories,
           name: currentEvent.name,
+          mainImageUrl: currentEvent.mainImageUrl,
           description: currentEvent.description,
           city: currentEvent.city,
           tags: currentEvent.tags,
+          formattedAddress: currentEvent.formattedAddress,
+          location: currentEvent.location,
+          category: currentEvent.category,
         });
         console.log(this.state);
       }
@@ -56,7 +63,6 @@ class AdminFormEditEvent extends Component {
 
   handleChange = (event) => {
     const key = event.target.name;
-
     const value =
       event.target.type === "select"
         ? event.target.checked
@@ -91,7 +97,7 @@ class AdminFormEditEvent extends Component {
       console.log(this.state.tags);
       let emptyTags = [...this.state.tags];
       emptyTags = [];
-      
+
       this.setState({ tags: emptyTags, tagsDisabled: false }, () => {
         console.log(this.state.tags);
       });
@@ -145,95 +151,110 @@ class AdminFormEditEvent extends Component {
 
   render() {
     return (
-      <div>
-        <h1>FORM EDIT EVENT</h1>
-        <Form size="large" onSubmit={this.handleSubmit}>
-          <Segment stacked>
-            <Form.Input
-              value={this.state.name}
-              fluid
-              icon="heart"
-              name="name"
-              type="text"
-              iconPosition="left"
-              placeholder="name of your event"
-              onChange={this.handleChange}
-            />
-            <Form.Input>
-              <select name="category" onChange={this.handleChange}>
-                <option value="">Choisis ta catégorie</option>
-                {this.state.listCategories.map((category) => (
-                  <option value={category.label}>{category.label}</option>
-                ))}
-              </select>
-            </Form.Input>
-            <Form.Input>
-              <Checkbox
-                toggle
-                checked={this.state.btnToggle}
-                onClick={this.handlerToggle}
-                disabled={this.state.toggleDisabled}
-              />
-            </Form.Input>
-            <Form.Input>
-              {this.state.listTags.map((tag) => (
-                <div key={tag._id}>
-                  <input
-                    disabled={this.state.tagsDisabled}
-                    label={tag.label}
-                    type="checkbox"
-                    value={tag._id}
-                    onChange={this.handleChangeCheckbox}
-                    name="tags"
-                  />{" "}
-                  {tag.label}{" "}
-                </div>
-              ))}
-            </Form.Input>
-            <Form.Input
-              name="time"
-              label="time"
-              type="datetime-local"
-              placeholder="hour"
-              onChange={this.handleChange}
-            />
-            <Form.Input
-              icon="heart"
-              name="mainImageUrl"
-              iconPosition="left"
-              type="file"
-              onChange={this.handleChange}
-            />
-            <Form.Input
-              value={this.state.city}
-              fluid
-              type="text"
-              icon="heart"
-              name="city"
-              iconPosition="left"
-              placeholder="ville"
-              onChange={this.handleChange}
-            />
-            <Form.Input>
-              <TextArea
-                value={this.state.description}
+      <div className="admin-forms-main-container">
+        <div className="admin-forms-h1">
+          <h1>Edit a event</h1>
+        </div>
+        <div className="admin-forms-form">
+          <Form size="large" onSubmit={this.handleSubmit}>
+            <Segment stacked>
+              <Form.Input
+                value={this.state.name}
                 fluid
                 icon="heart"
-                name="description"
+                name="name"
                 type="text"
                 iconPosition="left"
-                placeholder="description"
+                placeholder="name of your event"
                 onChange={this.handleChange}
               />
-            </Form.Input>
-            <Form.Input>
-              <AutoComplete onSelect={this.handlePlace} />
-            </Form.Input>
-            <Button color="teal" fluid size="large">
-              Editer cet événement
-            </Button>
-          </Segment>
-        </Form>
+              <Form.Input>
+                <select name="category" onChange={this.handleChange}>
+                  <option value="">select a category</option>
+                  {this.state.listCategories.map((category) => (
+                    <option value={category._id}>{category.label}</option>
+                  ))}
+                </select>
+              </Form.Input>
+              <Form.Input>
+                <p> select new tags : &#160;</p>
+                <Checkbox
+                  toggle
+                  checked={this.state.btnToggle}
+                  onClick={this.handlerToggle}
+                  disabled={this.state.toggleDisabled}
+                />
+              </Form.Input>
+              <Form.Input>
+                <div id="admin-edit-tags-checkbox">
+                  {this.state.listTags.map((tag) => (
+                    <div key={tag._id}>
+                      <input
+                        disabled={this.state.tagsDisabled}
+                        label={tag.label}
+                        type="checkbox"
+                        value={tag._id}
+                        onChange={this.handleChangeCheckbox}
+                        name="tags"
+                      />{" "}
+                      &#160;
+                      {tag.label}{" "}
+                    </div>
+                  ))}
+                </div>
+              </Form.Input>
+              <Form.Input
+                name="time"
+                type="datetime-local"
+                placeholder="hour"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                icon="heart"
+                name="mainImageUrl"
+                iconPosition="left"
+                type="file"
+                placeholder="mainImageUrl"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                value={this.state.city}
+                fluid
+                type="text"
+                icon="heart"
+                name="city"
+                iconPosition="left"
+                placeholder="city"
+                onChange={this.handleChange}
+              />
+              <Form.Input>
+                <TextArea
+                  value={this.state.description}
+                  fluid
+                  icon="heart"
+                  name="description"
+                  type="text"
+                  iconPosition="left"
+                  placeholder="description"
+                  onChange={this.handleChange}
+                />
+              </Form.Input>
+              <Form.Input>
+                <AutoComplete onSelect={this.handlePlace} />
+              </Form.Input>
+              <Button color="teal" fluid size="large">
+                Edit this event
+              </Button>
+            </Segment>
+          </Form>
+          <div className="admin-return-btn">
+            <Link to="/Admin">
+              <Button basic color="teal">
+                Back
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

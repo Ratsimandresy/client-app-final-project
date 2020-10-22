@@ -3,10 +3,14 @@
   justify-content: space-between;
 }
 
-.actions-logged-user{
-    display: flex;
+.actions-logged-user {
+  display: flex;
 }
 
 .link-marker:hover {
-    cursor:pointer;
+  cursor: pointer;
+}
+
+.sectionCard {
+  height: 80vh;
 }

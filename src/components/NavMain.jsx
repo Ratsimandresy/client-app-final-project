@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
+import { Icon } from "semantic-ui-react";
 
 import "../styles/NavMain.css";
 
@@ -21,22 +22,28 @@ const NavMain = (props) => {
 
   return (
     <nav className="NavMain">
-      <Link to="/">
+      <Link style={{ color: "white" }} to="/">
         <h3 className="logo">What's Up Paris</h3>
       </Link>
 
       <ul className="nav-list">
         <React.Fragment>
           <li>
-            <NavLink to="/all-users">All Users</NavLink>
+            <NavLink style={{ color: "white" }} to="/all-users">
+              <Icon size="large" name="users" />
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/all-events">All Events</NavLink>
+            <NavLink style={{ color: "white" }} to="/all-events">
+              <Icon size="large" name="images" />
+            </NavLink>
           </li>
 
           {context.isLoggedIn && (
             <li>
-              <NavLink to="/add-event">Add new event</NavLink>
+              <NavLink style={{ color: "white" }} to="/add-event">
+                <Icon size="large" name="plus square" />
+              </NavLink>
             </li>
           )}
         </React.Fragment>
@@ -46,13 +53,14 @@ const NavMain = (props) => {
         {context.isLoggedIn && (
           <React.Fragment>
             <li>
-              <NavLink to="/Admin">
+              <NavLink style={{ color: "white" }} to="/Admin">
                 Dashboard
               </NavLink>
             </li>
             <li>
-              <NavLink to="/profile">
-                {context.user && context.user.email}
+              <NavLink style={{ color: "white" }} to="/profile">
+                {/* {context.user && context.user.email} */}
+                My Profile
               </NavLink>
             </li>
             <li>
@@ -63,10 +71,14 @@ const NavMain = (props) => {
         {!context.isLoggedIn && (
           <React.Fragment>
             <li>
-              <NavLink to="/signin">Log in</NavLink>
+              <NavLink style={{ color: "white" }} to="/signin">
+                Log in
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/signup">Create account</NavLink>
+              <NavLink style={{ color: "white" }} to="/signup">
+                Create account
+              </NavLink>
             </li>
           </React.Fragment>
         )}
