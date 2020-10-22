@@ -46,9 +46,7 @@ const NavMain = (props) => {
         {context.isLoggedIn && (
           <React.Fragment>
             <li>
-              <NavLink to="/Admin">
-                Dashboard
-              </NavLink>
+              <NavLink to="/Admin">Dashboard</NavLink>
             </li>
             <li>
               <NavLink to="/profile">

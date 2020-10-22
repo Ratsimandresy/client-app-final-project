@@ -42,7 +42,7 @@ class SearchBar extends Component {
   render() {
     const { isLoading } = this.state;
     return (
-      <div>
+      <div className="search">
         {/* <pre> {JSON.stringify(this.state, null, 2)} </pre> */}
         <Grid.Column width={10}>
           <Search

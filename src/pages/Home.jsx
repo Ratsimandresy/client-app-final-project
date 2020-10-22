@@ -2,6 +2,7 @@ import React from "react";
 //import Cards from "../components/Card/Cards";
 import "../../src/styles/global.css";
 import "../../src/styles/Home.css";
+
 // import SearchBar from "../components/SearchBar";
 import { Link } from "react-router-dom";
 import { withUser } from "../components/Auth/withUser";
@@ -18,6 +19,9 @@ import API from "../api/apiHandler";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import SpinnerLoader from "../components/Loader/spinnerLoader";
+import Footer from "../components/Footer";
+import "aos/dist/aos.css";
+
 const Map = ReactMapboxGl(
   { accessToken: process.env.REACT_APP_MAPBOX_TOKEN },
   { height: "100%" }
@@ -80,8 +84,6 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log(this.props.context.isLoggedIn);
-
     return (
       <div className="page page-home">
         {this.state.isLoading && <SpinnerLoader />}
@@ -89,7 +91,7 @@ class Home extends React.Component {
           <SearchBar />
         </div>
         <section className="sectionCard">
-          <div>
+          <div data-aos="fade-in" data-aos-duration="2000">
             <div className="container-toggle">
               <Checkbox
                 toggle
@@ -154,6 +156,7 @@ class Home extends React.Component {
             </Sidebar.Pushable>
           </div>
         </section>
+        <Footer />
       </div>
     );
   }

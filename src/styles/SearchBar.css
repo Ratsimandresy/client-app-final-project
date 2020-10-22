@@ -1,22 +1,5 @@
-.search{
-    font-family: sans-serif;
-    text-align: center;
-  }
-  
-  .search ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    text-decoration: none;
-  }
-  
-  .search ul > li {
-    margin: 20px;
-    padding: 10px;
-    border-bottom: 2px solid #ccc;
-    box-shadow: 0 2px 2px 1px #aaa;
-  }
-  
-  .search input {
-    width: 200px;
-  }
+.search {
+  font-family: sans-serif;
+  text-align: center;
+  height: 70vh;
+}
