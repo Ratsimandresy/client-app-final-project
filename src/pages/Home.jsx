@@ -4,6 +4,7 @@ import "../../src/styles/global.css";
 import "../../src/styles/Home.css";
 
 import "../styles/NavMain.css";
+import OneEventCard from "../pages/extra-pages/OneEventCard";
 
 // import SearchBar from "../components/SearchBar";
 import SearchBar from "../components/SearchBar/SearchBar";
@@ -87,6 +88,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="page page-home">
+        <OneEventCard data-aos="fade-in" />
         {this.state.isLoading && <SpinnerLoader />}
         <div>
           <SearchBar />

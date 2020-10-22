@@ -26,6 +26,7 @@ import AdminFormEditEvent from "./components/Forms/AdminFormEditEvent";
 import CommentGroup from "./components/Comment/CommentGroup";
 import SearchBar from "./components/SearchBar/SearchBar";
 import OneEventCard from "./pages/extra-pages/OneEventCard";
+import AllEventExtra from "./pages/extra-pages/AllEventExtra";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route exact path="/all-users/:userId" component={SingleUser} />
         <Route exact path="/all-events/:eventId" component={SingleEvent} />
         <Route exact path="/OneEventCard" component={OneEventCard} />
+        <Route exact path="/AllEventExtra" component={AllEventExtra} />
         <ProtectedRoute exact path="/Admin" component={Admin} />
         <ProtectedRoute
           exact

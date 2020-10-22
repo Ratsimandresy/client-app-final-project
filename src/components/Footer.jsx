@@ -11,7 +11,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div data-aos="fade-in" data-aos-duration="2000" id="main-footer-container">
+    <div data-aos="fade-up" data-aos-duration="1500" id="main-footer-container">
       <div id="footer-top-part">
         <div className="divfoote">
           <h2 className="h1-footer">CONTACT US</h2>
@@ -62,7 +62,9 @@ const Footer = () => {
       </div>
       <div id="footer-bottom-part">
         <p>
-          <Icon name="copyright outline" /> autumn 2020 | <Icon name="heart"/> Rico Laura Laurent <Icon name="heart"/>| 248 Iron hack Cohort | Thankkkkx buddies
+          <Icon name="copyright outline" /> autumn 2020 | <Icon name="heart" />{" "}
+          Rico Laura Laurent <Icon name="heart" />| 248 Iron hack Cohort |
+          Thankkkkx buddies
         </p>
       </div>
     </div>
