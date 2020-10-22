@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import AllEvents from "./pages/AllEvents";
@@ -12,7 +12,6 @@ import ProfileEventDetails from "./pages/Profile/EventDetails";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavMain from "./components/NavMain";
-import Footer from "./components/Footer";
 import FormEvent from "./components/Forms/FormEvent";
 import SingleUser from "./pages/SingleUser";
 import SingleEvent from "./pages/SingleEvent";
@@ -97,7 +96,6 @@ function App() {
         <ProtectedRoute exact path="/searchbar" component={SearchBar} />
         <Route component={NotFound} />
       </Switch>
-      <Footer />
     </div>
   );
 }

@@ -5,7 +5,7 @@ class SearchCards extends Component {
   render() {
     console.log("---------------------->", this.props.oneEvent);
     return (
-      <div>
+      <div className="MainContainer">
         {this.props.oneEvent && (
           <div className="cardContainer cardContainer-cards">
             <div className="imgContainer">

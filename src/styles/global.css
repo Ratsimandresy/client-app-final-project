@@ -34,11 +34,11 @@ ul {
   box-shadow: 0 0 5px 3px rgba(27, 26, 26, 0.5);
   padding: 20px;
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
 .mainCardContainer1 {
-  border: 1px solid red;
+  border: "none";
   /* display: flex;
   flex-direction: row; */
 }
@@ -53,10 +53,6 @@ ul {
   width: 100%;
 }
 
-.page {
-  padding: 20px;
-}
-
 .btn {
   background-color: #ccc;
   color: black;
@@ -67,7 +63,7 @@ ul {
 }
 
 .btn:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .btn.btn-edit {
@@ -84,6 +80,6 @@ ul {
 
 .ui.tiny.label.event-tag {
   text-transform: uppercase;
-  font-size: .65rem;
+  font-size: 0.65rem;
   margin-right: 8px;
 }

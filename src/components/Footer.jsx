@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../styles/footer.css";
 import { Icon } from "semantic-ui-react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Footer = () => {
+  useEffect(() => {
+    Aos.init();
+  }, []);
+
   return (
-    <div id="main-footer-container">
+    <div data-aos="fade-in" data-aos-duration="2000" id="main-footer-container">
       <div id="footer-top-part">
         <div className="divfoote">
           <h2 className="h1-footer">CONTACT US</h2>
           <br />
           <ul>
-            <li><Icon name="mail outline" />What's Up Paris</li>
+            <li>
+              <Icon name="mail outline" />
+              What's Up Paris
+            </li>
             <li>156 rue de La Mare</li>
             <li>85 600 Paris</li>
             <li>+33 1 455 641 36</li>

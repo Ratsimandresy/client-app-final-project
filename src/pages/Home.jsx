@@ -1,9 +1,12 @@
 import React from "react";
-//import Cards from "../components/Card/Cards";
+// import Cards from "../components/Card/Cards";
 import "../../src/styles/global.css";
 import "../../src/styles/Home.css";
+
+import "../styles/NavMain.css";
+
 // import SearchBar from "../components/SearchBar";
-import { Link } from "react-router-dom";
+import SearchBar from "../components/SearchBar/SearchBar";
 import { withUser } from "../components/Auth/withUser";
 import HomeEventItem from "../components/Card/HomeEventItem";
 import {
@@ -15,9 +18,11 @@ import {
   Label,
 } from "semantic-ui-react";
 import API from "../api/apiHandler";
-import SearchBar from "../components/SearchBar/SearchBar";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import SpinnerLoader from "../components/Loader/spinnerLoader";
+import Footer from "../components/Footer";
+import "aos/dist/aos.css";
+
 const Map = ReactMapboxGl(
   { accessToken: process.env.REACT_APP_MAPBOX_TOKEN },
   { height: "100%" }
@@ -80,8 +85,6 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log(this.props.context.isLoggedIn);
-
     return (
       <div className="page page-home">
         {this.state.isLoading && <SpinnerLoader />}
@@ -89,7 +92,7 @@ class Home extends React.Component {
           <SearchBar />
         </div>
         <section className="sectionCard">
-          <div>
+          <div data-aos="fade-out" data-aos-duration="2000">
             <div className="container-toggle">
               <Checkbox
                 toggle
@@ -98,7 +101,10 @@ class Home extends React.Component {
               />
             </div>
 
-            <Sidebar.Pushable as={Segment}>
+            <Sidebar.Pushable
+              style={{ height: "80vh", border: "none" }}
+              as={Segment}
+            >
               <Sidebar
                 as={Segment}
                 animation={this.state.animations.animation}
@@ -110,7 +116,7 @@ class Home extends React.Component {
                 visible={this.state.btnToggle}
                 width="very wide"
               >
-                <div className="container-map" size={{ height: "100%" }}>
+                <div className="container-map">
                   <Map
                     style="mapbox://styles/mapbox/light-v10"
                     zoom={[12]}
@@ -119,7 +125,8 @@ class Home extends React.Component {
                       left: 0,
                       bottom: 0,
                       right: 0,
-                      height: "700px",
+                      border: "none",
+                      height: "80vh",
                       position: "absolute",
                     }}
                     center={[this.state.lng, this.state.lat]}
@@ -140,7 +147,11 @@ class Home extends React.Component {
                 </div>
               </Sidebar>
               <Sidebar.Pusher>
-                <Card.Group itemsPerRow={5}>
+                <Card.Group
+                  data-aos="zoom-in"
+                  style={{ margin: "10px" }}
+                  itemsPerRow={5}
+                >
                   {this.state.events.map((event) => (
                     <HomeEventItem
                       key={event._id}
@@ -154,6 +165,7 @@ class Home extends React.Component {
             </Sidebar.Pushable>
           </div>
         </section>
+        <Footer />
       </div>
     );
   }

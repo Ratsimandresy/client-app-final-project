@@ -3,7 +3,10 @@ import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import apiHandler from "../api/apiHandler";
 import { Image, Label, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import {withUser} from '../components/Auth/withUser';
+import SpinnerLoader from '../components/Loader/spinnerLoader';
 import CommentGroup from "../components/Comment/CommentGroup";
+import { ActionsLoggedUser } from "../components/Event/ActionsLoggedUser";
 import moment from "moment";
 import "../styles/SingleEvent.css";
 
@@ -49,6 +52,14 @@ class SingleUser extends React.Component {
     }
   }
 
+  handlerIsLoading = (isLoading) => {
+    console.log('callback loading ----------', isLoading);
+    this.setState({
+      isLoading: isLoading
+    });
+    console.log(this.state.isLoading);
+  }
+
   render() {
     if (!this.state.event) {
       return <div>Loading the event...</div>;
@@ -57,7 +68,10 @@ class SingleUser extends React.Component {
 
     return (
       <div className="main-global-singleevent">
-        <pre>{JSON.stringify(this.props.match, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(this.props.match, null, 2)}</pre> */}
+        {this.state.isLoading && (
+          <SpinnerLoader />
+        )}
         <div className="singleEvent-main">
           <div className="singleEvent-container">
             <div className="single-event-infos">
@@ -87,7 +101,10 @@ class SingleUser extends React.Component {
               <p className="single-event-tags-cat">
                 <Label className="event-tag" size="tiny" color="black">
                   {this.state.event.category.label}
-                </Label>
+
+              </Label>
+              <br />
+              <ActionsLoggedUser eventId={this.props.match.params.eventId}  getIsLoading={this.handlerIsLoading} />
                 <br />
                 {this.state.event.tags.map((tag) => (
                   <Label
