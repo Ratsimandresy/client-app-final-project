@@ -12,6 +12,10 @@
   display: flex;
 }
 
+.NavMain NavLink {
+  color: white;
+}
+
 .NavMain .nav-list li:not(:last-child) {
   margin-right: 20px;
 }

@@ -12,7 +12,6 @@ import ProfileEventDetails from "./pages/Profile/EventDetails";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavMain from "./components/NavMain";
-
 import FormEvent from "./components/Forms/FormEvent";
 import SingleUser from "./pages/SingleUser";
 import SingleEvent from "./pages/SingleEvent";

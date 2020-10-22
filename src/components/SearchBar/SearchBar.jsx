@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SearchCards from "./SearbarCard";
 import { Input, Grid, Search } from "semantic-ui-react";
 import _ from "lodash";
+import Aos from "aos";
 
 class SearchBar extends Component {
   state = {
@@ -56,7 +57,12 @@ class SearchBar extends Component {
 
         <ul>
           {this.state.events.map((oneEvent) => (
-            <div key={oneEvent._id}>
+            <div
+              data-aos="zoom-in"
+              data-aos-offset="300"
+              data-aos-easing="ease-in-sine"
+              key={oneEvent._id}
+            >
               <Link to={`/all-events/${oneEvent._id}`}>
                 <SearchCards oneEvent={oneEvent} />
               </Link>

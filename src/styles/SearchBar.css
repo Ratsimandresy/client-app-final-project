@@ -1,5 +1,10 @@
 .search {
   font-family: sans-serif;
   text-align: center;
-  height: 70vh;
+  height: 60 vh;
+}
+
+.search ul {
+  display: flex;
+  flex-wrap: wrap;
 }

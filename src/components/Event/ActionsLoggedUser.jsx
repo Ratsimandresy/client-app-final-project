@@ -22,11 +22,9 @@ export class ActionsLoggedUser extends Component {
             console.log(loadUserFavEvents);
             // console.log(loadUserFavEvents);
             console.log(this.props.eventId);
-            var btnAddEvent;
-            var btnRemoveEvent;
             
             console.log(loadUserFavEvents.events.includes(this.props.eventId));
-
+            console.log('------', this.props.getIsLoading)
             if (loadUserFavEvents.events.includes(this.props.eventId)) {
                 this.setState({
                     favEvents: loadUserFavEvents.events,
@@ -40,7 +38,7 @@ export class ActionsLoggedUser extends Component {
                     isLoading: false
                 });
             }
-            this.props.getIsLoading(this.state.isLoading);
+            
             
         } catch(errApi) {
             console.log(errApi);
@@ -54,7 +52,7 @@ export class ActionsLoggedUser extends Component {
                 isDisable:true,
                 isLoading: true,
             });
-            this.props.getIsLoading(this.state.isLoading);
+            this.props.getIsLoading(true);
             console.log('addEvent: ', eventId);
             const newArr = [...this.state.favEvents];
             console.log(newArr);
@@ -71,7 +69,7 @@ export class ActionsLoggedUser extends Component {
                 isDisable:false,
                 isLoading:false
             });
-            this.props.getIsLoading(this.state.isLoading);
+            this.props.getIsLoading(false);
             /*
             if(addedFav) {
                 
@@ -89,7 +87,7 @@ export class ActionsLoggedUser extends Component {
                 isDisable:true,
                 isLoading: true,
             });
-            this.props.getIsLoading(this.state.isLoading);
+            this.props.getIsLoading(true);
             console.log('remove event:', eventId);
             const newArr = [...this.state.favEvents];
             console.log(newArr);
@@ -105,11 +103,11 @@ export class ActionsLoggedUser extends Component {
                 isDisable:false,
                 isLoading: false
             });
-            this.props.getIsLoading(this.state.isLoading);
+            this.props.getIsLoading(false);
   
             
         }catch(errApi){
-            console.log(errApi)
+            console.log(errApi);
         }
         
     }
