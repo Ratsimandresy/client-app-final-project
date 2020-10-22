@@ -2,7 +2,6 @@ import React from "react";
 // import Cards from "../components/Card/Cards";
 import "../../src/styles/global.css";
 import "../../src/styles/Home.css";
-
 import "../styles/NavMain.css";
 import OneEventCard from "../pages/extra-pages/OneEventCard";
 
