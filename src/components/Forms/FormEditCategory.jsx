@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, Segment, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
+import "../../styles/admin.css";
 
 class FormEditCategory extends Component {
   state = {
@@ -46,24 +48,34 @@ class FormEditCategory extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Edit a Category</h1>
-        <Form size="large" onSubmit={this.handleSubmit}>
-          <Segment stacked>
-            <Form.Input
-              value={this.state.label}
-              fluid
-              icon="heart"
-              name="label"
-              iconPosition="left"
-              placeholder="Modifier la catégorie"
-              onChange={this.handleChange}
-            />
-            <Button color="teal" fluid size="large">
-              Go pour modifier ta catégorie
-            </Button>
-          </Segment>
-        </Form>
+      <div className="admin-forms-main-container">
+        <div className="admin-forms-h1">
+          <h1>Edit a category</h1>
+        </div>
+        <div className="admin-forms-form">
+          <Form size="large" onSubmit={this.handleSubmit}>
+            <Segment stacked>
+              <Form.Input
+                value={this.state.label}
+                fluid
+                icon="heart"
+                name="label"
+                iconPosition="left"
+                onChange={this.handleChange}
+              />
+              <Button color="teal" fluid size="large">
+                Edit your category
+              </Button>
+            </Segment>
+          </Form>
+          <div className="admin-return-btn">
+            <Link to="/Admin">
+              <Button basic color="teal">
+                Retour
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

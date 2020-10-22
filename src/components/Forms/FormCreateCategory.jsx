@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Form, Segment, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
 import "../../styles/admin.css";
@@ -51,13 +52,20 @@ class FormCreateCategory extends Component {
                 icon="heart"
                 name="label"
                 iconPosition="left"
-                placeholder="Nouvelle catégorie"
+                placeholder="new category"
               />
               <Button color="teal" fluid size="large">
-                Go pour ta nouvelle catégorie
+                Create a new one!
               </Button>
             </Segment>
           </Form>
+          <div className="admin-return-btn">
+            <Link to="/Admin">
+              <Button basic color="teal">
+                Retour
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     );

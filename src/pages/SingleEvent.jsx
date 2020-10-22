@@ -2,17 +2,16 @@ import React from "react";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import apiHandler from "../api/apiHandler";
 import { Image, Label, Icon } from "semantic-ui-react";
-import "../styles/singleUser.css";
 import { Link } from "react-router-dom";
 import CommentGroup from "../components/Comment/CommentGroup";
 import moment from "moment";
+import "../styles/SingleEvent.css";
 
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
 });
 
 let frDate;
-
 
 class SingleUser extends React.Component {
   state = {
@@ -32,13 +31,18 @@ class SingleUser extends React.Component {
       );
       console.log("cuurentevent : ", currentEvent);
       if (currentEvent) {
-        this.setState({
-          isLoading: false,
-          event: currentEvent,
-          
-          lng: currentEvent.location.coordinates[0],
-          lat: currentEvent.location.coordinates[1],
-        }, () => {console.log(this.state)});
+        this.setState(
+          {
+            isLoading: false,
+            event: currentEvent,
+
+            lng: currentEvent.location.coordinates[0],
+            lat: currentEvent.location.coordinates[1],
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
       }
     } catch (errApi) {
       console.log(errApi);
@@ -52,46 +56,51 @@ class SingleUser extends React.Component {
     console.log(this.props);
 
     return (
-      <div id="main-global-singleuser">
+      <div className="main-global-singleevent">
         <pre>{JSON.stringify(this.props.match, null, 2)}</pre>
-        <div id="singleUser-main">
-          <div className="singleUser-container">
-            <div>
-              <h1>EVENT</h1>
+        <div className="singleEvent-main">
+          <div className="singleEvent-container">
+            <div className="single-event-infos">
               <h2>{this.state.event.name}</h2>
               <br />
-              <p>
-                Un événement créé par : <br />{" "}
+              <p className="single-event-name">
+                <Icon name="user circle" /> <br />{" "}
                 <Link to={`/all-users/${this.state.event.userId._id}`}>
-                  <span>
+                  <span className="author-single-event">
                     {this.state.event.userId.firstName}{" "}
                     {this.state.event.userId.lastName}
                   </span>
                 </Link>
-              <p>
-                <br/>
-                <Icon  name='calendar alternate outline' /> {moment(this.state.event.time).format("dddd DD MMMM YYYY")}
-                <br/>
-                <Icon  name='clock outline' /> {moment(this.state.event.time).format("hh:mm A")}
-                <br/>
-                <Icon  name='map marker alternate' /> {this.state.event.location.formattedAddress}
               </p>
+
+              <p className="single-event-date-address">
+                <br />
+                <Icon name="calendar alternate outline" />{" "}
+                {moment(this.state.event.time).format("dddd DD MMMM YYYY")}
+                <br />
+                <Icon name="clock outline" />{" "}
+                {moment(this.state.event.time).format("hh:mm A")}
+                <br />
+                <Icon name="map marker alternate" />{" "}
+                {this.state.event.location.formattedAddress}
               </p>
-              <Label className="event-tag" size="tiny" color="orange">
-                {this.state.event.category.label}
-              </Label>
-              <br />
-              {this.state.event.tags.map((tag) => (
-                <Label
-                  color="teal"
-                  className="event-tag singleuser-tags"
-                  size="tiny"
-                  key={tag._id}
-                  tag
-                >
-                  {tag.label}
+              <p className="single-event-tags-cat">
+                <Label className="event-tag" size="tiny" color="black">
+                  {this.state.event.category.label}
                 </Label>
-              ))}
+                <br />
+                {this.state.event.tags.map((tag) => (
+                  <Label
+                    color="teal"
+                    className="event-tag singleuser-tags"
+                    size="tiny"
+                    key={tag._id}
+                    tag
+                  >
+                    {tag.label}
+                  </Label>
+                ))}
+              </p>
             </div>
             <Image
               src={this.state.event.mainImageUrl}
@@ -102,9 +111,9 @@ class SingleUser extends React.Component {
             />
           </div>
           <p>
-            <div className="description-singleUser">
+            <div className="description-singleEvent">
               <i>
-                A propos <br /> <span>{this.state.event.description}</span>
+                About <br /> <span>{this.state.event.description}</span>
               </i>
             </div>
           </p>
@@ -131,8 +140,11 @@ class SingleUser extends React.Component {
               </Marker>
             </Map>
           </div>
+          <CommentGroup
+            userId={this.state.event.userId._id}
+            eventId={this.props.match.params.eventId}
+          />
         </div>
-        <CommentGroup userId={this.state.event.userId._id} eventId={this.props.match.params.eventId} />
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Form, Segment, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
 import "../../styles/admin.css";
@@ -33,6 +34,10 @@ class FormCreateTag extends Component {
       });
   };
 
+  handleReturn = () => {
+    console.log("retour");
+  };
+
   render() {
     return (
       <div className="admin-forms-main-container">
@@ -51,13 +56,20 @@ class FormCreateTag extends Component {
                 icon="heart"
                 name="label"
                 iconPosition="left"
-                placeholder="Nouveau Tag"
+                placeholder="New Tag"
               />
               <Button color="teal" fluid size="large">
-                Go pour ton nouveau tag
+                Create a new one!
               </Button>
             </Segment>
           </Form>
+          <div className="admin-return-btn">
+            <Link to="/Admin">
+              <Button basic color="teal">
+                Retour
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     );

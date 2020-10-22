@@ -47,8 +47,7 @@ class SingleUser extends React.Component {
               <div className="singleUser-container">
                 <div>
                   <h1> 
-                    {this.state.user.lastName}
-                    {this.state.user.firstName}
+                    {this.state.user.lastName} {this.state.user.firstName}
                   </h1>
                   <br/>
                         <p>
@@ -87,10 +86,7 @@ class SingleUser extends React.Component {
                     <p>
                         age
                         <br/>
-                        <span> {
-                            this.state.user.age
-                        }
-                            ans</span>
+                        <span> {this.state.user.age} ans</span>
                     </p>
                     <br/>
                     <p>

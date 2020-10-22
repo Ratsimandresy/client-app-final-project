@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Segment, TextArea, Button } from "semantic-ui-react";
 import apiHandler from "../../api/apiHandler";
 import AutoComplete from "../utils/AutoComplete";
+import { Link } from "react-router-dom";
 import { buildFormData } from "../utils/buildFormData";
 import "../../styles/admin.css";
 
@@ -137,23 +138,30 @@ class FormCreateUser extends Component {
                 icon="heart"
                 name="city"
                 iconPosition="left"
-                placeholder="ville"
+                placeholder="city"
                 type="text"
               />
               <div>
                 <AutoComplete onSelect={this.handlePlace} />
               </div>
               <select name="gender">
-                <option value="">Genre</option>
-                <option value="male">homme</option>
-                <option value="female">femme</option>
-                <option value="other">autre</option>
+                <option value="">Gender</option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+                <option value="other">other</option>
               </select>
               <Button color="teal" fluid size="large">
                 Create !
               </Button>
             </Segment>
           </Form>
+          <div className="admin-return-btn">
+            <Link to="/Admin">
+              <Button basic color="teal">
+                Retour
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     );
