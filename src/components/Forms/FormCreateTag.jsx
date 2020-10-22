@@ -53,7 +53,6 @@ class FormCreateTag extends Component {
             <Segment stacked>
               <Form.Input
                 fluid
-                icon="heart"
                 name="label"
                 iconPosition="left"
                 placeholder="New Tag"

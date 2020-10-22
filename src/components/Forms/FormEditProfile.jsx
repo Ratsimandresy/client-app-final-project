@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import API from "../../api/apiHandler";
 import { withUser } from "../Auth/withUser";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import AutoComplete from "../utils/AutoComplete";
-
 import { buildFormData } from "../utils/buildFormData";
+import "../../styles/profileEdit.css";
 
 import {
   Button,
@@ -13,6 +13,7 @@ import {
   Grid,
   Header,
   Message,
+  TextArea,
   Segment,
 } from "semantic-ui-react";
 
@@ -85,6 +86,7 @@ class FormEditProfile extends React.Component {
     try {
       const updatedUser = await API.updateOne("api/user/update", fd);
       console.log(updatedUser);
+      this.props.history.push("/profile");
     } catch (errApi) {
       console.log(errApi);
     }
@@ -92,224 +94,230 @@ class FormEditProfile extends React.Component {
 
   render() {
     return (
-      <div className="form form-edit-profile">
-        {" "}
+      // <div className="form form-edit-profile profile-edit-main-container">
+      <div className="profile-edit-main-container">
+        <div className="profile-forms-h1">
+          <h1>Edit my profile</h1>
+        </div>{" "}
+        <div>
         {!this.state.isLoading && (
-          <div className="container">
-            <Card>
-              <form
-                className="form form-edit-profile"
-                onSubmit={this.handleSubmit}
-              >
-                <div className="form-group">
-                  <label htmlFor="input-profileImage">Profil Picture</label>
-                  {this.state.profilImage ? (
-                    <>
-                      <img src={this.state.profilImage} alt="" />
-                      <input
-                        id="input-profileImage"
-                        name="profilImage"
-                        onChange={this.handleChange}
-                        type="file"
-                      />
-                    </>
+          <div className="profile-edit-container">
+            {/* <Card> */}
+            <Form onSubmit={this.handleSubmit}>
+              {/* <div className="form-group"> */}
+              <div className="profile-edit-img-wrap">
+                {this.state.profilImage ? (
+                  <>
+                    <img src={this.state.profilImage} alt="profilepicture" />
+                    <Form.Input
+                      label="Image"
+                      name="profilImage"
+                      iconPosition="left"
+                      placeholder="profilImage"
+                      type="file"
+                      onChange={this.handleChange}
+                    />
+                  </>
+                ) : (
+                  <Form.Input
+                    label="Image"
+                    name="profilImage"
+                    iconPosition="left"
+                    placeholder="profilImage"
+                    type="file"
+                    onChange={this.handleChange}
+                  />
+                )}
+              </div>
+              {/* </div> */}
+              <Form.Group>
+                <Form.Input
+                  label="First name"
+                  value={this.state.firstName}
+                  fluid
+                  id="input-firstName"
+                  onChange={this.handleChange}
+                  name="firstName"
+                  type="text"
+                  width={8}
+                />
+
+                <Form.Input
+                  label="Last name"
+                  id="input-lastName"
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
+                  name="lastName"
+                  type="text"
+                  width={8}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Input
+                  label="Pseudo"
+                  id="input-pseudo"
+                  value={this.state.pseudo}
+                  onChange={this.handleChange}
+                  name="pseudo"
+                  type="text"
+                  width={8}
+                />
+
+                <Form.Input
+                  label="Age"
+                  id="input-age"
+                  value={this.state.age}
+                  onChange={this.handleChange}
+                  name="age"
+                  type="number"
+                  width={8}
+                />
+              </Form.Group>
+              <Form.Input label="Description">
+                <TextArea
+                  id="input-description"
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                  name="description"
+                  type="text"
+                />
+              </Form.Input>
+              <Form.Group>
+                <Form.Input
+                  label="Email"
+                  id="input-email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  name="email"
+                  type="text"
+                  width={8}
+                />
+
+                <Form.Input
+                  label="New password"
+                  id="input-password"
+                  value={this.state.newPassword}
+                  onChange={this.handleChange}
+                  name="newPassword"
+                  type="password"
+                  width={8}
+                />
+              </Form.Group>
+
+              <div className="form-group">
+                <p id="gender">Gender</p>
+                <label htmlFor="input-men">
+                  {" "}
+                  {this.state.gender === "male" ? (
+                    <input
+                      id="input-men"
+                      onChange={this.handleChange}
+                      name="gender"
+                      value="male"
+                      type="radio"
+                      checked
+                    />
                   ) : (
                     <input
-                      id="input-profileImage"
-                      name="profilImage"
+                      id="input-men"
                       onChange={this.handleChange}
-                      type="file"
+                      name="gender"
+                      value="male"
+                      type="radio"
                     />
                   )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="input-firstName">First Name</label>
-                  <input
-                    id="input-firstName"
-                    name="firstName"
-                    onChange={this.handleChange}
-                    value={this.state.firstName}
-                    type="text"
-                  />
-                </div>
+                  &nbsp; Men
+                </label>
 
-                <div className="form-group">
-                  <label htmlFor="input-lastName">Last Name</label>
-                  <input
-                    id="input-lastName"
-                    name="lastName"
-                    value={this.state.lastName}
-                    onChange={this.handleChange}
-                    type="text"
-                  />
-                </div>
+                <label htmlFor="input-women">
+                  {" "}
+                  {this.state.gender === "female" ? (
+                    <input
+                      id="input-women"
+                      onChange={this.handleChange}
+                      name="gender"
+                      value="female"
+                      type="radio"
+                      checked
+                    />
+                  ) : (
+                    <input
+                      id="input-women"
+                      name="gender"
+                      onChange={this.handleChange}
+                      value="female"
+                      type="radio"
+                    />
+                  )}
+                  &nbsp; Women
+                </label>
 
-                <div className="form-group">
-                  <label htmlFor="input-pseudo">Pseudo</label>
-                  <input
-                    id="input-pseudo"
-                    name="pseudo"
-                    value={this.state.pseudo}
-                    onChange={this.handleChange}
-                    type="text"
-                  />
-                </div>
+                <label htmlFor="input-other">
+                  {" "}
+                  {this.state.gender === "other" ? (
+                    <input
+                      id="input-other"
+                      onChange={this.handleChange}
+                      name="gender"
+                      value="other"
+                      type="radio"
+                      checked
+                    />
+                  ) : (
+                    <input
+                      id="input-other"
+                      onChange={this.handleChange}
+                      name="gender"
+                      value="other"
+                      type="radio"
+                    />
+                  )}
+                  &nbsp; Other
+                </label>
+              </div>
+              <Form.Input
+                label="Address"
+                id="input-address"
+                value={this.state.address}
+                onChange={this.handleChange}
+                name="address"
+                type="text"
+              />
+              <Form.Group>
+                <Form.Input
+                  label="Zip code"
+                  id="input-cp"
+                  value={this.state.cp}
+                  onChange={this.handleChange}
+                  name="cp"
+                  type="text"
+                  width={8}
+                />
 
-                <div className="form-group">
-                  <label htmlFor="input-description">Description</label>
-                  <textarea
-                    onChange={this.handleChange}
-                    id="input-description"
-                    row="5"
-                    name="description"
-                  >
-                    {this.state.description}
-                  </textarea>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="input-email">Email</label>
-                  <input
-                    id="input-email"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                    type="text"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="input-password">New Password</label>
-                  <input
-                    id="input-password"
-                    name="newPassword"
-                    value={this.state.newPassword}
-                    onChange={this.handleChange}
-                    type="password"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="input-age">Age</label>
-                  <input
-                    id="input-age"
-                    name="age"
-                    value={this.state.age}
-                    onChange={this.handleChange}
-                    type="number"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <span>Gender:</span>
-                  <label htmlFor="input-men">
-                    {" "}
-                    {this.state.gender === "male" ? (
-                      <input
-                        id="input-men"
-                        onChange={this.handleChange}
-                        name="gender"
-                        value="male"
-                        type="radio"
-                        checked
-                      />
-                    ) : (
-                      <input
-                        id="input-men"
-                        onChange={this.handleChange}
-                        name="gender"
-                        value="male"
-                        type="radio"
-                      />
-                    )}
-                    Men
-                  </label>
-
-                  <label htmlFor="input-women">
-                    {" "}
-                    {this.state.gender === "female" ? (
-                      <input
-                        id="input-women"
-                        onChange={this.handleChange}
-                        name="gender"
-                        value="female"
-                        type="radio"
-                        checked
-                      />
-                    ) : (
-                      <input
-                        id="input-women"
-                        name="gender"
-                        onChange={this.handleChange}
-                        value="female"
-                        type="radio"
-                      />
-                    )}
-                    Women
-                  </label>
-
-                  <label htmlFor="input-other">
-                    {" "}
-                    {this.state.gender === "other" ? (
-                      <input
-                        id="input-other"
-                        onChange={this.handleChange}
-                        name="gender"
-                        value="other"
-                        type="radio"
-                        checked
-                      />
-                    ) : (
-                      <input
-                        id="input-other"
-                        onChange={this.handleChange}
-                        name="gender"
-                        value="other"
-                        type="radio"
-                      />
-                    )}
-                    Other
-                  </label>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="input-address">Address</label>
-                  <input
-                    id="input-address"
-                    name="address"
-                    value={this.state.address}
-                    onChange={this.handleChange}
-                    type="text"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="input-cp">Code Postal</label>
-                  <input
-                    id="input-cp"
-                    name="cp"
-                    value={this.state.cp}
-                    onChange={this.handleChange}
-                    type="text"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="input-city">City</label>
-                  <input
-                    id="input-city"
-                    name="city"
-                    value={this.state.city}
-                    onChange={this.handleChange}
-                    type="text"
-                  />
-                </div>
-
-                <Button fluid>Update</Button>
-              </form>
-            </Card>
+                <Form.Input
+                  label="City"
+                  id="input-city"
+                  value={this.state.city}
+                  onChange={this.handleChange}
+                  name="city"
+                  type="text"
+                  width={8}
+                />
+              </Form.Group>
+              <Button color="teal">Update</Button>
+            </Form>
+            {/* </Card> */}
           </div>
         )}{" "}
+        <div className="admin-return-btn">
+          <Link to="/profile">
+            <Button basic color="teal">
+              Back
+            </Button>
+          </Link>
+        </div>
+        </div>
       </div>
     );
   }

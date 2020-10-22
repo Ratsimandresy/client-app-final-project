@@ -70,7 +70,6 @@ class FormCreateUser extends Component {
             <Segment stacked>
               <Form.Input
                 fluid
-                icon="heart"
                 name="firstName"
                 type="text"
                 iconPosition="left"
@@ -78,7 +77,6 @@ class FormCreateUser extends Component {
               />
               <Form.Input
                 fluid
-                icon="heart"
                 type="text"
                 name="lastName"
                 iconPosition="left"
@@ -86,14 +84,12 @@ class FormCreateUser extends Component {
               />
               <Form.Input
                 fluid
-                icon="heart"
                 name="email"
                 iconPosition="left"
                 placeholder="email"
               />
               <Form.Input
                 fluid
-                icon="heart"
                 name="password"
                 type="password"
                 iconPosition="left"
@@ -101,7 +97,6 @@ class FormCreateUser extends Component {
               />
               <Form.Input
                 fluid
-                icon="heart"
                 name="pseudo"
                 type="text"
                 iconPosition="left"
@@ -110,7 +105,6 @@ class FormCreateUser extends Component {
               <Form.Input
                 fluid
                 type="number"
-                icon="heart"
                 name="age"
                 iconPosition="left"
                 placeholder="age"
@@ -118,7 +112,6 @@ class FormCreateUser extends Component {
               <Form.Input>
                 <TextArea
                   fluid
-                  icon="heart"
                   name="description"
                   type="text"
                   iconPosition="left"
@@ -127,7 +120,6 @@ class FormCreateUser extends Component {
               </Form.Input>
               <Form.Input
                 fluid
-                icon="heart"
                 name="profilImage"
                 iconPosition="left"
                 placeholder="profilImage"
@@ -135,7 +127,6 @@ class FormCreateUser extends Component {
               />
               <Form.Input
                 fluid
-                icon="heart"
                 name="city"
                 iconPosition="left"
                 placeholder="city"

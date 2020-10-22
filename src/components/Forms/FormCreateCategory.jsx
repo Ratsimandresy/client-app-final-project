@@ -49,7 +49,6 @@ class FormCreateCategory extends Component {
             <Segment stacked>
               <Form.Input
                 fluid
-                icon="heart"
                 name="label"
                 iconPosition="left"
                 placeholder="new category"

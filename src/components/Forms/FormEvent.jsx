@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Select, TextArea, Button } from "semantic-ui-react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { buildFormData } from "../utils/buildFormData";
 
 import apiHandler from "../../api/apiHandler";
@@ -166,29 +166,38 @@ class FormEvent extends Component {
   render() {
     return (
       <div className="EventForm">
-        {" "}
+        <div className="admin-forms-h1">
+          <h1>Create a new event</h1>
+        </div>{" "}
+        <div id="test">
         {!this.state.isLoading && (
           <Form onSubmit={this.handleSubmit} className="formContainer">
-            <Form.Group>
-              <Form.Input
-                name="name"
-                onChange={this.handleChange}
-                required
-                label=" name"
-                placeholder="file event name"
-                width={5}
-              />
-              <Form.Input
-                onChange={this.handleChange}
-                name="time"
-                label="time"
-                type="datetime-local"
-                placeholder="hour"
-                width={5}
-                required
-              />
-            </Form.Group>
+            <Form.Input
+              name="name"
+              onChange={this.handleChange}
+              required
+              label="Title"
+              placeholder="event's name"
+            />
 
+            <Form.Input
+              name="mainImageUrl"
+              onChange={this.handleChange}
+              required
+              label="Picture"
+              type="file"
+            />
+
+            <Form.Input
+              onChange={this.handleChange}
+              name="time"
+              label="date and time"
+              type="datetime-local"
+              placeholder="hour"
+              required
+            />
+
+            <label>Categories</label>
             <select
               name="category"
               id="category"
@@ -203,61 +212,51 @@ class FormEvent extends Component {
                 </option>
               ))}{" "}
             </select>
-
-            <Form.Group>
-              <label>Tags</label>
-              <div className="tags-list" >
-                {this.state.listTags.map((tag) => (
-                  <div key={tag._id}>
-                    <input
-                      type="checkbox"
-                      value={tag._id}
-                      onChange={this.handleChangeCheckbox}
-                      name="tags"
-                    />{" "}
-                    {tag.label}{" "}
-                  </div>
-                ))}
-              </div>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Input
-                name="mainImageUrl"
-                onChange={this.handleChange}
-                required
-                label="Picture"
-                type="file"
-                width={8}
-              />
-            </Form.Group>
-            <Form.Group>
+            <br />
+            <label>Tags</label>
+            <div className="tags-list">
+              {this.state.listTags.map((tag) => (
+                <div key={tag._id}>
+                  <input
+                    type="checkbox"
+                    value={tag._id}
+                    onChange={this.handleChangeCheckbox}
+                    name="tags"
+                  />{" "}
+                  {tag.label}{" "}
+                </div>
+              ))}
+            </div>
+            <br />
+            <Form.Input label="Description">
               <TextArea
                 name="description"
                 onChange={this.handleChange}
                 required
                 placeholder="Describe your post/event"
-                style={{
-                  minHeight: 90,
-                  width: 600,
-                }}
+                // style={{
+                //   minHeight: 90,
+                //   width: 600,
+                // }}
               />
-            </Form.Group>
-
-            <div className="form-group">
-              <label className="label" htmlFor="location">
-                Address
-              </label>
+            </Form.Input>
+            {/* <div className="form-group"> */}
+            <Form.Input label="Address">
               <AutoComplete required onSelect={this.handlePlace} />
-            </div>
+            </Form.Input>
+            {/* </div> */}
 
-            <Button.Group>
-              <Button onClick={this.handleCancel}>Cancel</Button>
-              <Button.Or />
-              <Button color="teal">Add new event</Button>
-            </Button.Group>
+            <Button color="teal">Add new event</Button>
           </Form>
         )}
+        <div className="profile-editevent-back-btn">
+          <Link to="/all-events">
+            <Button basic color="teal">
+              Back
+            </Button>
+          </Link>
+        </div>
+        </div>
       </div>
     );
   }
