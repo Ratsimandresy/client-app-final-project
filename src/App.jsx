@@ -25,6 +25,7 @@ import FormEditUser from "./components/Forms/FormEditUser";
 import AdminFormEditEvent from "./components/Forms/AdminFormEditEvent";
 import CommentGroup from "./components/Comment/CommentGroup";
 import SearchBar from "./components/SearchBar/SearchBar";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -96,6 +97,7 @@ function App() {
         <ProtectedRoute exact path="/searchbar" component={SearchBar} />
         <Route component={NotFound} />
       </Switch>
+      <Footer />
     </div>
   );
 }

@@ -39,14 +39,16 @@ const HomeEventItem = (props) => {
           <img src={mainImageUrl}
             alt=""/>
         </Link>
-
+      </div>
+      <div className="home-event-item item-content">
+        <h3 className="item-title">{name}</h3>
         <p className="event-description">
           {
           description.substring(0, 50)
         }</p>
         <Label color="orange">
           {category.label}</Label>
-        <address> {
+        <address className="event-address"> {
           location.formattedAddress
         }</address>
         <p className="event-author">
