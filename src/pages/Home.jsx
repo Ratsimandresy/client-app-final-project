@@ -153,10 +153,8 @@ class Home extends React.Component {
                 >
                   {this.state.events.map((event) => (
                     <HomeEventItem
-                      key={event._id}
-                      {...event}
+                      key={event._id} {...event}
                       getCoordo={this.centerEventOnMap}
-                      getIsLoading={this.handlerLoading}
                     />
                   ))}
                 </Card.Group>

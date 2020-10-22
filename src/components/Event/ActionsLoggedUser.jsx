@@ -18,22 +18,23 @@ export class ActionsLoggedUser extends Component {
 
     async componentDidMount() {
         try{
-            const loadUserFavEvents = await API.get_one("api/user//me/favevents");
-            console.log(loadUserFavEvents);
+            const loadedUser = await API.get_one("api/user/me/favevents");
+            /* return the user */
+            console.log(loadedUser);
             // console.log(loadUserFavEvents);
-            console.log(this.props.eventId);
-            
-            console.log(loadUserFavEvents.events.includes(this.props.eventId));
-            console.log('------', this.props.getIsLoading)
-            if (loadUserFavEvents.events.includes(this.props.eventId)) {
+            console.log('EventId: ', this.props.eventId);
+            console.log('arr loeadedUsefavorites', loadedUser.favorites);
+            console.log('Test si eventId is in Favorites: ', loadedUser.favorites.includes(this.props.eventId));
+            console.log('------', this.props.getIsLoading);
+            if (loadedUser.favorites.includes(this.props.eventId)) {
                 this.setState({
-                    favEvents: loadUserFavEvents.events,
+                    favEvents: loadedUser.favorites,
                     togglingBtns: false,
                     isLoading:false
                 });
             } else {
                 this.setState({
-                    favEvents: loadUserFavEvents.events,
+                    favEvents: loadedUser.favorites,
                     togglingBtns: true,
                     isLoading: false
                 });
@@ -61,7 +62,7 @@ export class ActionsLoggedUser extends Component {
             newArr.push(eventId);
             console.log(newArr);
 
-            const addedFav = await API.updateOne("api/user/fav-event", {events: newArr});
+            const addedFav = await API.updateOne("api/user/fav-event", {favorites: newArr});
             console.log(addedFav);
             this.setState( {
                 favEvents: addedFav.events, 
@@ -95,7 +96,7 @@ export class ActionsLoggedUser extends Component {
 
             const filtredArr = newArr.filter((e) => e !== eventId);
             console.log('filtredArray', filtredArr);
-            const removedFav = await API.updateOne("api/user/fav-event", {events: filtredArr});
+            const removedFav = await API.updateOne("api/user/fav-event", {favorites: filtredArr});
             console.log(removedFav);
             this.setState({
                 favEvents: removedFav.events, 
