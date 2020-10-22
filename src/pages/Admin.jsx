@@ -21,7 +21,7 @@ import {
 class Admin extends Component {
   state = {
     data: [],
-    activeIndex: "",
+    activeIndex: -1,
     categories: null,
     tags: null,
     users: null,
@@ -137,8 +137,8 @@ class Admin extends Component {
     }
     return (
       <div id="admin-main-container">
-        <div id="admin-h1">
-          <h1 className="page page-admin">My dashboard</h1>
+        <div className="admin-forms-h1">
+          <h1>My dashboard</h1>
         </div>
         <div id="admin-accordion-container">
           <Accordion fluid styled>

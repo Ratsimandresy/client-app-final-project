@@ -26,25 +26,29 @@ class CommentForm extends Component {
     return (
       <div>
         <Form className="commentForm">
-          <textarea
-            style={{ height: "20px", width: "800px" }}
-            name="content"
-            onChange={this.handleChange}
-            placeholder="add coment here"
-            value={this.state.content}
-          ></textarea>
-          <Button
-            size="small"
-            content="Add comment"
-            labelPosition="left"
-            icon="edit"
-            primary
-            onClick={(e) => {
-              this.props.handleCommentSubmit(this.state);
-              this.resetingComment();
-            }}
-          />
-          <pre>{JSON.stringify(this.state, null, 2)}</pre>
+          <div className="comment-textarea">
+            <textarea
+              // style={{ height: "20px", width: "800px" }}
+              name="content"
+              onChange={this.handleChange}
+              placeholder="add coment here"
+              value={this.state.content}
+            ></textarea>
+          </div>
+          <div className="comment-btn-edit">
+            <Button
+              size="small"
+              content="Add comment"
+              labelPosition="left"
+              icon="edit"
+              primary
+              onClick={(e) => {
+                this.props.handleCommentSubmit(this.state);
+                this.resetingComment();
+              }}
+            />
+          </div>
+          {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
         </Form>
       </div>
     );
