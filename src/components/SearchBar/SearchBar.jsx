@@ -48,7 +48,6 @@ class SearchBar extends Component {
         <Grid.Column width={10}>
           <Search
             showNoResults={false}
-            loading={isLoading}
             onSearchChange={_.debounce(this.filterList, 500, {
               leading: true,
             })}
