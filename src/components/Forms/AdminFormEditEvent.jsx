@@ -53,6 +53,7 @@ class AdminFormEditEvent extends Component {
           formattedAddress: currentEvent.formattedAddress,
           location: currentEvent.location,
           category: currentEvent.category,
+          time: currentEvent.time,
         });
         console.log(this.state);
       }
@@ -161,7 +162,6 @@ class AdminFormEditEvent extends Component {
               <Form.Input
                 value={this.state.name}
                 fluid
-                icon="heart"
                 name="name"
                 type="text"
                 iconPosition="left"
@@ -210,7 +210,6 @@ class AdminFormEditEvent extends Component {
                 onChange={this.handleChange}
               />
               <Form.Input
-                icon="heart"
                 name="mainImageUrl"
                 iconPosition="left"
                 type="file"
@@ -221,7 +220,6 @@ class AdminFormEditEvent extends Component {
                 value={this.state.city}
                 fluid
                 type="text"
-                icon="heart"
                 name="city"
                 iconPosition="left"
                 placeholder="city"
@@ -231,7 +229,6 @@ class AdminFormEditEvent extends Component {
                 <TextArea
                   value={this.state.description}
                   fluid
-                  icon="heart"
                   name="description"
                   type="text"
                   iconPosition="left"

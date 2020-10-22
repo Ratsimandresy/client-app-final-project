@@ -87,7 +87,7 @@ class FormEditUser extends Component {
     return (
       <div className="admin-forms-main-container">
         <div className="admin-forms-h1">
-          <h1>edit user</h1>
+          <h1>Edit user</h1>
         </div>
         <div className="admin-forms-form">
           <Form
@@ -99,7 +99,6 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.firstName}
                 fluid
-                icon="heart"
                 name="firstName"
                 type="text"
                 iconPosition="left"
@@ -108,7 +107,6 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.lastName}
                 fluid
-                icon="heart"
                 type="text"
                 name="lastName"
                 iconPosition="left"
@@ -117,7 +115,6 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.email}
                 fluid
-                icon="heart"
                 name="email"
                 iconPosition="left"
                 placeholder="email"
@@ -134,7 +131,6 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.pseudo}
                 fluid
-                icon="heart"
                 name="pseudo"
                 type="text"
                 iconPosition="left"
@@ -144,7 +140,6 @@ class FormEditUser extends Component {
                 value={this.state.age}
                 fluid
                 type="number"
-                icon="heart"
                 name="age"
                 iconPosition="left"
                 placeholder="age"
@@ -153,7 +148,6 @@ class FormEditUser extends Component {
                 <TextArea
                   value={this.state.description}
                   fluid
-                  icon="heart"
                   name="description"
                   type="text"
                   iconPosition="left"
@@ -162,7 +156,6 @@ class FormEditUser extends Component {
               </Form.Input>
               <Form.Input
                 fluid
-                icon="heart"
                 name="profilImage"
                 iconPosition="left"
                 placeholder="profilImage"
@@ -171,7 +164,6 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.city}
                 fluid
-                icon="heart"
                 name="city"
                 iconPosition="left"
                 placeholder="ville"

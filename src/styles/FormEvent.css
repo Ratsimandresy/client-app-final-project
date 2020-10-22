@@ -1,18 +1,32 @@
-* {
-  box-sizing: border-box;
-}
 .EventForm {
-  margin-top: -40px;
+  /* margin-top: -40px; */
   width: 100%;
-  padding: 5% 20%;
+  /* padding: 5% 20%; */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid red; */
+  padding: 40px;
+  flex-direction: column;
 }
+
 .formContainer {
-  width: 80%;
-  background-color: lightgray;
-  box-shadow: 0 0 10px 0 rgba(27, 26, 26, 0.5);
-  height: 600px;
-  padding: 30px 25px 30px;
+  /* width: 80%; */
+  /* background-color: lightgray; */
+  border: 1px solid rgb(208, 208, 208);
+  border-radius: 10px;
+  padding: 40px;
+  width: 35vw;
+  margin-top: 40px;
+  /* height: 600px; */
+  /* padding: 30px 25px 30px; */
+}
+
+.profile-editevent-back-btn{
+  /* border: 1px solid red; */
+  margin: 30px 0 0 0;
+}
+
+#test {
+  /* border: 2px solid yellow; */
 }

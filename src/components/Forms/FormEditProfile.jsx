@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../api/apiHandler";
 import { withUser } from "../Auth/withUser";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import AutoComplete from "../utils/AutoComplete";
 import { buildFormData } from "../utils/buildFormData";
 import "../../styles/profileEdit.css";
@@ -86,6 +86,7 @@ class FormEditProfile extends React.Component {
     try {
       const updatedUser = await API.updateOne("api/user/update", fd);
       console.log(updatedUser);
+      this.props.history.push("/profile");
     } catch (errApi) {
       console.log(errApi);
     }
@@ -95,16 +96,29 @@ class FormEditProfile extends React.Component {
     return (
       // <div className="form form-edit-profile profile-edit-main-container">
       <div className="profile-edit-main-container">
-        {" "}
+        <div className="profile-forms-h1">
+          <h1>Edit my profile</h1>
+        </div>{" "}
+        <div>
         {!this.state.isLoading && (
           <div className="profile-edit-container">
             {/* <Card> */}
             <Form onSubmit={this.handleSubmit}>
               {/* <div className="form-group"> */}
-              <div className="profile-edit-img-wrap"> 
-              {this.state.profilImage ? (
-                <>
-                  <img src={this.state.profilImage} alt="profilepicture" />
+              <div className="profile-edit-img-wrap">
+                {this.state.profilImage ? (
+                  <>
+                    <img src={this.state.profilImage} alt="profilepicture" />
+                    <Form.Input
+                      label="Image"
+                      name="profilImage"
+                      iconPosition="left"
+                      placeholder="profilImage"
+                      type="file"
+                      onChange={this.handleChange}
+                    />
+                  </>
+                ) : (
                   <Form.Input
                     label="Image"
                     name="profilImage"
@@ -113,54 +127,44 @@ class FormEditProfile extends React.Component {
                     type="file"
                     onChange={this.handleChange}
                   />
-                </>
-              ) : (
-                <Form.Input
-                  label="Image"
-                  name="profilImage"
-                  iconPosition="left"
-                  placeholder="profilImage"
-                  type="file"
-                  onChange={this.handleChange}
-                />
-              )}
+                )}
               </div>
               {/* </div> */}
               <Form.Group>
-              <Form.Input
-                label="First name"
-                value={this.state.firstName}
-                fluid
-                id="input-firstName"
-                onChange={this.handleChange}
-                name="firstName"
-                type="text"
-                width={8}
-              />
+                <Form.Input
+                  label="First name"
+                  value={this.state.firstName}
+                  fluid
+                  id="input-firstName"
+                  onChange={this.handleChange}
+                  name="firstName"
+                  type="text"
+                  width={8}
+                />
 
-              <Form.Input
-                label="Last name"
-                id="input-lastName"
-                value={this.state.lastName}
-                onChange={this.handleChange}
-                name="lastName"
-                type="text"
-                width={8}
-              />
+                <Form.Input
+                  label="Last name"
+                  id="input-lastName"
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
+                  name="lastName"
+                  type="text"
+                  width={8}
+                />
               </Form.Group>
 
               <Form.Group>
-              <Form.Input
-                label="Pseudo"
-                id="input-pseudo"
-                value={this.state.pseudo}
-                onChange={this.handleChange}
-                name="pseudo"
-                type="text"
-                width={8}
-              />
+                <Form.Input
+                  label="Pseudo"
+                  id="input-pseudo"
+                  value={this.state.pseudo}
+                  onChange={this.handleChange}
+                  name="pseudo"
+                  type="text"
+                  width={8}
+                />
 
-                <Form.Input             
+                <Form.Input
                   label="Age"
                   id="input-age"
                   value={this.state.age}
@@ -180,7 +184,7 @@ class FormEditProfile extends React.Component {
                 />
               </Form.Input>
               <Form.Group>
-                <Form.Input             
+                <Form.Input
                   label="Email"
                   id="input-email"
                   value={this.state.email}
@@ -189,8 +193,8 @@ class FormEditProfile extends React.Component {
                   type="text"
                   width={8}
                 />
-                
-                <Form.Input             
+
+                <Form.Input
                   label="New password"
                   id="input-password"
                   value={this.state.newPassword}
@@ -200,7 +204,6 @@ class FormEditProfile extends React.Component {
                   width={8}
                 />
               </Form.Group>
-
 
               <div className="form-group">
                 <p id="gender">Gender</p>
@@ -224,7 +227,7 @@ class FormEditProfile extends React.Component {
                       type="radio"
                     />
                   )}
-                  	&nbsp; Men
+                  &nbsp; Men
                 </label>
 
                 <label htmlFor="input-women">
@@ -247,7 +250,7 @@ class FormEditProfile extends React.Component {
                       type="radio"
                     />
                   )}
-                  	&nbsp; Women
+                  &nbsp; Women
                 </label>
 
                 <label htmlFor="input-other">
@@ -270,19 +273,19 @@ class FormEditProfile extends React.Component {
                       type="radio"
                     />
                   )}
-                  	&nbsp; Other
+                  &nbsp; Other
                 </label>
               </div>
-                  <Form.Input             
-                  label="Address"
-                  id="input-address"
-                  value={this.state.address}
-                  onChange={this.handleChange}
-                  name="address"
-                  type="text"
-                />
-            <Form.Group>
-                <Form.Input             
+              <Form.Input
+                label="Address"
+                id="input-address"
+                value={this.state.address}
+                onChange={this.handleChange}
+                name="address"
+                type="text"
+              />
+              <Form.Group>
+                <Form.Input
                   label="Zip code"
                   id="input-cp"
                   value={this.state.cp}
@@ -292,7 +295,7 @@ class FormEditProfile extends React.Component {
                   width={8}
                 />
 
-                <Form.Input             
+                <Form.Input
                   label="City"
                   id="input-city"
                   value={this.state.city}
@@ -307,6 +310,14 @@ class FormEditProfile extends React.Component {
             {/* </Card> */}
           </div>
         )}{" "}
+        <div className="admin-return-btn">
+          <Link to="/profile">
+            <Button basic color="teal">
+              Back
+            </Button>
+          </Link>
+        </div>
+        </div>
       </div>
     );
   }
