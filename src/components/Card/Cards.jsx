@@ -20,7 +20,7 @@ class Cards extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="MainContainer">
         {this.state.events.map((event, i) => (
           <Link key={event.name} to={`/all-events/${event._id}`}>
             <div className="cardContainer">

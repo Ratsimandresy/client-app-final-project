@@ -1,8 +1,9 @@
 .search {
-  margin: 40px 0px;
+  margin-top: 40px;
+  margin-bottom: 10em;
   font-family: sans-serif;
   text-align: center;
-  height: 60 vh;
+  height: 80 vh;
 }
 
 .search ul {

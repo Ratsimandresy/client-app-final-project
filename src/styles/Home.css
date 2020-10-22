@@ -4,3 +4,7 @@
   margin-left: "10px";
   border: "none";
 }
+.page-home {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}

@@ -20,7 +20,7 @@ import {
 import API from "../api/apiHandler";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import SpinnerLoader from "../components/Loader/spinnerLoader";
-import Footer from "../components/Footer";
+
 import "aos/dist/aos.css";
 
 const Map = ReactMapboxGl(
@@ -155,6 +155,7 @@ class Home extends React.Component {
                 >
                   {this.state.events.map((event) => (
                     <HomeEventItem
+                      data-aos="fade-right"
                       key={event._id}
                       {...event}
                       getCoordo={this.centerEventOnMap}
@@ -166,7 +167,6 @@ class Home extends React.Component {
             </Sidebar.Pushable>
           </div>
         </section>
-        <Footer />
       </div>
     );
   }

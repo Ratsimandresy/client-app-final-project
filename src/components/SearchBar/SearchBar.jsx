@@ -47,6 +47,7 @@ class SearchBar extends Component {
         {/* <pre> {JSON.stringify(this.state, null, 2)} </pre> */}
         <Grid.Column width={10}>
           <Search
+            placeholder="search a post"
             showNoResults={false}
             onSearchChange={_.debounce(this.filterList, 500, {
               leading: true,

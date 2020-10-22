@@ -27,6 +27,8 @@ import CommentGroup from "./components/Comment/CommentGroup";
 import SearchBar from "./components/SearchBar/SearchBar";
 import OneEventCard from "./pages/extra-pages/OneEventCard";
 import AllEventExtra from "./pages/extra-pages/AllEventExtra";
+import Footer from "./components/Footer";
+import HomeSection from "./HomeSection";
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
         <Route exact path="/all-events/:eventId" component={SingleEvent} />
         <Route exact path="/OneEventCard" component={OneEventCard} />
         <Route exact path="/AllEventExtra" component={AllEventExtra} />
+        <Route exact path="/HomeSection" component={HomeSection} />
         <ProtectedRoute exact path="/Admin" component={Admin} />
         <ProtectedRoute
           exact
@@ -100,6 +103,7 @@ function App() {
         <ProtectedRoute exact path="/searchbar" component={SearchBar} />
         <Route component={NotFound} />
       </Switch>
+      <Footer />
     </div>
   );
 }
