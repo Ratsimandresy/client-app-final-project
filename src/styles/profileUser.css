@@ -61,7 +61,7 @@
     justify-content: center;
 }
 
-.container {
+.profile-page-container {
     /* border: 2px solid grey; */
     display: flex;
     flex-direction: column;

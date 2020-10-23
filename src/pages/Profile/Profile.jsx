@@ -151,7 +151,7 @@ class Profile extends React.Component {
     console.log(this.props);
 
     return (
-      <div className="container">
+      <div className="profile-page-container">
         <div className="page page-profile">
           {!this.state.isLoading && (
             <>

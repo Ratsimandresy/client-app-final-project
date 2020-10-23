@@ -9,7 +9,7 @@ class SingleUser extends React.Component {
   state = {
     user: null,
     event: null,
-    activeIndex: 0,
+    activeIndex: -1,
     isLoading: true,
   };
 
@@ -54,18 +54,42 @@ class SingleUser extends React.Component {
           <div id="singleUser-main">
             <div className="singleUser-container">
               <div>
-                <h1>
-                  {" "}
-                  {this.state.user.lastName}
-                  {this.state.user.firstName}{" "}
-                </h1>
+                <h1>{this.state.user.lastName} {this.state.user.firstName}</h1>
                 <br />
                 <p>
                   pseudo
                   <br />
                   <span> {this.state.user.pseudo}</span>
                 </p>
+              
+              <p>
+                email
+                <br />
+                <span> {this.state.user.email}</span>
+              </p>
+              
+              <p>
+                adresse
+                <br />
+        <span> {this.state.user.address}<br/> {this.state.user.cp}<br/> {this.state.user.city}</span>
+              </p>
+             
+              <p>
+                age
+                <br />
+                <span> {this.state.user.age} ans</span>
+              </p>
+           
+              <p>
+                genre
+                <br />
+                <span> {this.state.user.gender}</span>
+              </p>
+              <br />
+
+         
               </div>
+              <div id="img-single-user-page">
               <Image
                 src={this.state.user.profilImage}
                 size="medium"
@@ -73,33 +97,11 @@ class SingleUser extends React.Component {
                 alt="profil picture"
                 width="100px"
               />
+              </div>
+
             </div>
-            <div>
-              <p>
-                email
-                <br />
-                <span> {this.state.user.email}</span>
-              </p>
-              <br />
-              <p>
-                adresse
-                <br />
-        <span> {this.state.user.address}, {this.state.user.cp}, {this.state.user.city}</span>
-              </p>
-              <br />
-              <p>
-                age
-                <br />
-                <span> {this.state.user.age} ans</span>
-              </p>
-              <br />
-              <p>
-                genre
-                <br />
-                <span> {this.state.user.gender}</span>
-              </p>
-              <br />
-              <p>
+
+            <p>
                 <div className="description-singleUser">
                   <i>
                     A propos
@@ -108,7 +110,6 @@ class SingleUser extends React.Component {
                   </i>
                 </div>
               </p>
-            </div>
             <div>
               <Accordion styled>
                 <Accordion.Title
