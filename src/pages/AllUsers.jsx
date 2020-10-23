@@ -58,7 +58,6 @@ class AllUsers extends React.Component {
                         ))}
                         </Grid.Row>                        
                     </Grid>
-                    <Pagination defaultActivePage={1} totalPages={2} />
 
                     </div>
             </>

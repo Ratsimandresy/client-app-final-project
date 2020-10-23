@@ -7,20 +7,22 @@
 }
 
 #main-global-singleuser {
-    /*border: 1px solid red;*/
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
 #main-singleuser {
+    /* border: 2px solid red; */
     display: flex;
+    margin-top: 50px;
     justify-content: center;
 }
 
 #singleUser-main {
     /* border: 1px solid red; */
-    width: 580px;
+    width: 40vw;
     margin: 100px 0 100px 0;
 }
 
@@ -29,10 +31,10 @@
     color: rgb(107, 107, 107);
 }
 
-span {
+.singleUser-container span {
     font-weight: bold;
     color: black;
-    font-size: 19px;
+    font-size: 16px;
 }
 
 .description-singleUser {
@@ -55,4 +57,8 @@ span {
 
 .event-description-singleuser {
     font-size: 12px;
+}
+
+#img-single-user-page {
+    max-width: 220px;
 }
