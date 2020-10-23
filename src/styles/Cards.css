@@ -1,10 +1,12 @@
 .MainContainer:hover {
-  transform: scale(5);
   transform: translateY(-12px);
   transition: transform 0.4s ease;
+  opacity: 0.75;
+  transform: scale(0.98);
+  color: rgb(43, 105, 102);
 }
 .cardContainer {
-  width: 210px;
+  width: 300px;
   height: 260px;
 
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.15);
@@ -13,7 +15,7 @@
   flex-direction: column;
   /* align-items: center; */
   margin: 25px;
-  padding: 4px;
+  /* padding: 4px; */
 }
 
 .cardContainer-cards {
@@ -29,9 +31,9 @@
   /* display: block; */
   /* width: 187px; */
   /* height: 142px; */
-  /* object-fit: contain; */
+  object-fit: cover;
   /* margin-top: 1px; */
-  border-radius: 7px;
+  /* border-radius: 7px; */
   /* padding: 4px; */
 }
 
@@ -57,7 +59,7 @@
   align-items: flex-start;
   text-align: left;
   height: 100%;
-  margin: 10px 0 0 0;
+  padding: 5px 0px 6px 8px;
 }
 
 #cards-main-container {

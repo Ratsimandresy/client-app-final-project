@@ -1,10 +1,14 @@
 .NavMain {
-  background-color: #17232a;
+  background-color: #344855;
   color: white;
   display: flex;
   align-items: center;
   padding: 20px;
   height: 70px;
+  width: 100%;
+  z-index: 6;
+  position: fixed;
+  top: 0;
 }
 
 .NavMain .nav-list {
