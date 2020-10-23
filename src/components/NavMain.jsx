@@ -52,11 +52,13 @@ const NavMain = (props) => {
       <ul className="nav-list">
         {context.isLoggedIn && (
           <React.Fragment>
+            {context.user.role === 'admin' && (
             <li>
               <NavLink style={{ color: "white" }} to="/Admin">
                 Dashboard
               </NavLink>
             </li>
+            )}
             <li>
               <NavLink style={{ color: "white" }} to="/profile">
                 {/* {context.user && context.user.email} */}
