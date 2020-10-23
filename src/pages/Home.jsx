@@ -103,7 +103,7 @@ class Home extends React.Component {
             </div>
 
             <Sidebar.Pushable
-              style={{ height: "80vh", border: "none" }}
+              style={{ height: "100%", border: "none" }}
               as={Segment}
             >
               <Sidebar
@@ -151,7 +151,7 @@ class Home extends React.Component {
                 <Card.Group
                   data-aos="zoom-in"
                   style={{ margin: "10px" }}
-                  itemsPerRow={5}
+                  itemsPerRow={3}
                 >
                   {this.state.events.map((event) => (
                     <HomeEventItem
@@ -165,6 +165,7 @@ class Home extends React.Component {
             </Sidebar.Pushable>
           </div>
         </section>
+        
       </div>
     );
   }

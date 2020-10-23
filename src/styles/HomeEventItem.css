@@ -3,6 +3,30 @@
   justify-content: space-between;
 }
 
+.home-event-item .img-container {
+  max-height:10em;
+  overflow: hidden;
+}
+
+.home-event-item .img-container img{
+  object-fit: cover;
+  max-height: 10em;
+  width: 100%;
+}
+
+.home-event-item .item-title {
+  font-size: 1.2em;
+}
+
+.home-event-item .item-content {
+  padding: .5em;
+}
+
+.home-event-item .event-address,
+.home-event-item .event-author {
+  font-size: .8em;
+}
+
 .actions-logged-user {
   display: flex;
 }
@@ -12,5 +36,5 @@
 }
 
 .sectionCard {
-  height: 80vh;
+  height: auto;
 }

@@ -156,56 +156,52 @@ class Profile extends React.Component {
           {!this.state.isLoading && (
             <>
               {/* <Card fluid> */}
-              <div className="card-profile">
-                <h1>
+              <div id="welcome">
+              <h1>
                   Welcome {user.firstName} {user.lastName}
                 </h1>
+              </div>
+              <div className="card-profile">
+
+                <div id="fixbug">
+
+               
                 <div className="card-profile-visu">
                   <img src={user.profilImage} alt="profile" width="140px" />
                 </div>
 
                 <div className="card-profile-content">
-                  <h2>
-                    {user.firstName}
-                    {user.lastName}
-                  </h2>
+       
+                    <p>pseudo :  <span>{user.pseudo}</span></p>
+      
                   <p>
-                    <span>pseudo :</span>
-                    {user.pseudo}
+                    email : <span>{user.email}</span>
                   </p>
                   <p>
-                    <span>email :</span>
-                    {user.email}
+                  age : <span>{user.age} years old </span>
                   </p>
                   <p>
-                    <span>age :</span>
-                    {user.age} ans
+                   description : <span>{user.description}</span>
                   </p>
                   <p>
-                    <span>description :</span>
-                    {user.description}
+                   address : <span>{user.address}</span>
                   </p>
                   <p>
-                    <span>Address :</span>
-                    {user.address}
+                  zip code : <span>{user.cp}</span> 
                   </p>
                   <p>
-                    <span>CP :</span>
-                    {user.cp}
-                  </p>
-                  <p>
-                    <span>City :</span>
-                    {user.city}
+                  city : <span>{user.city}</span> 
                   </p>
 
                   <div className="actions-btn">
                     <Link
-                      className="link-profil btn btn-edit"
                       to="/profile/edit"
                     >
-                      Edit my profile
+                      <Button basic color="teal">Edit my profile</Button>
+                      
                     </Link>
                   </div>
+                </div>
                 </div>
               </div>
               {/* </Card> */}
