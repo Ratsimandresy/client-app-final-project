@@ -11,6 +11,7 @@ import ProfileEventEdit from "./pages/Profile/EventEdit";
 import ProfileEventDetails from "./pages/Profile/EventDetails";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin";
 import NavMain from "./components/NavMain";
 import FormEvent from "./components/Forms/FormEvent";
 import SingleUser from "./pages/SingleUser";
@@ -46,7 +47,7 @@ function App() {
         <Route exact path="/OneEventCard" component={OneEventCard} />
         <Route exact path="/AllEventExtra" component={AllEventExtra} />
         {/* <Route exact path="/HomeSection" component={HomeSection} /> */}
-        <ProtectedRoute exact path="/Admin" component={Admin} />
+        <ProtectedRouteAdmin exact path="/Admin" component={Admin} />
         <ProtectedRoute
           exact
           path="/Admin/category-create"
