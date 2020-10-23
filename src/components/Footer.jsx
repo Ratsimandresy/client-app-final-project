@@ -11,7 +11,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div data-aos="fade-up" data-aos-duration="1500" id="main-footer-container">
+    <div data-aos="fade-in" data-aos-duration="1500" id="main-footer-container">
       <div id="footer-top-part">
         <div className="divfoote">
           <h2 className="h1-footer">CONTACT US</h2>

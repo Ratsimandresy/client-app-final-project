@@ -11,6 +11,7 @@ import ProfileEventEdit from "./pages/Profile/EventEdit";
 import ProfileEventDetails from "./pages/Profile/EventDetails";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin";
 import NavMain from "./components/NavMain";
 import FormEvent from "./components/Forms/FormEvent";
 import SingleUser from "./pages/SingleUser";
@@ -52,6 +53,8 @@ function App() {
         <Route exact path="/HomeSection2" component={HomeSection2} />
         <Route exact path="/HomeSection3" component={HomeSection3} />
         <ProtectedRoute exact path="/Admin" component={Admin} />
+        {/* <Route exact path="/HomeSection" component={HomeSection} /> */}
+        <ProtectedRouteAdmin exact path="/Admin" component={Admin} />
         <ProtectedRoute
           exact
           path="/Admin/category-create"
@@ -108,6 +111,7 @@ function App() {
         <ProtectedRoute exact path="/searchbar" component={SearchBar} />
         <Route component={NotFound} />
       </Switch>
+
       <Footer />
     </div>
   );
