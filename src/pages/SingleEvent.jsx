@@ -57,7 +57,7 @@ class SingleUser extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.context.isLoggedIn)
     return (
       <div id="main-global-singleuser"> {/* <pre>{JSON.stringify(this.props.match, null, 2)}</pre> */}
       { this.state.isLoading && (<SpinnerLoader/>)}
@@ -75,9 +75,7 @@ class SingleUser extends React.Component {
                     this.state.event.userId._id
                   }`
                 }>
-                  <span> {
-                    this.state.event.userId.firstName
-                  }
+                  <span> {this.state.event.userId.firstName}
                     {" "}
                     {
                     this.state.event.userId.lastName
@@ -101,12 +99,14 @@ class SingleUser extends React.Component {
                 this.state.event.category.label
               } </Label>
               <br/>
-              
+              {this.props.context.isLoggedIn && (            
               <ActionsLoggedUser 
                 eventId={this.props.match.params.eventId}
                 deleteFavEvent={this.handlerRemoveFavorite}
-                getIsLoading={this.handlerIsLoading}/>
-                
+                getIsLoading={this.handlerIsLoading}
+
+              />
+              )}  
                 {this.state.event.tags.map((tag) => (
                   <Label
                     color="teal"
@@ -160,10 +160,12 @@ class SingleUser extends React.Component {
               </Marker>
             </Map>
           </div>
-        <CommentGroup 
-          userId={this.state.event.userId._id}
-          eventId={this.props.match.params.eventId}
-        />
+          {this.props.context.isLoggedIn && (
+            <CommentGroup 
+              userId={this.state.event.userId._id}
+              eventId={this.props.match.params.eventId}
+            />
+          )}
       </div> )}
     </div>);
   }
