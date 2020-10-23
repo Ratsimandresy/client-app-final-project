@@ -6,7 +6,7 @@
   padding: 20px;
   height: 70px;
   width: 100%;
-  z-index: 6;
+  z-index: 20;
   position: fixed;
   top: 0;
 }
