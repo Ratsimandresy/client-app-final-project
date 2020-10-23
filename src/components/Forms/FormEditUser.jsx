@@ -100,6 +100,7 @@ class FormEditUser extends Component {
                 value={this.state.firstName}
                 fluid
                 name="firstName"
+                label="First Name"
                 type="text"
                 iconPosition="left"
                 placeholder="firstName"
@@ -107,6 +108,7 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.lastName}
                 fluid
+                label="Last Name"
                 type="text"
                 name="lastName"
                 iconPosition="left"
@@ -115,6 +117,7 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.email}
                 fluid
+                label="email"
                 name="email"
                 iconPosition="left"
                 placeholder="email"
@@ -132,6 +135,7 @@ class FormEditUser extends Component {
                 value={this.state.pseudo}
                 fluid
                 name="pseudo"
+                label="Pseudo"
                 type="text"
                 iconPosition="left"
                 placeholder="pseudo"
@@ -139,6 +143,7 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.age}
                 fluid
+                label="Age"
                 type="number"
                 name="age"
                 iconPosition="left"
@@ -148,6 +153,7 @@ class FormEditUser extends Component {
                 <TextArea
                   value={this.state.description}
                   fluid
+                  label="Description"
                   name="description"
                   type="text"
                   iconPosition="left"
@@ -164,14 +170,30 @@ class FormEditUser extends Component {
               <Form.Input
                 value={this.state.city}
                 fluid
+                label="City"
                 name="city"
                 iconPosition="left"
                 placeholder="ville"
                 type="text"
               />
-              <div>
-                <AutoComplete onSelect={this.handlePlace} />
-              </div>
+              <Form.Input
+                label="Address"
+                id="input-address"
+                value={this.state.address}
+                onChange={this.handleChange}
+                name="address"
+                type="text"
+              />
+                <Form.Input
+                  label="Zip code"
+                  id="input-cp"
+                  value={this.state.cp}
+                  onChange={this.handleChange}
+                  name="cp"
+                  type="text"
+                />
+
+
               <select name="gender">
                 <option value="">Genre</option>
                 <option value="male">homme</option>
