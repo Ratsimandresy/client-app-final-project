@@ -30,6 +30,7 @@ import AllEventExtra from "./pages/extra-pages/AllEventExtra";
 import Footer from "./components/Footer";
 import HomeSection from "./HomeSection";
 import HomeSection2 from "./HomeSection2";
+import HomeSection3 from "./pages/extra-pages/HomeSEction3";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <Route exact path="/AllEventExtra" component={AllEventExtra} />
         <Route exact path="/HomeSection" component={HomeSection} />
         <Route exact path="/HomeSection2" component={HomeSection2} />
+        <Route exact path="/HomeSection3" component={HomeSection3} />
         <ProtectedRoute exact path="/Admin" component={Admin} />
         <ProtectedRoute
           exact

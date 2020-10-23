@@ -9,6 +9,8 @@ import OneEventCard from "../pages/extra-pages/OneEventCard";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { withUser } from "../components/Auth/withUser";
 import HomeEventItem from "../components/Card/HomeEventItem";
+import HomeSection3 from "../pages/extra-pages/HomeSEction3";
+import HomeGalery from "../pages/extra-pages/HomeGalery";
 import {
   Sidebar,
   Segment,
@@ -103,7 +105,7 @@ class Home extends React.Component {
             </div>
 
             <Sidebar.Pushable
-              style={{ height: "80vh", border: "none" }}
+              style={{ height: "100%", border: "none" }}
               as={Segment}
             >
               <Sidebar
@@ -151,7 +153,7 @@ class Home extends React.Component {
                 <Card.Group
                   data-aos="zoom-in"
                   style={{ margin: "10px" }}
-                  itemsPerRow={5}
+                  itemsPerRow={3}
                 >
                   {this.state.events.map((event) => (
                     <HomeEventItem
@@ -165,6 +167,12 @@ class Home extends React.Component {
             </Sidebar.Pushable>
           </div>
         </section>
+        <div className="HomeSection3">
+          <HomeSection3 />
+        </div>
+        <div className="HomeGalery">
+          <HomeGalery />
+        </div>
       </div>
     );
   }

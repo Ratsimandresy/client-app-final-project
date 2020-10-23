@@ -49,6 +49,19 @@ class FormEditProfile extends React.Component {
       }
       this.setState({
         // user: loadedUser,
+        firstName: loadedUser.firstName,
+        lastName: loadedUser.lastName,
+        email: loadedUser.email,
+        password: loadedUser.password,
+        pseudo: loadedUser.pseudo,
+        age: loadedUser.age,
+        description: loadedUser.description,
+        profilImage: loadedUser.profilImage,
+        address: loadedUser.address,
+        city: loadedUser.city,
+        formattedAddress: loadedUser.formattedAddress,
+        gender: loadedUser.gender,
+        cp: loadedUser.cp,
         isLoading: false,
       });
       console.log(this.state);
@@ -126,6 +139,7 @@ class FormEditProfile extends React.Component {
                     placeholder="profilImage"
                     type="file"
                     onChange={this.handleChange}
+                    
                   />
                 )}
               </div>

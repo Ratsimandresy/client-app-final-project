@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { withUser } from "../Auth/withUser";
 import { Card, Icon, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -36,10 +36,17 @@ const HomeEventItem = (props) => {
           <img src={mainImageUrl} alt="" />
         </Link>
       </div>
-      <div>
-        <p className="event-description">{description.substring(0, 50)}</p>
-        <Label color="orange">{category.label}</Label>
-        <address> {location.formattedAddress}</address>
+      <div className="home-event-item item-content">
+        <h3 className="item-title">{name}</h3>
+        <p className="event-description">
+          {
+          description.substring(0, 50)
+        }</p>
+        <Label color="orange">
+          {category.label}</Label>
+        <address className="event-address"> {
+          location.formattedAddress
+        }</address>
         <p className="event-author">
           <strong>Author:</strong>
           {userId.firstName || userId.pseudo}
