@@ -40,7 +40,7 @@
 }
 
 .description-singleEvent {
-    border: 1px solid rgb(233, 233, 233);
+    /*border: 1px solid rgb(233, 233, 233);*/
     padding: 40px;
     border-radius: 10px;
     margin: 20px 0 40px 0;
@@ -89,17 +89,17 @@
     display: flex;
 }
 
-        /* #event-singleuser-container {
-            display: flex;
-            margin: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgb(221, 221, 221);
-        } */
-        
-        /* #event-singleuser-name-descr {
-            margin: 0 0 0 20px;
-        } */
-        
-        /* .event-description-singleuser {
-            font-size: 12px;
-        } */
+/* #event-singleuser-container {
+    display: flex;
+    margin: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+} */
+
+/* #event-singleuser-name-descr {
+    margin: 0 0 0 20px;
+} */
+
+/* .event-description-singleuser {
+    font-size: 12px;
+} */

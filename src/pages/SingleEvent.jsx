@@ -120,13 +120,16 @@ class SingleUser extends React.Component {
                       </Label>
                     ))}
                   </div>
-                  <div id="actions-logged-user-like-etc">
-                    <ActionsLoggedUser
-                      eventId={this.props.match.params.eventId}
-                      deleteFavEvent={this.handlerRemoveFavorite}
-                      getIsLoading={this.handlerIsLoading}
-                    />
-                  </div>
+              {this.props.context.isLoggedIn && (    
+                <div id="actions-logged-user-like-etc">        
+              <ActionsLoggedUser 
+                eventId={this.props.match.params.eventId}
+                deleteFavEvent={this.handlerRemoveFavorite}
+                getIsLoading={this.handlerIsLoading}
+              />
+               </div>
+              )}  
+                    
                 </div>
               </div>
               <Image
@@ -167,10 +170,12 @@ class SingleUser extends React.Component {
                 </Marker>
               </Map>
             </div>
-            <CommentGroup
+            {this.props.context.isLoggedIn && (
+            <CommentGroup 
               userId={this.state.event.userId._id}
               eventId={this.props.match.params.eventId}
             />
+          )}
           </div>
         )}
         <div className="singleuser-return-btn">

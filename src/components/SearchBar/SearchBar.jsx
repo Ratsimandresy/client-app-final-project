@@ -13,20 +13,30 @@ class SearchBar extends Component {
     events: [],
     isLoading: false,
     value: "",
+    displayed: true,
   };
 
   filterList = (e) => {
-    var updatedEvents = this.state.initialEvents;
-    updatedEvents = updatedEvents.filter(function (oneEvent) {
-      console.log(oneEvent);
-      return (
-        oneEvent.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
-      );
-    });
-    this.setState({
-      events: updatedEvents,
-      isLoading: true,
-    });
+    if(e.target.value === '') {
+      this.setState({
+        displayed: false,
+        isLoading: false,
+      }); 
+    } else {
+      var updatedEvents = this.state.initialEvents;
+      updatedEvents = updatedEvents.filter(function (oneEvent) {
+        console.log(oneEvent);
+        return (
+          oneEvent.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+        );
+      });
+      
+      this.setState({
+        displayed: true,
+        events: updatedEvents,
+        isLoading: true,
+      });
+    }
   };
   onKeyUp = (e) => {
     console.log(this.state.initialEvents);
@@ -40,6 +50,7 @@ class SearchBar extends Component {
       .catch((err) => console.log(err));
   };
 
+
   render() {
     const { isLoading } = this.state;
     return (
@@ -52,10 +63,12 @@ class SearchBar extends Component {
             onSearchChange={_.debounce(this.filterList, 500, {
               leading: true,
             })}
+            
           />
         </Grid.Column>
 
-        <ul>
+        {this.state.displayed && (<>
+        <ul> 
           {this.state.events.map((oneEvent) => (
             <div
               data-aos="zoom-in"
@@ -67,8 +80,10 @@ class SearchBar extends Component {
                 <SearchCards oneEvent={oneEvent} />
               </Link>
             </div>
-          ))}
+          ))}         
         </ul>
+        </>)}
+        
       </div>
     );
   }
